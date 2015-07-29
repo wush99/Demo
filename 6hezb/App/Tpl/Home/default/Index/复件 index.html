@@ -1,0 +1,651 @@
+﻿<include file="Public:_header_common" />
+<title>{$glo.index_title}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<meta property="wb:webmaster" content="37afd1196b6d28b7" />
+<script  type="text/javascript" src="__ROOT__/Style/H/js/backtotop.js"></script>
+<script  type="text/javascript" src="__ROOT__/Style/H/js/index.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/common.js" language="javascript"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/jquery.kinMaxShow-1.0.min.js"></script>
+<meta property="qc:admins" content="30505113364651155636" />
+<meta property="wb:webmaster" content="d0d120bc5ee656d7" />
+<script type="text/javascript">
+var Transfer_invest_url = "__APP__/tinvest";
+</script>
+<script type="text/javascript">
+function LoginSubmit() {
+	$.jBox.tip("登陆中......",'loading');
+	$.ajax({
+		url: "__APP__/member/common/actlogin",
+		data: {"sUserName": $("#uname").val(),"sPassword": $("#upass").val(),"sVerCode": $("#vcode").val(),"Keep":$("#loginstate").val()},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==0){
+					$.jBox.tip(d.message,"tip");	
+				}else{
+					window.location.href="/";
+				}
+			}
+		}
+	});
+}
+
+function jfun_dogetpass(){
+	var ux = $("#emailname").val();
+	if(ux==""){
+		$.jBox.tip('请输入用户名或者邮箱','tip');
+		return;
+	}
+	$.jBox.tip("邮件发送中......","loading");
+	$.ajax({
+		url: "__APP__/member/common/dogetpass/",
+		data: {"u":ux},
+		//timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					$.jBox.tip("发送成功，请去邮箱查收",'success');
+					$.jBox.close(true);
+				}else{
+					$.jBox.tip("发送失败，请重试",'fail');
+				}
+			}
+		}
+	});
+
+}
+
+function getPassWord() {
+	$.jBox("get:__APP__/member/common/getpassword/", {
+		title: "找回密码",
+		width: "auto",
+		buttons: {'发送邮件':'jfun_dogetpass()','关闭': true }
+	});   
+}
+
+</script>
+<script type="text/javascript">
+$(function(){
+	
+	$("#kinMaxShow").kinMaxShow({
+			//设置焦点图高度(单位:像素) 必须设置 否则使用默认值 500
+			height:330,
+			//设置焦点图 按钮效果
+			button:{
+			    //设置按钮上面不显示数字索引(默认也是不显示索引)
+                            showIndex:false,
+			    //按钮常规下 样式设置 ，css写法，类似jQuery的 $('xxx').css({key:value,……})中css写法。            
+			    //【友情提示：可以设置透明度哦 不用区分浏览器 统一为 opacity，CSS3属性也支持哦 如：设置按钮圆角、投影等，只不过IE8及以下不支持】            
+                            normal:{background:'url(/Style/H/images/button.png) no-repeat -15px 0',marginRight:'8px',border:'0',right:'44%',bottom:'20px'},
+                            //当前焦点图按钮样式 设置，写法同上
+                            focus:{background:'url(/Style/H/images/button.png) no-repeat 0 0',border:'0'}
+			},
+			//焦点图切换回调，每张图片淡入、淡出都会调用。并且传入2个参数(index,action)。index 当前图片索引 0为第一张图片，action 切入 或是 切出 值:fadeIn或fadeOut
+			//函数内 this指向 当前图片容器对象 可用来操作里面元素。本例中的焦点图动画主要就是靠callback实现的。
+			callback:function(index,action){
+				switch(index){
+					case 0 :
+							if(action=='fadeIn'){
+								$(this).find('.sub_1_1').animate({left:'70px'},600)
+								$(this).find('.sub_1_2').animate({top:'60px'},600)
+								
+							}else{
+								$(this).find('.sub_1_1').animate({left:'110px'},600)
+								$(this).find('.sub_1_2').animate({top:'120px'},600)
+								
+							};
+							break;
+							
+					case 1 :
+							if(action=='fadeIn'){
+								$(this).find('.sub_2_1').animate({left:'-100px'},600)
+								$(this).find('.sub_2_2').animate({top:'60px'},600)
+							}else{
+								$(this).find('.sub_2_1').animate({left:'-160px'},600)	
+								$(this).find('.sub_2_2').animate({top:'20px'},600)
+							};
+							break;
+							
+					case 2 :
+							if(action=='fadeIn'){
+								$(this).find('.sub_3_1').animate({right:'350px'},600)
+								$(this).find('.sub_3_2').animate({left:'180px'},600)
+							}else{
+								$(this).find('.sub_3_1').animate({right:'180px'},600)	
+								$(this).find('.sub_3_2').animate({left:'30px'},600)
+							};
+							break;	
+				}
+			}
+		});
+});
+
+</script>
+<div class="doc doc-711-234">
+  <div class="body1">
+    <div class="doc doc-711-234"> <include file="Public:_header_shouye" />
+      <div class="ibannerbox" >
+        <div id="kinMaxShow">
+          <volist name=":get_ad(4)" id="va">
+            <div> <a href="{$va.url}"><img src="__ROOT__/{$va.img}" /></a> </div>
+          </volist>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- //head slide -->
+  <div style="width:990px; margin:0px auto; padding-bottom:10px;position:relative;">
+		<div class="statistics">
+	  <span><img src="__ROOT__/Style/H/images/Statistics.jpg" width="16" height="15" style="margin-left:3px; vertical-align: middle;"/> 查看统计数据</span>
+	  <span>成功融资企业：<em><!--{$uservar.user_num}-->1009</em>家</span>
+	  <span>用户投资总额：<em><!--{$uservar.borrow_all}-->2,516,750,000</em>元</span>
+	  
+	  <span>用户赚取收益：<em><!--{$uservar.Total_revenue}-->248,188,673</em>元</span></div>
+  
+	<!--<table width="980" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="245" height="105" align="center" valign="middle"><a class="iico_1" href="__APP__/invest/index.html"></a></td>
+        <td width="245" align="center" valign="middle"><a class="iico_2" href="__APP__/borrow/index.html"></a></td>
+        <td width="245" align="center" valign="middle"><a class="iico_3" href="__APP__/Feedback/jk.html"></a></td>
+      </tr>
+      <tr style="font-size:24px; color:#3C4145;">
+        <td height="50" align="center" valign="middle">我要投资</td>
+        <td align="center" valign="middle">我要基金</td>
+        <td align="center" valign="middle">绿色通道</td>
+      </tr>
+      <tr style="font-size:14px; color:#8D8B8B">
+        <td height="55" align="left" valign="middle"><p style="padding:0 0 0 14px;"> 安全高收益，预期年化收益率10%-24%，<br/>
+            零门槛，多重保障，让您的资金迅速升值.<br/>
+            更有资金周转标，债权转让标</p></td>
+        <td align="left" valign="middle"><p style="padding:0 0 0 42px;"> 抵押贷款，信用贷款等多种融资方式为您<br/>
+            量身定制，利率更低，手续更简，下款更<br/>
+            快，费用更低</p></td>
+        <td align="left" valign="middle"><p style="padding:0 0 0 42px;"> 您身边优质金融资源的整合专家，银行贷<br/>
+            款，银行承兑汇票，银行信用卡，融资租<br/>
+            赁，信托，私募等多种金融业务快速咨询对接</p></td>
+      </tr>
+    </table>  -->
+  </div>
+  <div class="fixed project-area" style="margin:20px auto 0;width:990px;">
+    <div class="item item1">
+      <div class="proname">
+        <h2>微投在线季</h2>
+      </div>
+      <div class="rate">
+        <span class="num"><i class="sign">≈</i>6.8<i class="percent">%</i></span><p class="text">预期<br/>年化利率</p>
+      </div>
+      <div class="trait"><i class="icon_vouch">保</i>100%本息担保<i class="icon_repay ml20">保</i>多种还款方式</div>
+      <div class="people-count">257人次已投资</div>
+      <div class="info info1 fixed" style="height:35px;">
+        <dl class="info-item">
+          <dd>一个月以上</dd>
+          <dt>期限</dt>
+        </dl>
+        <dl class="info-item">
+          <dd>持有60天可转让</dd>
+          <dt>灵活性</dt>
+        </dl>
+       
+      </div>
+      <p class="linkbtn"><a href="__APP__/invest/index.html">查看项目</a></p>
+    </div>
+    <div class="item item2" id="hots-xzwf" style="position:relative">
+      <div class="proname">
+        <h2>微投聚富</h2>
+      </div>
+      <div class="rate">
+        <span class="num"><i class="sign">≈</i>7.6<i class="percent">%</i></span><p class="text">预期<br/>年化利率</p>
+      </div>
+      <div class="trait"><i class="icon_vouch">保</i>100%本息担保<i class="icon_repay ml20">保</i>多种还款方式</div>
+      <div class="people-count">257人次已投资</div>
+      <div class="info fixed" style="height:35px;">
+       <dl class="info-item">
+          <dd>一个月以上</dd>
+          <dt>期限</dt>
+        </dl>
+        <dl class="info-item">
+          <dd>持有60天可转让</dd>
+          <dt>灵活性</dt>
+        </dl>
+       
+      </div>
+      <p class="linkbtn"><a href="__APP__/tinvest/index.html">查看项目</a></p>
+	 <b></b>
+    </div>
+	
+    <div class="item item3">
+      <div class="proname">
+        <h2>微投稳富</h2>
+      </div>
+      <div class="rate">
+        <span class="num"><i class="sign">≈</i>8.5<i class="percent">%</i></span><p class="text">预期<br/>年化利率</p>
+      </div>
+      <div class="trait"><i class="icon_vouch">保</i>100%本息担保<i class="icon_repay ml20">保</i>多种还款方式</div>
+      <div class="people-count">257人次已投资</div>
+      <div class="info fixed" style="height:35px;">
+	 <dl class="info-item">
+          <dd>一个月以上</dd>
+          <dt>期限</dt>
+        </dl>
+        <dl class="info-item">
+          <dd>持有60天可转让</dd>
+          <dt>灵活性</dt>
+        </dl>
+        
+      </div>
+      <p class="linkbtn"><a href="__APP__/borrow/index.html">查看项目</a></p>
+    </div>
+	<div class="item item4">
+      <div class="proname">
+        <h2>微投在线</h2>
+      </div>
+      <div class="rate">
+        <span class="num"><i class="sign">≈</i>11<i class="percent">%</i></span><p class="text">预期<br/>年化利率</p>
+      </div>
+      <div class="trait"><i class="icon_vouch">保</i>100%本息担保<i class="icon_repay ml20">保</i>多种还款方式</div>
+      <div class="people-count">257人次已投资</div>
+      <div class="info fixed" style="height:35px;">
+			  <dl class="info-item">
+				  <dd>一个月以上</dd>
+				  <dt>期限</dt>
+				</dl>
+			<dl class="info-item">
+			  <dd>持有60天可转让</dd>
+			  <dt>灵活性</dt>
+			</dl>
+       
+      </div>
+      <p class="linkbtn"><a href="__APP__/Feedback/jk.html">查看项目</a></p>
+    </div>
+	
+  </div>
+  <!-- head stat -->
+  <!-- //head stat -->
+  <div class="main">
+    <h2 class="title_03" style="margin-top:10px;"><i class="icons"></i><span>基金直投列表<em>p2c创新模式 即投即算利息</em></span><a class="more" href="/tinvest/index.html">查看更多基金直投项目&gt;&gt;</a></h2>
+    <table width="990" style="border:#E7EAEC solid 1px;">
+      <tr class="liuzhuan">
+        <volist name="listTBorrow.list" id="vb">
+        <td colspan="0" class="dengji diyi"><table width="318" border="0" class="liuzhuanlist <if condition="($vb['transfer_out']-$vb['transfer_total'] eq 0) and ($vb['borrow_status'] eq 2) or ($vb['borrow_status'] eq 7)">
+          delbackground
+          <elseif condition="($vb.is_show eq 0) and ($vb['borrow_status'] neq 7)"/>
+          delbackground
+          </if>
+          ">
+      <tr>
+        <td colspan="3" align="left"><span  style="margin-top:7px; display:block; float:left; margin-left:10px;">{:getIco($vb)}</span><a href="{$vb.id|getTInvestUrl=###}"title="{$vb.borrow_name}" class="BL_name" style=" font-size:16px; color:#5F5F5F; font-family:'微软雅黑'; font-weight:bold;">{$vb.borrow_name|cnsubstr=###,12}</a></td>
+      </tr>
+      <tr>
+        <td width="161" height="-2"></td>
+        <td width="162" align="left"><span style="color:#ff6b00; font-family:'微软雅黑'; font-size:14px; font-weight:bold;">{$vb.per_transfer|getMoneyFormt=###}</span>元起</td>
+        <td align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="161" height="0"><span style="color:#245178; font-family:'微软雅黑'; font-size:22px; position:relative; top:-10px;">{$vb.borrow_interest_rate}%</span></td>
+        <td width="" align="left"><span style="color:#ff6b00; font-family:'微软雅黑'; font-size:14px; font-weight:bold;">{$vb.borrow_duration}</span>&nbsp;个月（期限）</td>
+        <td align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td><span style="color:#245178; font-family:'微软雅黑'; font-size:14px;position:relative; top:-3px;">（年化利率）</span></td>
+        <td align="left"><span style="color:#ff6b00; font-family:'微软雅黑'; font-size:14px;">{$vb.borrow_money|getMoneyFormt=###}</span>元（融资额）</td>
+        <td align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td><span style="color:#245178; font-family:'微软雅黑'; font-size:14px;">&nbsp;</span></td>
+        <td align="left"><span style="color:#ff6b00; font-family:'微软雅黑'; font-size:14px;">&nbsp;</td>
+        <td align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" width="211" style="font-size:14px; text-align:left;">&nbsp;进度&nbsp;<span class="progress"> <span class="precent" style="width:{$vb.progress}%"></span> </span>&nbsp;{$vb.progress}%</td>
+        <td style="position:absolute; top:176px;_top:167px; left:198px;"><if condition="($vb['transfer_out']-$vb['transfer_total'] eq 0) and ($vb['borrow_status'] eq 7)">
+            <table width="125" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="center" valign="top" height=""><img src="__ROOT__/Style/H/images/status/ywc.gif" /> </td>
+              </tr>
+            </table>
+            <elseif condition="($vb['transfer_out']-$vb['transfer_total'] eq 0) and ($vb['borrow_status'] eq 2)"/>
+            <table width="" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="center" valign="top" height=""><img  class="anNiuHKZ" src="__ROOT__/Style/H/images/status/touM.gif"  /> </td>
+              </tr>
+            </table>
+            <elseif condition="($vb.is_show eq 0) and ($vb['borrow_status'] neq 7)"/>
+            <table width="" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td align="center" valign="top" height=""><img src="__ROOT__/Style/H/images/status/yts.gif" /> </td>
+              </tr>
+            </table>
+            <else/>
+            <table width="" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="" colspan="3" align="center" valign="middle"><a href="{$vb.id|getTInvestUrl=###}"><img src="__ROOT__/Style/H/images/status/toubiao.gif" /></a></td>
+              </tr>
+            </table>
+          </if>
+        </td>
+      </tr>
+      <tr style="height:15px;">
+        <td><span style="color:#245178; font-family:'微软雅黑'; font-size:14px;"></span></td>
+        <td align="left"><span style="color:#ff6b00; font-family:'微软雅黑'; font-size:14px;"></td>
+        <td align="left"></td>
+      </tr>
+    </table>
+    </td>
+    </volist>
+    </tr>
+    </table>
+  </div>
+  <script type="text/javascript">
+		var lilenth = $(".list-h li").length+1;
+		$(".list-h").css("width", lilenth * 156);
+		var leftpos = 0;
+		var leftcount = 0;
+
+		$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+		$("#spec-left1").css("cursor", "default");
+
+		if (lilenth > 1) {
+			$(function() {
+				$("#spec-right").click(function() {
+					if (leftcount >= 0) {
+						$("#imgLeft").attr("src", "__ROOT__/Style/H/images/scroll_left.gif");
+						$("#spec-left1").css("cursor", "pointer");
+					}
+					if (lilenth - leftcount < 3) {
+						$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+						$("#spec-right").css("cursor", "default");
+					}
+					else {
+						leftpos = leftpos - 156;
+						leftcount = leftcount + 1;
+						$(".list-h").animate({ left: leftpos }, "slow");
+						if (lilenth - leftcount < 2) {
+							$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+							$("#spec-right").css("cursor", "default");
+						}
+					}
+
+				});
+			});
+
+
+			$(function() {
+				$("#spec-left1").click(function() {
+					if (lilenth - leftcount > 2) {
+						$("#imgRight").attr("src", "__ROOT__/Style/H/images/scroll_right.gif");
+						$("#spec-right").css("cursor", "pointer");
+					}
+
+					if (leftcount < 1) {
+						$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+						$("#spec-left1").css("cursor", "default");
+					}
+					else {
+						leftpos = leftpos + 156;
+						leftcount = leftcount - 1;
+						$(".list-h").animate({ left: leftpos }, "slow");
+						if (leftcount < 1) {
+							$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+							$("#spec-left1").css("cursor", "default");
+						}
+					}
+
+				}
+				)
+			})
+		}
+		else {
+			$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+			$("#spec-right").css("cursor", "default");
+		}
+		$(function() {
+			var width = $("#preview").width();
+			$("#spec-list1").css("width", 730).css("margin-right", 8);
+
+		});
+
+		$(function() {
+			$("#spec-list1 img").bind("mouseover", function() {
+				$(this).css({
+					"border": "0px solid #FFFFFF",
+					"padding": "0px"
+				});
+			}).bind("mouseout", function() {
+				$(this).css({
+					"border": "0px solid #ccc",
+					"padding": "0px"
+				});
+			});
+		})
+		
+	$(function() {
+		$(".borrowlistl").bind("mouseover", function(){
+			$(this).css("background", "#f8f8f8");
+		})
+
+		$(".borrowlistl").bind("mouseout", function(){
+			$(this).css("background", "#fff");
+		})
+
+		$(".changecolor").bind("mouseover", function(){
+			$(this).css("background", "#f8f8f8");
+			$(this).css("color", "#007EB9");
+		})
+
+		$(".changecolor").bind("mouseout", function(){
+			$(this).css("background", "#fff");
+			$(this).css("color", "#737272");
+		})
+	});
+  function changeDIV(num){
+	for(var id = 1;id<=7;id++)
+		{
+			if(id==num)
+			{
+				$("#detail_menu_"+id).attr('style','display: block');
+				$("#list_etatil_"+id).addClass('w-n-l-tab-nav-1 cur');
+			}
+			else
+			{
+				$("#detail_menu_"+id).attr('style','display: none');
+				$("#list_etatil_"+id).removeClass('cur');
+			}
+		}
+}
+</script>   
+</script>
+ 				<!--债权市场-->
+            <div class="invest-product-item clearfix">
+                <div class="invest-product-name clearfix">
+                    <h2 class="dspn">债权市场</h2>
+                    <span class="fl large strong">债权市场</span>
+                    <a href="/debt/index.html" class="fr" style="color:#0a6792">更多债权项目 ＞</a>
+                </div>
+                <div class="invest-product-case i-p-c-debt">
+                    <ul class="i-p-c-d-list clearfix" >
+					
+					        
+                         <li class="i-p-c-d-l-item rel" >
+                           <dl class="i-p-c-d-content">
+                                <dt class="i-p-c-d-name"><a href="/invest/a{$item.borrow_nid}.html" title="{$item.borrow_name}">大型洗衣机制售企业原材料...</a></dt>
+                                
+								<div class="yybiao_con">
+			                        <ul>
+				                      <li style="padding-top:5px;"><em class="fs-xl strong ffA">13.92</em><em class="slarge">%</em><span>认购收益</span></li>
+				                      <li class="brn"><font>256天</font><span style="text-align:left;">期限 </span></li>
+				                    </ul>    
+				                </div>
+				                     
+			
+		                        
+								
+                                <dd class="i-p-c-d-invest">
+								    <div class="clearfix" style="margin-top:10px">
+									<p style="float:left;margin-left:12px;margin-top:12px;">原收益：<em style="font-size:16px;color:#676765;font-weight:bold;">14.50</em>%</p><p style="float:right;margin-right:8px;margin-top:15px;">可投份额：1万</p>
+									</div>
+                                    <div class="clearfix">
+									   <p style="float:left;margin-left:10px;line-height:40px;"><img src="__ROOT__/Style/H/images/time_zq.jpg" style="margin-right:2px; vertical-align: middle;"/>2天9时31分</p>
+                                       <a href="#" class="i-p-c-i-btn-2 a-auto" style="margin-right:10px;margin-top:0px;color:#fff">立即认购</a>
+                                   </div>
+                                </dd>
+                            </dl>
+                        </li>
+						
+						
+						<li class="i-p-c-d-l-item rel" >
+                           <dl class="i-p-c-d-content">
+                                <dt class="i-p-c-d-name"><a href="/invest/a{$item.borrow_nid}.html" title="{$item.borrow_name}">大型IT企业研发经费及硬件...</a></dt>
+                                
+								<div class="yybiao_con">
+			                        <ul>
+				                      <li style="padding-top:5px;"><em class="fs-xl strong ffA">13.91</em><em class="slarge">%</em><span>认购收益</span></li>
+				                      <li class="brn"><font>256天</font><span style="text-align:left;">期限 </span></li>
+				                    </ul>    
+				                </div>
+				                     
+			
+		                        
+								
+                                <dd class="i-p-c-d-invest">
+								    <div class="clearfix" style="margin-top:10px">
+									<p style="float:left;margin-left:12px;margin-top:12px;">原收益：<em style="font-size:16px;color:#676765;font-weight:bold;">14.50</em>%</p><p style="float:right;margin-right:8px;margin-top:15px;">可投份额：1万</p>
+									</div>
+                                    <div class="clearfix">
+									   <p style="float:left;margin-left:10px;line-height:40px;"><img src="__ROOT__/Style/H/images/time_zq.jpg" style="margin-right:2px; vertical-align: middle;"/>1天9时31分</p>
+                                       <a href="#" class="i-p-c-i-btn-2 a-auto" style="margin-right:10px;margin-top:0px;color:#fff">立即认购</a>
+                                   </div>
+                                </dd>
+                            </dl>
+                        </li>
+						
+						
+						<li class="i-p-c-d-l-item rel" >
+                           <dl class="i-p-c-d-content">
+                                <dt class="i-p-c-d-name"><a href="/invest/a{$item.borrow_nid}.html" title="{$item.borrow_name}">计算机系统研发企业流动资...</a></dt>
+                                
+								<div class="yybiao_con">
+			                        <ul>
+				                      <li style="padding-top:5px;"><em class="fs-xl strong ffA">13.91</em><em class="slarge">%</em><span>认购收益</span></li>
+				                      <li class="brn"><font>256天</font><span style="text-align:left;">期限 </span></li>
+				                    </ul>    
+				                </div>
+				                     
+			
+		                        
+								
+                               <dd class="i-p-c-d-invest">
+								    <div class="clearfix" style="margin-top:10px">
+									<p style="float:left;margin-left:12px;margin-top:12px;">原收益：<em style="font-size:16px;color:#676765;font-weight:bold;">14.50</em>%</p><p style="float:right;margin-right:8px;margin-top:15px;">可投份额：1万</p>
+									</div>
+                                    <div class="clearfix">
+									   <p style="float:left;margin-left:10px;line-height:40px;"><img src="__ROOT__/Style/H/images/time_zq.jpg" style="margin-right:2px; vertical-align: middle;"/>0天9时31分</p>
+                                       <a href="#" class="i-p-c-i-btn-2 a-auto" style="margin-right:10px;margin-top:0px;color:#fff">立即认购</a>
+                                   </div>
+                                </dd>
+                            </dl>
+                        </li>
+						
+                     </ul>
+                </div>
+                <div class="invest-product-introduce">
+                    <div class="i-p-c-d-border a-auto">
+                        <div class="i-p-c-d-b-top"></div>
+                        <div class="i-p-c-d-b-left"></div>
+                        <div class="i-p-c-d-b-right"></div>
+                        <div class="i-p-c-d-b-bottom"></div>
+                    </div>
+                    <a href="#">
+                        <dl class="i-p-i-introduce">
+                            <dt style="color:#656766">债权市场是什么？</dt>
+                            <dd>可将已投产品转让，以便提前收回资金，提高流动性，还可根据偏好的投资期限、利率，认购他人转让的债权。</dd>
+                        </dl>
+                        <ul class="i-p-i-trait clearfix">
+                    	<li><span class="icon-iSprite-1 icon-i-39"></span><span class="i-mar10 fl">自由交易</span><span class="fl mrn tint">可转让亦可认购</span></li>
+                      <li><span class="icon-iSprite-1 icon-i-40"></span><span class="i-mar10 fl">资金安全</span><span class="fl mrn tint">规避流动性风险</span></li>
+                      <li><span class="icon-iSprite-1 icon-i-41"></span><span class="i-mar10 fl">市场利率</span><span class="fl mrn tint">折价溢价自由定价</span></li>
+                      <li><span class="icon-iSprite-1 icon-i-42"></span><span class="i-mar10 fl">期限灵活</span><span class="fl mrn tint">选择多样按需投资</span></li>
+                  </ul>
+                    </a>
+                </div>
+		     </div>
+			 
+			<div class="website-news clearfix">
+        	            <div id="media-news" class="website-news-content clearfix">
+                <div class="website-news-case">
+                    <div class="w-n-c-title clearfix">
+                        <h2>媒体报道</h2>
+                        <a href="/zuinews/index.html">更多 ＞</a>
+                    </div>
+                    <div class="m-slide-w">
+                                                                        <ul class="w-n-c-list clearfix">
+				     <php>$xlist = getArticleList(array("type_id"=>21,"pagesize"=>2)); foreach($xlist['list'] as $kx => $va){</php>
+                         <li>
+                            <a href="{$va.arturl}">
+                                <img src="https://itzstatic.b0.upaiyun.com//data/upfiles/article/2014-08/25/tmp_article_1408948263.jpg" width="110" height="75" alt="微投在线CEO：希望银行能成为P2P资金的托管方" />
+                                <h3 title="{$va.title|cnsubstr=###,25}">{$va.title|cnsubstr=###,15}...</h3>
+                                <p>{$va.title|cnsubstr=###,25}...</p>
+                            </a>
+                        </li>
+						   <php>};$xlist=NULL;</php>	
+                                                </ul>
+                                                                                               
+                                                                                               
+                                                                    </div>
+                </div>
+                <div class="website-news-case brn">
+                    <div class="w-n-c-title">
+                        <h2>最新动态</h2>
+                        <a href="/zuinews/index.html">更多 ＞</a>
+                    </div>
+                    <div class="m-slide-w">
+                         <ul class="w-n-c-list clearfix">
+						   <php>$xlist = getArticleList(array("type_id"=>2,"pagesize"=>2)); foreach($xlist['list'] as $kx => $va){</php>
+                          <li>
+                            <a href="{$va.arturl}">
+                                <img src="https://itzstatic.b0.upaiyun.com//data/upfiles/article/2014-08/22/tmp_article_1408689232.jpg" width="110" height="75" alt="微投在线CEO参加ALS冰桶挑战  上演“湿身诱惑” " />
+                                <h3 title="{$va.title}” ">{$va.title|cnsubstr=###,10}</h3>
+                                <p>{$va.title|cnsubstr=###,25}</p>
+                            </a>
+                        </li>
+                       <php>};$xlist=NULL;</php>	
+                                                </ul>
+                                                                                              
+                                                                    </div>
+                </div>
+            </div>
+            
+            <div id="noticeTabs" class="website-news-list rel">
+    <div class="w-n-l-tab-nav" >
+        <span class="w-n-l-tab-nav-1 cur" id="list_etatil_1" onclick="changeDIV(1)">服务公告</span>
+        <span class="w-n-l-tab-nav-2" id="list_etatil_2" onclick="changeDIV(2)">到期公告</span>
+   
+     
+   </div>
+    <div class="w-n-l-tab-more">
+        <a href=""  style="display:none">更多11 ＞</a>
+        <a href=""   style="display:none">更多 ＞</a>
+    </div>
+    <div class="w-n-l-tab-content" id="detail_menu_1">
+        <ul>
+		             <php>$xlist = getArticleList(array("type_id"=>22,"pagesize"=>5)); foreach($xlist['list'] as $kx => $va){</php>
+                        <li><a href="{$va.arturl}" title="{$va.title}"><img src="__ROOT__/Style/H/images/111.gif" width="5" height="7"  align="absmiddle" style="position:relative; top:15px; left:10px;"/>&nbsp;&nbsp;&nbsp;&nbsp;{$va.title|cnsubstr=###,15}</a></li>
+                        <php>};$xlist=NULL;</php>	    
+                    </ul>
+    </div>
+    <div class="w-n-l-tab-content" id="detail_menu_2"  style="display:none">
+        <ul>
+		                <php>foreach($noticeList['list'] as $kx => $vn){</php>
+                            <li><a href="{$vn.arturl}" title="{$vn.title}" class="changecolor"><img src="__ROOT__/Style/H/images/111.gif" width="5" height="7"  align="absmiddle" style="position:relative; top:15px; left:10px;"/><!--<span>{$vn.art_time|date="Y-m-d H:i",###}</span>-->&nbsp;&nbsp;&nbsp;&nbsp;{$vn.title|cnsubstr=###,15}</a></li>
+                           <php>};$noticeList=NULL;</php>
+                    </ul>
+    </div>
+</div></div> 
+</div>
+<include file="Public:_footer" />

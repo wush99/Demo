@@ -1,0 +1,2 @@
+<?php
+return array ( 'BANK' => array ( 0 => array ( 'bank' => '建设银行', 'payee' => '邹冰', 'account' => '6217 0072 0002 2857 190', 'address' => '中国建设银行深圳市笋岗支行', ), 1 => array ( 'bank' => '农业银行', 'payee' => '邹冰', 'account' => '6228 4801 2822 0468 275', 'address' => '中国农业银行深圳国贸锦湖支行', ), 2 => array ( 'bank' => '平安银行', 'payee' => '邹冰', 'account' => '6230 5820 0001 0561 531', 'address' => '平安银行', ), 3 => array ( 'bank' => '招商银行', 'payee' => '邹冰', 'account' => '6214 8365 5931 2695', 'address' => '', ), ), 'BANK_INFO' => '<p>788778</p>', ); ?>

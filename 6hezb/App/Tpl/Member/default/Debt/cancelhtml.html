@@ -1,0 +1,78 @@
+<style type="text/css">
+/*新风格 填写金额窗口*/
+.ajax-invest{ width:360px; height:auto; float:left; margin:40px;}
+.ajax-invest .item{ width:100%; height:auto; float:left;}
+.ajax-invest .item li{ width:100%; height:auto; float:left; margin-bottom:20px;}
+.ajax-invest .item li h6{ width:100px; height:30px; font-size:14px; line-height:30px; text-align:center; float:left;}
+.ajax-invest .item li input{ width:200px; height:30px; line-height:30px; float:left; border:1px solid #CBCBCB; padding:0 3px; border-radius:3px;}
+.ajax-invest .item li div{ width:100%; height:40px; float:left; margin:30px 0 0; _display:none;}
+.ajax-invest .item li a{ width:auto; height:40px; line-height:40px; color:#fff; float:left; padding:0 20px; background:#067BCE; border-radius:5px;}
+.ajax-invest .item li a.center{ margin-left:110px; _display:none;}
+.ajax-invest .item li div a.center{ margin-left:135px; _display:none;}
+.ajax-invest .item li a:hover{ background:#128BDE;}
+.ajax-invest .item li p{ text-align:center;}
+</style>
+<div class="ajax-invest">
+    <ul class="item">
+    	<li>
+			<p><font style="color: red;">债权转让只能转让3次，3次后将不能在进行转让。</font></p>
+		</li>
+		<li>
+			<h6>支付密码</h6>
+			<input type="password" name="paypass"  id="paypass"/>
+		</li>
+		<li>
+			<div>
+			<input type="hidden" name="invest_id" id="invest_id" value="{$invest_id}">
+			<a href="javascript:void(0);" class="center" id="dosubmit">确认转让</a>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+function myrefresh() 
+{ 
+	 setTimeout(function (){ 
+     	if(location.hash){
+     		location.replace(location.href.replace(/#/, '?_'+ new Date().getTime() + '#'));
+     		return;
+     	}
+     	window.location.reload();
+ },1000); 
+}
+$("#dosubmit").click(function(){
+    var paypass = $("#paypass").val();
+    var invest_id = $("#invest_id").val();
+    if(!invest_id){
+        alert("缺少参数，请与管理员联系！");
+        return false;
+    }
+    if(!paypass){
+        alert("请输入支付密码！");
+        return false;
+    }
+    if(confirm('你确定撤销债权转让吗?')){
+        $.jBox.tip("数据处理中，请稍候......",'loading');
+        $.ajax({
+            url: "__URL__/cancel/",
+            data: {"paypass":paypass, "invest_id":invest_id},
+            timeout: 4000,
+            cache: false,
+            type: "post",
+            dataType: "json",
+            success: function (d, s, r) {
+                    if(d.status==1){
+                    	$.jBox.tip(d.message,"success");
+                        myrefresh();
+                    }else{
+                        $.jBox.tip(d.message,"fail");
+                    }
+            },
+            complete:function(XMLHttpRequest, textStatus){
+                    setTimeout('myrefresh()',3000); //指定3秒刷新
+            }
+        });
+    }
+})
+</script>

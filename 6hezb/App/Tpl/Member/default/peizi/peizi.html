@@ -1,0 +1,199 @@
+<tagLib name="htmlA" />
+<style>
+.contentright{background: #fff;}
+#table1{margin:0 auto;}
+#table1 span{color:#0697da;font-size:12px;}
+#table1 tr{height:40px;}
+#table1 input{height:23px;border:1px solid #ccc;}
+#table1 label input{height: 10px;}
+#table1 ul{width:90%;margin:0 auto;}
+#table1 ul li{width:24%;float:left;border-left:1px solid #ccc;height:40px;text-align: center;line-height: 40px;}
+#table1 #ul1 li{background: #0697da;color:#fff;font-size:16px;font-weight: 600;}
+#table1 #ul2 li{border-bottom: 1px solid #ccc;font-size: 20px;color:#0697da;}
+#table1 #ul2 li span{font-size: 20px;}
+</style>
+<script>
+$(function(){
+	$('#own_money').blur(function(){
+		if(isNaN($(this).attr('value'))){
+			$(this).attr('value',0)
+		}
+		var i=parseInt($('#txt').attr('value'))
+		if($('#own_money').attr('value')!=''){
+			var money=parseInt($('#own_money').attr('value'))
+		}else{
+			var money=$('#own_money').attr('value')
+		}
+		$(this).attr('value',money)
+		$('#money').attr('value',money*i)
+		$('#m_fee').text(parseInt($('#money').attr('value')*$('#m_rate').text()*100))
+		$('#g_fee').text(parseInt($('#money').attr('value')*$('#g_rate').text()*100))
+	})
+	$("#jia").click(function(){
+		var i=parseInt($('#txt').attr('value'))+1
+		var money=$('#own_money').attr('value');
+		if(i<=10){
+			$('#txt').attr('value',i)
+			$('#money').attr('value',money*i)
+			$('#m_fee').text(parseInt($('#money').attr('value')*$('#m_rate').text()*100))
+			$('#g_fee').text(parseInt($('#money').attr('value')*$('#g_rate').text()*100))
+		}
+	})
+	$('#jian').click(function(){
+		var i=parseInt($('#txt').attr('value'))-1
+		var money=$('#own_money').attr('value');
+		if(i>0){
+			$('#txt').attr('value',i)
+			$('#money').attr('value',money*i)
+			$('#m_fee').text(parseInt($('#money').attr('value')*$('#m_rate').text()*100))
+			$('#g_fee').text(parseInt($('#money').attr('value')*$('#g_rate').text()*100))
+		}
+	})
+})
+</script>
+<form method='post' action="{:U('save')}">
+	<input type='hidden' name='uid' value="{$uid}"/>
+	<input type='hidden' name='interest' value="{$glo['peizi_rate']}"/>
+	<?php 
+		foreach($vo as $key=>$val){
+			echo $key.'==>'.$val.'<br/>';
+		}
+
+	?>
+<table border='0' width='90%' id='table1'>
+	<tr>
+		<td><b>自有资金：</b></td>
+		<td><input type='text' name='own' id='own_money'/> 万
+			<span>注：仅能输入整数</span>
+		</td>
+	</tr>
+	<tr>
+		<th>配资倍数：</th>
+		<td>
+			<input id='txt' name='beishu' size=5 value='1' readonly />
+			<input type='button' value='+' id='jia' style='width:20px;height:20px;'/>
+			<input type='button' value='-' id='jian' style='width:20px;height:20px;'/>
+			<span>注：仅能选择整数，1 ≤“配资倍数”≤ 10</span>
+		</td>
+	</tr>
+	<tr>
+		<td><b>配资额度：</b></td>
+		<td><input type='text' name='money' id='money' readonly /> 万
+			<!-- <span>注：仅能输入整数，“配资额度”=“自有资金”×5 </span> -->
+		</td>
+	</tr>
+
+	<tr>
+		<td><b>配资期限：</b></td>
+		<td>
+			<label><input type='radio' name='times' value='1' checked=checked />1个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='2'/>2个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='3'/>3个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='4'/>4个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='5'/>5个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='6'/>6个月</label>
+		</td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td>
+			<label><input type='radio' name='times' value='7'/>7个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='8'/>8个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='9'/>9个月</label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='10'/>10个月</label>&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='11'/>11个月</label>&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='12'/>1年</label>
+		</td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td>
+			<label><input type='radio' name='times' value='24'/>2年</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type='radio' name='times' value='36'/>3年</label>
+		</td>
+	</tr>
+	<tr>
+		<td><b>利息支付方式：</b></td>
+		<td>
+			<label><input type='radio' value='36' checked=checked />按月付息，到期还本</label>
+		</td>
+	</tr>
+	<tr style='height:100px;'>
+		<!-- <th>月利率：</th>
+		<td><label><input type='radio' name='interest' value='{$glo.peizi_rate}' checked="" style='height:10px;'/> <?php echo round($glo['peizi_rate']/12,2);?>%</label></td> -->
+		<td colspan="2">
+			<ul id='ul1'>
+				<li>每月需支付利息</li>
+				<li>每月需支付管理费</li>
+				<li>月利率</li>
+				<li>管理费率</li>
+			</ul>
+			<ul id='ul2'>
+				<li id='m_fee'></li>
+				<li id='g_fee'></li>
+				<li><span id='m_rate'><?php echo round($glo['peizi_rate']/12,2);?></span>%</li>
+				<li style='border-right:1px solid #ccc'><span id='g_rate'><?php echo round($glo['peizi_fee']/12,2);?></span>%</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center" style='font-size:18px;color:red;font-weight:600'>股市有风险，入市需谨慎</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input id='check1' type='checkbox' style='height:20px;vertical-align:middle;'/>我已阅读并签署<a href='/aboutus/jiekuan.html' target="_black">《借款协议》</a></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input id='check2' type='checkbox' style='height:20px;vertical-align:middle;'/>我已阅读并签署<a href='/aboutus/fenx.html' target="_black">《风险协议》</a></td>
+	</tr>
+	<script>
+	$(function(){
+		$('form').submit(function(){
+			if(!$('#check1').attr('checked') || !$('#check2').attr('checked')){
+				return false
+			}
+		})
+	})
+	</script>
+	<tr>
+		<td> </td>
+		<td><input type='image' name='submit' src='__ROOT__/Style/H/images1/sqjk.png' style='width:178px;height:38px;margin-left:150px;'/></td>
+	</tr>
+</table>
+</form><br/>
+<span style='display:block;width:100%;text-align:center;font-size:12px;color:red;'>注：一经提交将冻结服务费，请谨慎处理！如不小心提交，请尽快前往"我要配资 >> 需求管理"撤消。</span>
+<script type="text/javascript">
+function editmemberinfo(){
+	p = makevar(['sex','info','marry','education','income','age','province','city','area','province_now','city_now','area_now','zy']);
+	p['_tps'] = "post";
+	var mxs = true;
+	$.each(p,function(i){
+		if(typeof p[i] == "undefined" && i!='area_now' && i!='area'){
+			mxs=false;
+			$.jBox.tip("所有项目都不能为空");	
+		}
+	});
+	if(mxs===false){
+	  $.jBox.tip("所有项目都不能为空");	
+	  return;
+	}
+
+	$.jBox.tip('提交中......','tip');
+	$.ajax({
+		url: "__URL__/editmemberinfo/",
+		data: p,
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					$.jBox.tip(d.message,'success');
+					setTimeout('window.location.href="/member/memberinfo#fragment-2";window.location.reload();',1000);
+				}
+				else  $.jBox.tip(d.message,'fail');
+			}
+		}
+	});
+}
+</script>

@@ -1,0 +1,102 @@
+
+#jquery-overlay {
+    height: 500px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 90;
+}
+#jquery-lightbox {
+    left: 0;
+    line-height: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+#jquery-lightbox a img {
+    border: medium none;
+}
+#lightbox-container-image-box {
+    background-color: #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 250px;
+    margin: 0 auto;
+    position: relative;
+    width: 250px;
+}
+#lightbox-container-image {
+    padding: 10px;
+}
+#lightbox-loading {
+    height: 25%;
+    left: 0;
+    line-height: 0;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    width: 100%;
+}
+#lightbox-nav {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+#lightbox-container-image-box > #lightbox-nav {
+    left: 0;
+}
+#lightbox-nav a {
+    outline: medium none;
+}
+#lightbox-nav-btnPrev, #lightbox-nav-btnNext {
+    display: block;
+    height: 100%;
+    width: 49%;
+}
+#lightbox-nav-btnPrev {
+    float: left;
+    left: 0;
+}
+#lightbox-nav-btnNext {
+    float: right;
+    right: 0;
+}
+#lightbox-container-image-data-box {
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font: 12px/1.4em "宋体",Tahoma;
+    margin: 0 auto;
+    overflow: auto;
+    padding: 0 10px;
+    width: 100%;
+}
+#lightbox-container-image-data {
+    color: #666666;
+    padding: 0 10px;
+}
+#lightbox-container-image-data #lightbox-image-details {
+    float: left;
+    text-align: left;
+    width: 70%;
+}
+#lightbox-image-details-caption {
+    font-weight: bold;
+}
+#lightbox-image-details-currentNumber {
+    clear: left;
+    color: #999999;
+    display: block;
+    padding-bottom: 1em;
+}
+#lightbox-secNav-btnClose {
+    float: right;
+    padding-bottom: 0.7em;
+    width: 30px;
+}

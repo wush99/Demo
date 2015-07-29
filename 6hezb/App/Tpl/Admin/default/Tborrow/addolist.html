@@ -1,0 +1,78 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+	var delUrl = '__URL__/doDel';
+	var addUrl = '__URL__/add';
+</script>
+
+<div class="so_main">
+  <div class="page_tit">追加保证金(其他)</div>
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="__URL__/verifylist" value="网配投资列表（待审核）" />
+    <htmlA:commonBtn type="href" action="__URL__/otherlist" value="网配投资列表（其他）" />
+    <htmlA:commonBtn type="href" action="__URL__/addlist" value="追加保证金（待审核）" />
+    <htmlA:commonBtn type="href" action="__URL__/addolist" value="追加保证金（其他）" />
+  </div>
+  <div class="list">
+    <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <th style="width:30px;"> <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+          <label for="checkbox"></label>
+        </th>
+        <th class="line_l">配资ID</th>
+        <th class="line_l">申请人</th>
+        <th class="line_l">保证金</th>
+        <th class="line_l">配资倍数</th>
+        <th class="line_l">配资额度</th>
+        <th class="line_l">利率</th>
+        <th class="line_l">运作期限</th>
+        <th class="line_l">追加保证金</th>
+        <th class="line_l">申请时间</th>
+        <th class="line_l">审核意见</th>
+        <th class="line_l">状态</th>
+      </tr>
+      <foreach name="list" item="vo">
+      <?php
+        $vol=M('peizi')->where('id='.$vo['pid'])->find();
+      ?>
+        <tr overstyle='on' id="list_{$vo.id}">
+          <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+          <td>{$vo.pid}</td>
+          <td><?php $name=M('members')->where("id=".$vo['uid'])->field('user_name')->find();?>
+            <htmlA:user id="vo.uid" uname="name.user_name" />
+          </td>
+          <td>{$vol.own}万</td>
+          <td>{$vol.beishu}</td>
+          <td>{$vol.money}万</td>
+          <td>{$vol.interest}%</td>
+          <td>{$vol.times}个月</td>
+          <td>{$vo.add_own}万</td>
+          <td>{$vo.time|date="Y-m-d H:i",###}</td>
+          <td>{$vo.verify_cause}</td>
+          <td>
+            <?php
+              if($vo['verify']==1){
+                echo '已通过';
+              }elseif($vo['verify']==2){
+                echo '未通过';
+              }elseif($vo['verify']==4){
+                echo '已撤销';
+              }
+            ?>
+          </td>
+        </tr>
+      </foreach>
+    </table>
+  </div>
+  <div class="Toolbar_inbox">
+    <div class="page right">{$pagebar}</div>
+    <htmlA:commonBtn type="href" action="__URL__/add" value="添加网配投资" />
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+<include file="Public:_footer" />

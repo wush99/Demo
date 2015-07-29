@@ -1,0 +1,34 @@
+﻿<include file="Pub:header" /> 
+<div class="main">
+<form  action="" method="post" name="loginForm" id="loginForm">
+<div class="login">           
+ <div class="name"><label>用户名：</label><input type="text" name='username' id="username" value="" class="wbk" /></div>
+ <div class="name"><label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input type="password" name="password" value="" id="password" class="wbk" /></div>
+ <div class="name"><label>验证码：</label><input type="text" name="verify" id="verify" class="wbk" value="" style="width:60px" />
+ <img src='/M/Pub/verify'  class="verify" onclick="this.src=this.src+'?t='+Math.random()"/>
+ </div>     
+ <div class="button"><input type="button" class="butt" value="登&nbsp;&nbsp; 陆" /></div>
+ <div style="text-align: center; height: 50; line-height: 50px;">没有融天下账号？请<a href="{:U('M/pub/regist')}"><font color="#f08012">注册</font></a></div>
+</div> 
+</form>
+</div>
+<script language="javascript">
+$(function(){
+    $(".butt").click(function(){
+        if($.trim($("#username").val())==''){
+            Apprise('<font color=red>请输入用户名！</font>');
+            return false;
+        }
+        if($.trim($("#password").val())==''){
+            Apprise('<font color=red>请输入密码！</font>'); 
+            return false;
+        }
+        if($.trim($("#verify").val())==''){
+            Apprise('<font color=red>请输入验证码！</font>'); 
+            return false;
+        }
+        $("#loginForm").submit();
+    })
+})
+</script>
+﻿<include file="Pub:footer" />

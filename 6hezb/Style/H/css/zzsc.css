@@ -1,0 +1,20 @@
+
+/*客服按钮*/
+#service{margin-top:-200px;position:fixed; _position:absolute;right:0;top:50%;width:56px;height:100px;filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity: 0.9;}
+#service a{display:block;width:56px;height:100px;text-indent:-9999px;background:url("../images/service.png") no-repeat;cursor:pointer;margin-bottom:1px}
+#service a.mscBtn{height:50px;background:#fff url("../images/musicBtn.gif") no-repeat}
+#service a.goTop{height:52px;width:56px;background-position:0 bottom}
+#service a.goTop:hover{background-position:-56px bottom}
+#service a.pause{background-position:0 bottom}
+#service .srvLog{}
+#service .srvLog:hover{background-position:-56px 0}
+#service .srvDj{background-position:0 -200px}
+#service .srvDj:hover{background-position:-56px -200px}
+
+.srvCns{width:56px;height:100px; background:#ffffff; margin-top:-99px;position:fixed; _position:absolute;right:0px;top:50%;filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity: 0.9;}
+.srvCns a.qq{display:block;width:56px;height:100px; float:left;text-indent:-9999px;background:url("../images/service.png") no-repeat 0 -100px;cursor:pointer;margin-bottom:1px}
+.srvCns a.qq:hover{background-position:-56px -100px}
+.srvCns ul{ width:240px; height:90px; float:left; padding:5px 20px 5px 30px;}
+.srvCns ul li{ float:left; width:120px; height:30px; line-height:30px;background:url("../images/qq.png") no-repeat left center; text-indent:20px;}
+.srvCns ul li a{ font-family:"微软雅黑",Arial, Helvetica, sans-serif; color:#3fa9f5;}
+.srvCns_hover a.qq{background-position:-56px -100px}

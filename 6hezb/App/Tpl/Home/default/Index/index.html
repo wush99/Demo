@@ -1,0 +1,274 @@
+<include file="Public:_header_common"/>
+<title>{$glo.index_title}</title>
+<link rel = "Shortcut Icon" href='__ROOT__/favicon.png'> 
+<style>
+ .header{margin-top:-22px;}
+ .security_tit,.fund_list_aaa{
+    text-align: left;
+ }
+</style>
+<div id="kinMaxShow" style="position:relative;z-index:0;*margin-top:-65px;">
+  <volist name=":get_ad(4)" id="va">
+    <div> <a href="{$va.url}"><img src="__ROOT__/{$va.img}" /></a> </div>
+  </volist>
+</div>
+
+<div class="business both">
+  <div class="wrapper">
+    <a href="invest/small.html"  target="_blank" style="text-decoration:none; cursor:pointer">
+      <div id="typeDis_1" class="business_list" onmouseover="typeDisChange(1)">
+          <div class="business_list_a"><img id="typeSubDis_1_1" src="__ROOT__/Style/H/images/index_08.jpg"  width="95" height="93" alt="投资理财" /></div>
+          <div id="typeSubDis_1_2" class="business_list_b">投资理财</div>
+          <div id="typeSubDis_1_3" class="business_list_c">成为理财人，通过投标加入配资标、小微贷标将资金进行有保障的投资，获得稳定年化收益。</div>
+      </div>
+      </a>
+      <a href="/invest/index.html"  target="_blank" style="text-decoration:none; cursor:pointer">
+      <div id="typeDis_2" class="business_list business_list_on" onmouseover="typeDisChange(2)">
+          <div class="business_list_a"><img id="typeSubDis_2_1" src="__ROOT__/Style/H/images/index_10.jpg"  width="95" height="93" alt="我要配资" /></div>
+          <div id="typeSubDis_2_2" class="business_list_d">我要配资</div>
+          <div id="typeSubDis_2_3" class="business_list_e">成为配资方，通过线上年利率12%的资金成本提交配资需求，快速高效获取相应操作账号。</div>
+      </div>
+      </a>
+      <a href="/borrow/index.html"  target="_blank" style="text-decoration:none; cursor:pointer">
+      <div id="typeDis_3" class="business_list" onmouseover="typeDisChange(3)">
+          <div class="business_list_a"><img id="typeSubDis_3_1" src="__ROOT__/Style/H/images/index_12.jpg"  width="95" height="93" alt="小微贷款" /></div>
+          <div id="typeSubDis_3_2" class="business_list_b">小微贷款</div>
+          <div id="typeSubDis_3_3" class="business_list_c">成为借款人，通过个人车产、房产、企业资质抵押担保发标进行借款，轻松获得所需资金。</div>
+      </div>
+      </a>
+  </div>
+</div>
+
+<div class="security both">
+  <div class="wrapper">
+    <div class="security_tit">
+          <span class="left">安全保障</span>
+          <span class="right" style="padding-top:20px;">
+              <a href="javascript::" class="prev off security_titAOver" onclick="return false"></a>
+              <a href="javascript::" class="next on security_titAOut" onclick="return false"></a>
+          </span>
+    </div>
+     <div class="v_conment" style='text-align:left;'>
+      <div class="security_list">
+      <ul>
+        <li><div class="security_list_a">
+      <div class="security_lis_tit"><span class="left" style="padding-right:10px;"><img src="__ROOT__/Style/H/images/bjbz.png"  width="40" height="38" alt="本金保障" /></span><span class="left">本金保障</span></div>
+      <div class="security_txt">所有投资标的100%适用于本金保障计划，如遇借款人违约，放心贷将通过风险备用金有效保障理财人的本金安全</div>
+      </div></li>
+        <li><div class="security_list_b" style="margin:0 15px;">
+      <div class="security_lis_tit"><span class="left" style="padding-right:10px;"><img src="__ROOT__/Style/H/images/qqlh.png"  width="40" height="38" alt="强强联合" /></span><span class="left">强强联合</span></div>
+      <div class="security_txt">放心贷联合知名银行、券商、担保机构、第三方支付、律师事务所鼎力合作，打造互联网金融全新模式</div>
+      </div></li>
+        <li><div class="security_list_c">
+      <div class="security_lis_tit"><span class="left" style="padding-right:10px;"><img src="__ROOT__/Style/H/images/zhaq.png"  width="40" height="38" alt="账户安全" /></span><span class="left">账户安全</span></div>
+      <div class="security_txt">国内顶级技术团队提供网站建设及安全技术保护，全方位保障平台账户及信息安全</div>
+      </div></li>
+        <li><div class="security_list_a">
+      <div class="security_lis_tit"><span class="left" style="padding-right:10px;"><img src="__ROOT__/Style/H/images/shdk.png"  width="40" height="38" alt="贷款审核" /></span><span class="left">贷款审核</span></div>
+      <div class="security_txt">跨越初级信用借贷模式，所有标的均为保证金借款标或担保机构担保标，审核严格远高于行业基准</div>
+      </div></li>
+        <li><div class="security_list_b" style="margin:0 15px;">
+      <div class="security_lis_tit"><span class="left" style="padding-right:10px;"><img src="__ROOT__/Style/H/images/qctm.png"  width="40" height="38" alt="全程透明" /></span><span class="left">全程透明</span></div>
+      <div class="security_txt">多方监管，资金流向全程透明，随时掌握资金动向</div>
+      </div></li>
+        <li><div class="security_list_c">
+      <div class="security_lis_tit"><span class="left" style="padding-right:10px;"><img src="__ROOT__/Style/H/images/zcfg.png"  width="40" height="38" alt="政策法规" /></span><span class="left">政策法规</span></div>
+      <div class="security_txt">平台所有行为均受国家政策法规保护</div>
+      </div></li>
+      </ul>
+      </div>
+     </div>
+  </div>
+</div>
+
+<div class="fund">
+  <div class="wrapper">
+    <div class="security_tit">投资列表</div>
+    <div class="fund_a">
+      <div class="fund_b">
+        <div class="fund_list_aaa"><strong>借款标题</strong></div>
+        <div class="fund_list_c"><strong>年利率</strong></div>
+        <div class="fund_list_c"><strong>保证金</strong></div>
+        <div class="fund_list_c"><strong>配资金额</strong></div>
+        <div class="fund_list_b"><strong>期限</strong></div>
+        <div class="fund_list_c"><strong>进度</strong></div>
+        <div class="fund_list_b"></div>
+      </div>
+      <div class="fund_c">
+        <volist name="listTBorrow.list" id="vb">
+          <div class="fund_list">
+            <div class="fund_list_aaa">
+              <span class='left'>{:getIco($vb)}</span>
+              <span class="orange left"><a href="{$vb.id|getTInvestUrl=###}" >{$vb.borrow_name|cnsubstr=###,20}</a></span>
+            </div>
+            <div class="fund_list_c"><span class="size18">{$vb.borrow_interest_rate}</span>%</div>
+            <div class="fund_list_c"><span class="size18"><?php echo round(intval($vb['borrow_money'])/50000,2);?></span>万元</div>
+            <div class="fund_list_c"><span class="size18"><?php echo intval($vb['borrow_money'])/10000;?></span>万元</div>
+            <div class="fund_list_b"><span class="size18">{$vb.borrow_duration}
+                <if condition="$vb['repayment_type'] eq 1">天
+                  <else/>
+                  个月</if></span></div>
+            <div class="fund_list_c" style="padding-top:12px">
+            <span style='display:block;width:100%;background:#aaa;text-align:left;'>
+            <table width="{$vb.progress|intval}%" height="12px" border="0" bgcolor="#ff8106" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="11px"></td>
+              </tr>
+            </table>
+            </span>  
+            <span style="display:block;margin-top:-13px;color:#FFF; font-size:11px; line-height:12px; padding-top:2px;text-align:center;">{$vb.progress|intval}%</span>
+            </div>
+            <div class="fund_list_b" style="margin-left:15px;">
+              <if condition="$vb.borrow_status eq 3"> <a href="javascript:;"><img class="anNiuYLB" src="__ROOT__/Style/H/images/status/touM.gif" /></a>
+                <elseif condition="$vb.borrow_status eq 4"/>
+                <a href="javascript:;"><img class="anNiuDDFS" src="__ROOT__/Style/H/images/status/touM.gif" /></a>
+                <elseif condition="$vb.borrow_status eq 6"/>
+                <a href="javascript:;"><img  class="anNiuHKZ" src="__ROOT__/Style/H/images/status/touM.gif"  /></a>
+                <elseif condition="$vb.borrow_status gt 6"/>
+                <a href="{$vb.id|getTInvestUrl=###}"><img class="anNiuYWC" src="__ROOT__/Style/H/images/status/touM.gif"  /></a>
+                <else/>
+                <a href="{$vb.id|getTInvestUrl=###}"><img class="anNiuTB" src="__ROOT__/Style/H/images/status/touM.gif" /></a> 
+              </if>
+            </div>
+          </div>
+        </volist>
+      </div>
+    </div>
+    <div class="fund_d"><a href="Tinvest/index.html"  class="gray999">查看更多投资理财项目</a></div>
+  </div>
+</div>
+
+<div class="news" style='text-align:center;'>
+  <div class="wrapper">
+    <div class="news_wrapper left">
+      <div class="news_tit" style='text-align:left;'>最新动态</div>
+      <div class="news_a">
+        <ul><php>$xlist = getArticleList(array("type_id"=>27,"pagesize"=>4)); foreach($xlist['list'] as $kx => $va){</php>
+          <li><span class="left"><img src="__ROOT__/Style/H/images/top_bg4.gif"  width="8" height="8" alt="{$glo.index_title}" /> <a href="{$va.arturl}">{$va.title|cnsubstr=###,23} </a></span> <span class="font12 right">{$va.art_time|date='Y-m-d',###}</span></li>
+          <php>};$xlist=NULL;</php>
+          <li style='text-align:left;'><a href="/aboutus/new.html"  class="news_blue">查看更多>></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="news_wrapper right">
+      <div class="news_tit" style='text-align:left;'>公告</div>
+      <div class="news_a">
+      <ul><php>$xlist = getArticleList(array("type_id"=>26,"pagesize"=>4)); foreach($xlist['list'] as $kx => $va){</php>
+        <li><span class="left"><img src="__ROOT__/Style/H/images/top_bg4.gif"  width="8" height="8" alt="{$glo.index_title}" /> <a href="{$va.arturl}"  > {$va.title|cnsubstr=###,23}</a></span> <span class="font12 right">{$va.art_time|date='Y-m-d',###}</span></li>
+        <php>};$xlist=NULL;</php>
+         <li style='text-align:left;'><a href="/aboutus/notice.html"  class="news_blue">查看更多>></a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function typeDisChange(curIndex)
+{
+  for(var i=1;i<4;i++){
+    if(i==curIndex){
+      $("#typeDis_"+i).addClass('business_list_on');
+      $("#typeSubDis_"+i+"_2").removeClass('business_list_b').addClass('business_list_d');
+      $("#typeSubDis_"+i+"_3").removeClass('business_list_c').addClass('business_list_e');
+      if(i==1){
+        $("#typeSubDis_"+1+"_1").attr('src', '__ROOT__/Style/H/images/index_008.jpg'/*tpa=http://www.6hezb.com/images/index_008.jpg*/);
+        $("#typeSubDis_"+2+"_1").attr('src', '__ROOT__/Style/H/images/index_010.jpg'/*tpa=http://www.6hezb.com/images/index_010.jpg*/);
+        $("#typeSubDis_"+3+"_1").attr('src', '__ROOT__/Style/H/images/index_12.jpg'/*tpa=http://www.6hezb.com/images/index_12.jpg*/);
+      }
+      else if(i==2){
+        $("#typeSubDis_"+1+"_1").attr('src', '__ROOT__/Style/H/images/index_08.jpg'/*tpa=http://www.6hezb.com/images/index_08.jpg*/);
+        $("#typeSubDis_"+2+"_1").attr('src', '__ROOT__/Style/H/images/index_10.jpg'/*tpa=http://www.6hezb.com/images/index_10.jpg*/);
+        $("#typeSubDis_"+3+"_1").attr('src', '__ROOT__/Style/H/images/index_12.jpg'/*tpa=http://www.6hezb.com/images/index_12.jpg*/);
+      }
+      else if(i==3){
+        $("#typeSubDis_"+1+"_1").attr('src', '__ROOT__/Style/H/images/index_08.jpg'/*tpa=http://www.6hezb.com/images/index_08.jpg*/);
+        $("#typeSubDis_"+2+"_1").attr('src', '__ROOT__/Style/H/images/index_010.jpg'/*tpa=http://www.6hezb.com/images/index_010.jpg*/);
+        $("#typeSubDis_"+3+"_1").attr('src', '__ROOT__/Style/H/images/index_012.jpg'/*tpa=http://www.6hezb.com/images/index_012.jpg*/);
+      }
+      else{
+        ;
+      }
+    }
+    else{
+      $("#typeDis_"+i).removeClass('business_list_on');
+      $("#typeSubDis_"+i+"_2").removeClass('business_list_d').addClass('business_list_b');
+      $("#typeSubDis_"+i+"_3").removeClass('business_list_e').addClass('business_list_c');
+    }
+  }
+}
+
+$(function(){
+  var page  = 0;
+  var i = 3;
+  var $parent = $('.wrapper');
+  var $v_show = $parent.find('.security_list');
+  var $v_content = $parent.find('.v_conment');
+  var v_width = $v_content.width();
+  var len = $v_show.children().find('li').length;
+  var page_count = Math.ceil(len/i);
+   $('span.right a.prev.htm'/*tpa=http://www.6hezb.com/span.right a.prev*/).click(function(){
+     if (--page == -1) {
+        page = 0;
+        return false;
+      }
+      autoProxy();
+     }).mouseover(function(){      
+      $(this).addClass('security_titAOver');
+      if( $(this).hasClass( "security_titAOut" )){
+        $(this).removeClass("security_titAOut");
+      }
+       $('span.right a.next.htm'/*tpa=http://www.6hezb.com/span.right a.next*/).addClass('security_titAOut');
+       if( $('span.right a.next.htm'/*tpa=http://www.6hezb.com/span.right a.next*/).hasClass( "security_titAOver" )){
+        $('span.right a.next.htm'/*tpa=http://www.6hezb.com/span.right a.next*/).removeClass("security_titAOver");
+      }
+    });
+   $('span.right a.next.htm'/*tpa=http://www.6hezb.com/span.right a.next*/).click(function(){
+      if (++page == page_count) {
+        page = page_count - 1;
+        return false;
+      }
+      autoProxy();
+     }).mouseover(function(){      
+      $(this).addClass('security_titAOver');
+      if( $(this).hasClass( "security_titAOut" )){
+        $(this).removeClass("security_titAOut");
+      }
+       $('span.right a.prev.htm'/*tpa=http://www.6hezb.com/span.right a.prev*/).addClass('security_titAOut');
+       if( $('span.right a.prev.htm'/*tpa=http://www.6hezb.com/span.right a.prev*/).hasClass( "security_titAOver" )){
+        $('span.right a.prev.htm'/*tpa=http://www.6hezb.com/span.right a.prev*/).removeClass("security_titAOver");
+      }
+    });
+    //5秒后自动切换
+    var timer = setInterval(auto, 5000);
+    function autoProxy(){
+      //alert(page);
+      if(page == page_count-1){
+        if(len%3==0){
+          $v_show.animate({left:'-'+v_width*(page)},'slow',function(){}); 
+        }
+        else{
+          $v_show.animate({left:'-'+326*(len%3)},'slow',function(){}); 
+        }       
+      }
+      else{
+          $v_show.animate({left:'-'+v_width*(page)},'slow',function(){}); 
+       }
+       false;
+    };
+    function auto(){
+      if (++page == page_count) {
+        page = 0;
+      }
+      autoProxy();
+    }
+    //悬停层上面停止方法 
+    $(".wrapper").hover(function(){
+      clearInterval(timer);
+      },function(){
+        timer = setInterval(auto, 5000);
+      })
+  });
+</script>
+
+<include file="Public:_footer"/>

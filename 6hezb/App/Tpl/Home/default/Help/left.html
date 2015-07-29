@@ -1,0 +1,8 @@
+
+<div class="about_left">
+  <ul class="leftsidebar">
+		<foreach name="leftlist" item='vl'>
+		<li><a class="<if condition="$vl.id eq $cid">leftsidebar2</if>" href="{$vl.turl}" title="{$vl.type_name}" class="cn1l-item-name" >{$vl.type_name|cnsubstr2=###,8}</a></li>
+		</foreach>
+    </ul>
+</div>

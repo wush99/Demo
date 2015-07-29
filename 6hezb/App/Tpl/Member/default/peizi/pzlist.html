@@ -1,0 +1,49 @@
+<style>
+	#pz_list li{float:left;width:90px;height:50px;text-align: center;line-height: 50px;}
+	#pz_list .ul_1 li{border:1px solid #ccc;border-right:none;}
+	#pz_list .ul_2 li{border:1px solid #ccc;border-top:none;border-right:none;}
+	#pz_list .ul_2 a{color:#00a8e8;}
+</style>
+<div style='width:92%;margin:0 auto' id='pz_list'>
+	<ul class='ul_1'>
+		<li>配资ID</li>
+		<li>冻结资金</li>
+		<li>配资额度</li>
+		<li>配资期限</li>
+		<li>利息支付方式</li>
+		<li>状态</li>
+		<li>申请时间</li>
+		<li style='border-right:1px solid #ccc'>操作</li>
+	</ul>
+	<foreach name='list' item='val'>
+		<ul class='ul_2'>
+			<li>{$val.id}</li>
+			<li>{$val.own}万</li>
+			<li>{$val.money}万</li>
+			<li>{$val.times}个月</li>
+			<li style='line-height:25px;'>按月付息<br/>到期还本</li>
+			<li>
+				<?php if($val['verify']==0){echo '审核中';}elseif($val['verify']==1){echo '审核通过';}elseif($val['verify']==2){echo '审核失败';}elseif($val['verify']==4){echo '已撤销';}?>
+			</li>
+			<li style='line-height:23px;'><?php echo date('Y-m-d H:i:s',$val['time']);?></li>
+			<li style='border-right:1px solid #ccc'>
+				<?php
+					$add=M('peizi_add')->where('pid='.$val['id'].' and verify=0')->select(); 
+					if($val['verify']==0){echo "<a href='__URL__/cexiao.html?id=".$val['id']."&uid=".$val['uid']."&own=".$val['own']."'>撤销</a>";}elseif($val['verify']==1 && !$add){echo "<a id='add' href='".$val['id']."'>增加保证金</a>";}elseif($add){echo "追加审核中";}
+				?>
+			</li>
+		</ul>
+	</foreach>
+</div>
+<script>
+$('#add').click(function(){
+	var id=$(this).attr('href')
+	var iWidth=600;
+	var iHeight=400;
+	var iTop = (window.screen.height-30-iHeight)/2; //获得窗口的垂直位置;
+	var iLeft = (window.screen.width-10-iWidth)/2; //获得窗口的水平位置;
+	window.open("/member/peizi/add.html?id="+id,'newwindow','height='+iHeight+',width='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+	return false;
+})
+
+</script>

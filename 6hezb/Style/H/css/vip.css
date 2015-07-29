@@ -1,0 +1,114 @@
+@charset "utf-8";
+/* CSS Document */
+.vip_content{width:988px;margin:0 auto;height:auto;display:table;}
+.vip_left{width:145px;float:left;}
+.vip_right{width:844px;float:right; font-size:12px;}
+.vip_nav,.vip_nav1,.vip_nav2,.vip_nav3,.vip_nav4,.vip_nav5,.vip_nav6,.vip_nav7,.vip_nav,.vip_nav01,.vip_nav02,.vip_nav03,.vip_nav04,.vip_nav05,.vip_nav06,.vip_nav07,.vip_nav8,.vip_nav08{height:50px;line-height:50px;color:#333;border-bottom:1px solid #fff;padding-left:42px;font-size:14px;}
+.vip_nav01 a:link,.vip_nav01 a:visited,.vip_nav02 a:link,.vip_nav02 a:visited,.vip_nav03 a:link,.vip_nav03 a:visited,.vip_nav04 a:link,.vip_nav04 a:visited,.vip_nav05 a:link,.vip_nav05 a:visited,.vip_nav06 a:link,.vip_nav06 a:visited,.vip_nav07 a:link,.vip_nav07 a:visited,.vip_nav08 a:visited,.vip_nav08 a:visited,.vip_nav06 a:visited{color:#fff;}
+.vip_nav1{background:url("../images/index4_03.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index4_03.jpg*/ no-repeat;}
+.vip_nav2{background:url("../images/index4_06.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index4_06.jpg*/ no-repeat;}
+.vip_nav3{background:url("../images/index4_08.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index4_08.jpg*/ no-repeat;}
+.vip_nav4{background:url("../images/index4_10.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index4_10.jpg*/ no-repeat;}
+.vip_nav5{background:url("../images/index4_12.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index4_12.jpg*/ no-repeat;}
+.vip_nav6{background:url("../images/index4_14.gif")/*tpa=http://www.6hezb.com/themes/default/images/index4_14.gif*/ no-repeat;}
+.vip_nav7{background:url("../images/index4_15.gif")/*tpa=http://www.6hezb.com/themes/default/images/index4_15.gif*/ no-repeat;}
+.vip_nav8{background:url("../images/index4_06.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index4_06.jpg*/ no-repeat;}
+.vip_nav01{background:url("../images/index3_03.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index3_03.jpg*/ no-repeat;color:#fff;}
+.vip_nav02{background:url("../images/index3_06.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index3_06.jpg*/ no-repeat;color:#fff;}
+.vip_nav03{background:url("../images/index3_08.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index3_08.jpg*/ no-repeat;color:#fff;}
+.vip_nav04{background:url("../images/index3_10.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index3_10.jpg*/ no-repeat;color:#fff;}
+.vip_nav05{background:url("../images/index3_12.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index3_12.jpg*/ no-repeat;color:#fff;}
+.vip_nav06{background:url("../images/index3_14.gif")/*tpa=http://www.6hezb.com/themes/default/images/index3_14.gif*/ no-repeat;color:#fff;}
+.vip_nav07{background:url("../images/index3_15.gif")/*tpa=http://www.6hezb.com/themes/default/images/index3_15.gif*/ no-repeat;color:#fff;}
+.vip_nav08{background:url("../images/index3_06.jpg")/*tpa=http://www.6hezb.com/themes/default/images/index3_06.jpg*/ no-repeat;}
+.vip,.vip4{border:1px solid #e6e6e6;background:#fff;font-family:Arial;}
+.vip{height:143px;padding:28px 21px 0 21px;}
+.vip01{width:104px;height:124px;float:left;}
+.vip02{width:459px;height:124px;float:left;padding-left:23px;}
+.vip03{width:191px;height:93px;float:left;padding-top:31px;}
+.vip2,.vip2_in{height:24px;line-height:24px;}
+.vip2_in{width:220px;float:left}
+.vip2_in img{width:20px;height:20px;}
+.vip3{height:32px;line-height:24px;}
+.vip4{height:600px;padding:25px 42px 0 42px;}
+.vip5{height:50px;padding-top:15px;font-size:14px;}
+.vip6{height:75px;padding-top:15px;}
+.vip7{border-bottom:1px solid #ececec;font-size:14px;}
+.vip5_in{width:370px;float:left}
+.vip8{height:35px;}
+.vip9{padding:1px 0;}
+.vip9 li,.vip10{height:30px;line-height:30px;background:#f9f9f9;color:#999;}
+.vip9 li a{padding-left:40px;color:#ccc}
+a.vip10:link,a.vip10:visited,a.vip10:hover,a.vip10:active{background:#d7b991;color:#fff;display:block;}
+.vip11{background:url("../images/border_top_vip.gif")/*tpa=http://www.6hezb.com/themes/default/images/border_top_vip.gif*/ repeat-x bottom;font-size:16px;font-family:"微软雅黑";}
+.vip11 li{width:118px;height:48px;line-height:48px; text-align:center;float:left;}
+.vip11 li a{color:#cbcbcb;}
+a.vip12:link,a.vip12:visited,a.vip12:hover,a.vip12:active{text-align:center;background:url("../images/vip_bg2.gif")/*tpa=http://www.6hezb.com/themes/default/images/vip_bg2.gif*/ no-repeat;border-right:1px solid #dcdcdc;display:block;color:#333;}
+.vip13{width:588px;height:auto;display:table;border:1px solid #dcdcdc;padding:58px 118px;font-size:14px;background:#fff;border-top:none;}
+.vip14,.vip15{height:40px;line-height:40px;}
+.vip14{padding-bottom:20px;}
+.vip15{width:118px;float:left;}
+.vip16{width:400px;float:left;}
+.vip_box,.vip_box2,.vip_box3,.vip_box4,.vip_box5,.vip_box6,.vip_box7,.vip_box8{border:1px solid #e4e4e4;color:#999;padding-left:5px;}
+.vip_box,.vip_box2,.vip_box3,.vip_box4,.vip_box5,.vip_box6,.vip_box7,.vip_box8{width:190px;background:url("../images/ind14.gif")/*tpa=http://www.6hezb.com/themes/default/images/ind14.gif*/ no-repeat right #fff;height:35px;}
+.vip_box2{background:#fff;}
+.vip_box3{width:125px;}
+.vip_box4{width:300px;background:#fff;}
+.vip_box5{width:120px;}
+.vip_box6{width:117px;height:32px;}
+.vip_box7{width:179px;}
+.vip_box8{width:117px;height:32px;background:url("../images/bg4.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg4.gif*/ right no-repeat;}
+.vip18{width:842px;background:#fff;border:1px solid #dcdcdc;border-top:none;display:table;}
+.vip17{width:730px;height:78px;padding-top:60px;padding-left:96px;line-height:35px;font-size:14px;background:#fff;}
+.vip17_in{width:86px;line-height:35px;float:left}
+.vip17_in2{width:193px;float:left;padding:0 10px;}
+.vip17_in3{width:20px;float:left;line-height:35px; text-align:center}
+.vip17_in4{width:120px;float:left}
+.lan_box55,.lan_box66{height:35px;width:112px;}
+.vip21{width:726px;height:300px;padding:0 0 0 0;margin-left:49px;border-top:1px solid #ececec;}
+.vip19{height:50px;color:#0697da;font-size:22px;padding-top:30px;font-family:"微软雅黑";}
+.vip20{height:40px;}
+.vip20_in{width:241px;float:left;}
+.vip20_in01{width:88px;float:left;}
+.vip20_in02{width:150px;float:left;}
+.vip22{width:828px;background:#fff;}
+.hei24{color:#333;font-size:24px; font-family:Arial;}
+.hei_size24{color:#f79608;font-size:24px; font-family:Arial;}
+.heia24{color:#333;font-size:24px; font-family:"微软雅黑";}
+.subnav{width:145px;padding:5px 0;font-size:12px;}
+.subnav li,.subnav2{height:30px;line-height:30px;}
+.subnav li a{display:block;padding-left:46px;}
+a.subnav2:link,a.subnav2:visited,a.subnav2:hover,a.subnav2:active{display:block;padding-left:46px;background:#7fd4f3;color:#fff;font-weight:bold;}
+/* CSS 登陆 */
+.lan{width:266px;height:100px; text-align:right;line-height:100px;font-size:14px;}
+.lan_content{width:100%;height:auto;display:table;background:url("../images/Landed_top_bg.gif")/*tpa=http://www.6hezb.com/themes/default/images/Landed_top_bg.gif*/ repeat-x top;padding:20px 0;}
+.lan2,.login3,.login4{width:886px;margin:0 auto;height:500px;border:1px solid #eaeaea;border-bottom:none;background:url("../images/ind_bo.gif")/*tpa=http://www.6hezb.com/themes/default/images/ind_bo.gif*/ repeat-x bottom #FFF;padding:50px;}
+.lan_tit{height:40px;border-bottom:1px solid #d9d9d9;font-family:"微软雅黑";font-size:24px;color:#0697da;}
+.lan3{width:453px;height:256px;margin:0 auto;padding-top:100px;}
+.lan4,.lan5,.lan6,.lan7{height:38px;line-height:38px;}
+.lan4{}
+.lan5{width:76px;float:left;}
+.lan6{width:264px;float:left;}
+.lan7{width:82px;float:left; text-align:right}
+.lan_box,.lan_box2,.lan_box3,.lan_box4{width:264px;height:38px;line-height:38px;background:url("../images/l01.jpg")/*tpa=http://www.6hezb.com/themes/default/images/l01.jpg*/ no-repeat right;color:#000;padding-left:5px;border:1px solid #e4e4e4;}
+.lan_box2{background:url("../images/l02.jpg")/*tpa=http://www.6hezb.com/themes/default/images/l02.jpg*/ no-repeat right;}
+.lan_box3{background:#fff;}
+.lan_box4{width:157px;background:#fff;}
+.login_b{height:520px;padding:100px 30px 0 60px;}
+.login2,.login01,.login02{height:38px;}
+.login01{width:140px;line-height:38px; text-align:right;float:left;}
+.login02{width:350px;height:28px;padding:10px 0 0 20px; text-align:left;float:left;}
+.login3{height:800px;}
+.login4{height:750px;font-size:12px; font-family:Arial;}
+.login_a{
+	width: 690px;
+	height: 57px;
+	float: right;
+	padding-top:57px;
+	text-align:right;
+}
+.vip01_tit{width:783px;height:86px;line-height:86px;border-bottom:1px solid #f3f3f3;margin:0 auto;color:#00a8e8; font-family:"微软雅黑"; font-size:24px;}
+.vip01_tit2{height:56px;padding:0px 0 0 32px;color:#00a8e8; font-family:"微软雅黑";padding-top:30px;}
+.vip01_a{width:117px;float:left;padding:0 10px 0 0;}
+.vip01_b{width:179px;float:left;padding:0 10px;}
+.vip01_d{width:844px; font-family:"微软雅黑";}

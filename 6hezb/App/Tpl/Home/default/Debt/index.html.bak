@@ -1,0 +1,198 @@
+﻿<include file="Public:_header_common" />
+<title>{$glo.index_title}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<script type="text/javascript" src="__ROOT__/Style/H/js/common.js" language="javascript"></script>
+<script type="text/javascript">
+var Transfer_invest_url = "__APP__/tinvest";
+</script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/area.js"></script>
+<include file="Public:_header_main" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+var url = window.location.href;
+if(url)var allargs = url.split("?")[1];
+if(allargs)var tab1= allargs.split("=")[1];
+if(tab1)var tab= tab1.split("&")[0];
+
+$(function(){ 
+    if(tab==9){
+        $('#a1').addClass("show_style");
+    }
+    if(tab==4){
+        $('#a2').addClass("show_style");
+        $('#a1').removeClass("show_style");
+    }
+    if(tab==6){
+        $('#a3').addClass("show_style");
+        $('#a1').removeClass("show_style");
+    };
+    if(tab==7){
+        $('#a4').addClass("show_style");
+        $('#a1').removeClass("show_style");
+    };
+    if(tab==10){
+        $('#a5').addClass("show_style");
+        $('#a1').removeClass("show_style");
+        $('#black').attr('style','display:block');
+        $('#con').attr('style','display:none');
+    };
+});
+
+</script>
+<script type="text/javascript">
+function buy_debt(invest_id)
+{
+    $.jBox("get:__URL__/buydebt?invest_id="+invest_id, {
+        title: "购买债权",
+        width: "auto",
+        buttons: {}
+    });
+}
+</script>
+
+<div class="list_banner">
+  <div class="list_banner_left">
+    <div class="list_banner_left_l">
+      <h2>筛选理财基金</h2>
+      <ul>
+        <li class="saixuanlx">基金状态</li>
+        <php>foreach($searchMap['borrow_status'] as $key=>$v){</php>
+        <php>if($key==$searchUrl['borrow_status']['cur']){</php>
+        <li class="buxz"><a>{$v}</a></li>
+        <php>}else{</php>
+        <li><a class="a_lb_2" href="__URL__/index.html?type=search&{$searchUrl.borrow_status.url}&borrow_status={$key}">{$v}</a></li>
+        <php>}</php>
+        <php>}</php>
+      </ul>
+      <ul class="dierge">
+        <li  class="saixuanlx">信用等级</li>
+        <php>foreach($searchMap['leve'] as $key=>$v){</php>
+        <php>if($key==$searchUrl['leve']['cur']){</php>
+        <li class="buxz"><a>{$v}</a></li>
+        <php>}else{</php>
+        <li><a class="a_lb_2" href="__URL__/index.html?type=search&{$searchUrl.leve.url}&leve={$key}">{$v}</a></li>
+        <php>}</php>
+        <php>}</php>
+      </ul>
+      <ul>
+        <li class="saixuanlx">运作期限</li>
+        <php>foreach($searchMap['borrow_duration'] as $key=>$v){</php>
+        <php>if($key==$searchUrl['borrow_duration']['cur']){</php>
+        <li class="buxz"><a href="__ROOT__/invest/index.html">{$v}</a></li>
+        <php>}else{</php>
+        <li><a class="a_lb_2" href="__URL__/index.html?type=search&{$searchUrl.borrow_duration.url}&borrow_duration={$key}">{$v}</a></li>
+        <php>}</php>
+        <php>}</php>
+      </ul>
+      <ul style="border-bottom:none;">
+        <form name="searchform" action="__URL__/index" method="get">
+          <li  class="saixuanlx">关键词搜索:</li>
+          <li style="width:250px;">
+            <htmlA:radio id="is_keyword" value="key|searchMap.is_keyword" default="0|不限制,1|基金用户,2|基金商品名"/>
+          </li>
+          <li>
+            <input class="searchkeywords" name="searchkeywords" type="text"    value="{$searchMap.searchkeywords}" style="margin-top:6px;"/>
+          </li>
+          <li>
+            <input type="submit" name="btnSubmit" id="btnSubmit" value=" " style="height:29px; margin-left:77px; margin-top:3px; cursor: pointer;" class="btn">
+          </li>
+        </form>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="list_main main">
+  <div class="list_main_top">
+  <div class="wleft"><h3 class="title_03">基金列表<a id="wpass" class="more" href="/tools/tool.html">理财计算器</a></h3> </div>
+  <div class="wright"></div>   
+</div>
+    
+     <table border="0" style="padding:0 5px;">
+            <tr class="diyige borrowlistl">
+            <td width="286">基金商品名</td>
+            <td class="dengji" width="124">信用等级</td>
+            <td class="dengji" width="124">基金利率</td>
+            <td cclass="dengji" width="100">转让价格</td>
+            <td class="dengji" width="100">待收本息</td>
+            <td class="dengji jindu" width="120">转让期数/总期数</td>
+            <td class="dengji" width="160">状态</td>
+          </tr>
+  <volist name="list.data" id="vb">
+	    <tr height="80" class="borrowlist borrowlistl <if condition="($key+1)%10 eq 0">delline</if>">
+	    <td width="286" align="left" style="text-align:left;">&nbsp;&nbsp;{:getIco($vb)}<a href="{$vb.id|getInvestUrl=###}"title="{$vb.borrow_name}" class="BL_name">{$vb.borrow_name|cnsubstr=###,12}</a></td>
+	    <td class="dengji" width="124">{$vb.credits|getLeveIco=###,2}</td>
+	    <td class="dengji" width="124"><span class="BL_time">{$vb.borrow_interest_rate}</span>&nbsp;%</td>
+	    <td class="dengji" width="100"><span class="BL_time">{$vb.transfer_price|default=0}</span>&nbsp;元</td>
+	    <td class="dengji" width="100"><span class="BL_time">￥{$vb.money|default=0}</span>&nbsp;元</td>
+	    <td class="dengji jindu" width="100"> <span class="BL_time">{$vb.period}</span>期/<span class="BL_time">{$vb.total_period}</span>期
+</td>
+	    <td class="dengji" width="160">
+        
+         <if condition="$vb.status eq '2'"> <a href="javascript:;" onclick="buy_debt('{$vb.invest_id}')"><img class="anNiuYLB" src="__ROOT__/Style/H/images/tb.gif" /></a>
+                            <elseif condition="$vb.status eq '4'"/>
+                            <img  class="anNiuHKZ" src="__ROOT__/Style/H/images/ywc.gif"  /> </if>
+                    
+                  <input id="hid{$vo.debt_id}" type="hidden" value="{$vo['valid']-time()}" />
+			  <script type="text/javascript">
+                var seconds{$vo.debt_id};
+                var timer{$vo.debt_id}=null;
+                function setLeftTime{$vo.debt_id}() {
+                    seconds{$vo.debt_id} = parseInt($("#hid{$vo.debt_id}").val(), 10);
+                    timer{$vo.debt_id} = setInterval(showSeconds{$vo.debt_id},1000);
+                }
+                
+                function showSeconds{$vo.debt_id}() {
+                    var day1{$vo.debt_id} = Math.floor(seconds{$vo.debt_id} / (60 * 60 * 24));
+                    var hour{$vo.debt_id} = Math.floor((seconds{$vo.debt_id} - day1{$vo.debt_id} * 24 * 60 * 60) / 3600);
+                    var minute{$vo.debt_id} = Math.floor((seconds{$vo.debt_id} - day1{$vo.debt_id} * 24 * 60 * 60 - hour{$vo.debt_id} * 3600) / 60);
+                    var second{$vo.debt_id} = Math.floor(seconds{$vo.debt_id} - day1{$vo.debt_id} * 24 * 60 * 60 - hour{$vo.debt_id} * 3600 - minute{$vo.debt_id} * 60);
+                    
+                    $("#loan_time{$vo.debt_id}").html(day1{$vo.debt_id} + " 天 " + hour{$vo.debt_id} + " 小时 " + minute{$vo.debt_id} + " 分 " + second{$vo.debt_id} + " 秒");
+                    
+                    seconds{$vo.debt_id}--;
+                    if(seconds{$vo.debt_id}==0){
+                       $("#endtime{$vo.debt_id}").html("已结束");
+                       $("#buy_button").html('<img  class="anNiuHKZ" src="__ROOT__/Style/H/images/ywc.gif"  />'); 
+                    }
+                }                
+                setLeftTime{$vo.debt_id}();
+            </script>
+
+</td>
+		
+	  </tr>
+         </volist>  </table> 
+    
+</div>
+<div class="list_bottom">
+  <div class="list_bottom_right">
+    <ul>
+      {$list.page}
+    </ul>
+  </div>
+</div>
+  <script language="javascript">
+	$(function() {
+		$(".borrowlistp").bind("mouseover", function(){
+			$(this).css("background", "#fce8e1");
+		})
+
+		$(".borrowlistp").bind("mouseout", function(){
+			$(this).css("background", "#fff");
+		})
+
+
+		$(".borrowlistl").bind("mouseover", function(){
+			$(this).css("background", "#f8f8f8");
+		})
+
+		$(".borrowlistl").bind("mouseout", function(){
+			$(this).css("background", "#fff");
+		})
+	});
+
+</script>
+								
+<!--中部结束-->
+<include file="Public:_footer" />

@@ -1,0 +1,98 @@
+
+<div class="footer">
+    <div class="wrapper">
+        <div class="foote_link"><a href="#"><strong>友情链接</strong></a>
+            <!-- <a href="https://www.96caifu.com/" target="_blank">玖珑财富</a>
+            <a href="http://www.p2peye.com/" target="_blank">网贷天眼</a>
+            <a href="http://www.wangdaizhijia.com/" target="_blank">网贷之家</a> -->
+        <?php $links=friend_link();foreach($links as $link){
+            echo "<a href='".$link['link_href']."' target='_blank' >".$link['link_txt']."</a>";
+        }?>
+        </div>
+        <div class="foote_nav">
+            <div class="foote_nav_a">
+                <div class="foote_nav_b">
+                    <a href="/aboutus/jianjie.html">公司介绍</a>
+                    <a href="/aboutus/zizhi.html">政策法规</a>
+                    <a href="/aboutus/zfsm.html">了解配资</a>
+                    <a href="/aboutus/zcfgd.html">常见问题</a>
+                    <a href="/aboutus/lxwm.html">联系我们</a>
+                    <a href="/aboutus/arit.html">文章推荐</a>
+                    <a href="/borrow/che.html">车贷</a>
+                    <a href="/borrow/fang.html">房贷</a>
+                    <a href="/borrow/qiye.html">企业贷</a>
+                </div>
+                <div class="foote_nav_c">
+                    <span  style="line-height:30px;padding-right:20px;float:left;">客户服务</span>
+                    <span class="left">
+                        <a href="{$glo.xinlang}" target="_blank" class="foote_nav_cv"></a>
+                        <a href="/aboutus/lxwm.html"   class="foote_nav_cv2"></a>
+                        <a href="{$glo.tenxun}" target="_blank" class="foote_nav_cv3"></a>
+                        <a href="" target="_blank" class="foote_nav_cv4 qq"></a>
+                        <a href="<?php $qq=get_qq(1);echo $qq[0]['qq_num'];?>" target="_blank" class="foote_nav_cv5"></a>
+                        
+                    </span>
+                </div>
+            </div>
+            <div class="foote_tel">
+                <span class="foote_tel20">{:get_ad(9)}</span>
+            </div>
+        </div>
+        <div class="copyright">
+            <span class="left" style='text-align:left'>公司地址：海南省海口市美兰区海府一横路华宇大厦13楼<br />{$glo.bottom}
+                <span style="display:none">
+                    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000405030'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1000405030' type='text/javascript'%3E%3C/script%3E"));</script>
+                    <script type="text/javascript">
+                    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9784dbf7cbf8662c253fe8ba86e962a5' type='text/javascript'%3E%3C/script%3E"));
+                    </script> 
+                </span>
+            </span>
+            <span class="right"> <img src="__ROOT__/Style/H/images/bottom_bg2.gif" width="217" height="36" alt="六合资本" /> <a hre="http://webscan.360.cn/index/checkwebsite/url/www.6hezb.com"><img border="0" height="24" src="http://img.webscan.360.cn/status/pai/hash/0311303dddbd33667c25399e83904071"/></a> 
+            </span>
+        </div>
+    </div>
+</div>
+<!-- 代码 开始 -->
+<link href="__ROOT__/Style/H/css/zzsc.css"   rel="stylesheet" type="text/css" />
+<div id="service" style='z-index:1000;'>
+  <a href="/aboutus/lxwm.html" class="srvLog" target="_blank">联系我们</a>
+  
+  <!--<a class="goTop" id="goTop" title="返回顶部" style="display:none">返回顶部</a>-->
+</div>
+<div class="srvCns">
+    <a class="qq" href='' target="_blank">在线客服</a>
+    <!-- <a class="qq" href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">在线客服</a> -->
+    <!-- <ul >
+        <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">LHZB-小迪</a></li>
+        <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">LHZB-小凡</a></li>
+        <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">LHZB-小陶</a></li>
+        <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">LHZB-小雯</a></li>
+        <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">LHZB-小铭</a></li>
+        <li><a href="http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6" target="_blank">LHZB-小燕</a></li>
+    </ul> -->
+    <ul id='kef' style='display:none;'>
+        <php>$vll = get_qq(0); foreach($vll as $kx => $vl){</php>
+            <li><a class=icoTc href="http://wpa.qq.com/msgrd?v=3&amp;uin={$vl.qq_num}&amp;site=qq&amp;menu=yes" target="_blank">{$vl.qq_title}</a> </li>
+        <php>};$xlist=NULL;</php>  
+    </ul>
+</div>
+<script>
+    $(function(){
+        function rand(){
+            var x=parseInt(Math.random()*10)%4
+            if(x==0){x=4}
+            href=$('#kef li:nth-child('+x+') a').attr('href')
+            if(href==''){
+                rand()
+            }else{
+                $('.qq').attr('href',href)
+            }
+        }
+        rand()
+    })
+</script>
+<!--<script type="text/javascript" src="/js/service.js"></script>-->
+<!-- 代码 结束 -->
+</body>
+</html>

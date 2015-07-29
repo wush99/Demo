@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+
+<link rel="stylesheet" href="__ROOT__/Style/M/css/detail.css" />
+<link href="__ROOT__/Style/M/css/home.css" rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/index.css"   rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/indexbase.css"   rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/base.css" rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/about.css" rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/vip.css" rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/M/css/css.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="__ROOT__/Style/jBox1/Skins/Blue/jbox.css"/>
+
+<script src="__ROOT__/Style/H/js/jquery.min.js"   type="text/javascript"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/header.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/user.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/tipswindown.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/css/tipswindown.css"></script>
+<script type="text/javascript" src="__ROOT__/Style/M/js/backtotop.js"></script>
+
+<script src="__ROOT__/Style/H/js/jquery.kinMaxShow-1.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='__ROOT__/Style/jBox1/jquery.jBox.min.js'></script>
+<script type='text/javascript' src='__ROOT__/Style/jBox1/jquery.jBoxConfig.js'></script>
+<link rel="icon" href="__ROOT__/favicon1.ico" type="image/x-icon" />
+<link REL="SHORTCUT ICON" HREF="__ROOT__/favicon1.ico" type="image/x-icon" />
+
+<?php
+  $dws= session('u_user_name');
+?>
+<style>
+.rrd-dimgray{
+	text-align:left;
+	width:90%;
+	padding:5px;
+}
+img{
+  border;none;
+}
+.header{
+  text-align: center;
+  *margin-top:-22px;
+}
+.mainbav{
+  width:600px;
+  *width:580px;
+}
+.wrapper2{
+  *text-align: center;
+  *margin-top:-65px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+  $("#kinMaxShow").kinMaxShow({
+      //设置焦点图高度(单位:像素) 必须设置 否则使用默认值 500
+      height:451,
+      //设置焦点图 按钮效果
+      button:{
+          //设置按钮上面不显示数字索引(默认也是不显示索引)
+          showIndex:false,
+          //按钮常规下 样式设置 ，css写法，类似jQuery的 $('xxx').css({key:value,……})中css写法。            
+          //【友情提示：可以设置透明度哦 不用区分浏览器 统一为 opacity，CSS3属性也支持哦 如：设置按钮圆角、投影等，只不过IE8及以下不支持】            
+          normal:{background:'url(__ROOT__/Style/H/images/button.png) no-repeat -14px 0',marginRight:'8px',border:'0',right:'45%',bottom:'20px'},
+          //当前焦点图按钮样式 设置，写法同上
+          focus:{background:'url(__ROOT__/Style/H/images/button.png) no-repeat 0 0',border:'0'}
+      }});
+$("#navbox").hoverClass("current");
+});
+(function(a){
+  a.fn.hoverClass=function(b){
+    var a=this;
+    a.each(function(c){
+      a.eq(c).hover(function(){
+        $(this).addClass(b)
+      },function(){
+        $(this).removeClass(b)
+      })
+    });
+    return a
+  };
+})(jQuery);
+</script>
+
+<script type="text/javascript">
+var timeout         = 500;
+var closetimer    = 0;
+var ddmenuitem      = 0;
+function jsddm_open()
+{ 
+  jsddm_canceltimer();
+  jsddm_close();
+  ddmenuitem = $(this).find('ul').eq(0).css('visibility', 'visible');
+}
+function jsddm_close()
+{ 
+  if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');
+}
+function jsddm_timer()
+{ 
+  closetimer = window.setTimeout(jsddm_close, timeout);
+}
+function jsddm_canceltimer()
+{ if(closetimer)
+  { window.clearTimeout(closetimer);
+    closetimer = null;
+  }
+}
+$(document).ready(function()
+{ $('#jsddm > li').bind('mouseover',jsddm_open);
+  $('#jsddm > li').bind('mouseout',jsddm_timer);
+});
+document.onclick = jsddm_close;
+  </script>
+</head>
+<body>
+  <div class="header" style='position:relative;z-index:999;'>
+    <div class="wrapper">
+      <div class="top">
+        <div class="top_txt left" style='text-align:left;'>
+          <if condition="$UID gt '0'">
+          	<a style="color:#FFF" href="__APP__/member/">{$dws|cnsubstr=###,10}</a> &nbsp; <A href="__APP__/member/msg#fragment-1" style="color:#FFF" >消息({$unread|default=0})</A> <A href="__APP__/member/common/actlogout"   style="color:#FFF">退出</A>
+          <else/>
+          	<span style="color:#FFF">您好，欢迎来到{$glo.web_name}！</span> <A href="/member/common/login.html" style="color:#FFF" >请登录</A>-<A href="/member/common/register.html"   style="color:#FFF">免费注册</A>
+          </if>
+        </div>
+        <div class="top_nav right"><a href="/member/" style="color:#FFF">我的{$glo.web_name}</a> <a href="/aboutus/xins.html"   style="color:#FFF">帮助</a><a href="/"   style="color:#FFF">首页</a> </div>
+      </div>
+      <div class="nav">
+        <div class="logo"><!-- <a href="index.htm"  ><img src="__ROOT__/Style/H/images/index_03.jpg"   width="197" height="114" alt="logo" /></a> --><div class="N_logo"><a href="/">{:get_ad(1)}</a></div></div>
+        <div class="mainbav">
+          <ul id="jsddm">
+            <li><a href="/aboutus/jianjie.html">关于我们</a></li>
+            <li><a href="/aboutus/xins.html">新手指引 </a></li>
+            <li><a href="/member/peizi.html">我要配资</a></li>
+            <li><a href="/borrow/index.html">我要借款 <img src="__ROOT__/Style/H/images/top_bg3.gif" alt="我要借款" /> </a>
+              <ul style="z-index:5;text-align:left;">
+                  <li><a href="/borrow/che.html">车贷</a></li>
+                  <li><a href="/borrow/fang.html">房贷</a></li>
+                  <li><a href="/borrow/qiye.html">企业贷</a></li>
+              </ul>
+            </li>
+            <li><a href="/invest/small.html">我要理财 <img src="__ROOT__/Style/H/images/top_bg3.gif" alt="我要理财" /></a>
+              <ul style="z-index:5;text-align:left;">
+                <li><a href="/Tinvest/index.html" >网配出资</a></li>
+                <li><a href="/invest/index.html" >小微投资</a></li>
+                <li><a href="/debt/index.html" >债权转让</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="login" id="navbox">
+            <if condition="$UID gt '0'">
+            <else/>
+                <a href="/member/common/register.html" class="gray999">注册</a> <a href="/member/common/login.html" class="Blue">登录</a>
+            </if>
+        <if condition="$UID gt '0'">
+              <!--快捷通道-->
+              <div class="grid_3 ui-header-grid" style='margin-top:-10px;'>
+                <ul class="ui-nav fn-right  ">
+                  <li id="ui-nav-item-link"  class="ui-nav-item ui-nav-item-x" > <a  class="ui-nav-item-link rrd-dimgray ui-nav-username fn-text-overflow" href="__APP__/member/" >
+                    <span id="jieduan">您好，{$dws|cnsubstr=###,9} <span class="arrow-down"></span> </a>
+                    <ul class="ui-nav-dropdown" id="ui-nav-dropdown" style="display: none;float:left;">
+                      <li class="ui-nav-dropdown-angle"><span></span></li>
+                      <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/charge#fragment-1">充值</a></li>
+                      <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/withdraw#fragment-1">提现</a></li>
+                      <li class="ui-nav-dropdown-separator"></li>
+                      <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/capital#fragment-2">资金明细</a></li>
+                      <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/verify?id=7#fragment-7">资料认证</a></li>
+                      <li class="ui-nav-dropdown-separator"></li>
+                      <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/common/actlogout">退出</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!--快捷通道end-->
+        </if>
+        <script language="javascript">
+        $(document).ready(function(){
+
+        	
+        $("#ui-nav-item-link").mouseover(function(){
+        	$("#ui-nav-dropdown").show()
+        	}).mouseout(function(){
+        		$("#ui-nav-dropdown").hide()
+        		});
+        	$(".ui-nav-dropdown-item").mouseover(function(){
+        		$(this).css({"background":"#027BC0"}).mouseout(function(){
+        			$(this).css({"background":"#fff"})
+        			});
+
+        		})
+          })
+        $('#peizi').click(function(){
+          $.jBox.tip("<p style='font-size:20px;'>“我要配资”请联系‘在线客服’线下进行操作！！！</p>")
+        });
+        </script>
+        </div>
+      </div>
+    </div>
+  </div>

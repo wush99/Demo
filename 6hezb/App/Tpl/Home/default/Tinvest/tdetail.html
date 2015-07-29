@@ -1,0 +1,748 @@
+<include file="Public:_header_common" />
+<title>{$vo.borrow_name}-我要投资-{$glo.web_name}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<link rel="stylesheet" type="text/css" href="__ROOT__/Style/fancybox/jquery.fancybox-1.3.2.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="__ROOT__/Style/H/css/detail.css" />
+<script type="text/javascript" src="__ROOT__/Style/fancybox/jquery.fancybox-1.3.2.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/common.js" language="javascript"></script>
+<script type="text/javascript">
+var Transfer_invest_url = "__APP__/tinvest";
+</script>
+<script>
+<!--
+/*第一种形式 第二种形式 更换显示样式*/
+function setTab(name,cursel,n){
+for(i=1;i<=n;i++){
+var menu=document.getElementById(name+i);
+var con=document.getElementById("con_"+name+"_"+i);
+menu.className=i==cursel?"hover":"";
+con.style.display=i==cursel?"block":"none";
+}
+}
+
+function invest(id){
+	$.jBox("get:__URL__/ajax_invest?id="+id, {title: "立即投标--{$glo.web_name}"});
+}
+
+function vouch(id){
+	$.jBox("get:__URL__/ajax_vouch?id="+id, {
+		title: "立即担保--{$glo.web_name}"
+	});
+}
+function addFriend(type){
+	var uid = {$minfo.uid};
+	$.ajax({
+		url: "__URL__/addfriend",
+		data: {"fuid":uid,"type":type},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1)	 $.jBox.tip(d.message,'success');
+				else $.jBox.tip(d.message,'error');
+			}
+		}
+	});
+}
+function InnerMsg(){
+	var uid = {$minfo.uid};
+	$.jBox("get:__URL__/innermsg?uid="+uid, {
+		title: "发送站内信"
+	});
+}
+
+function changeDIV(num){
+	for(var id = 1;id<=8;id++)
+		{
+			if(id==num)
+			{
+				$("#detail_menu_"+id).attr('style','display: block');
+				$("#li_menu_"+id).addClass('now');
+			}
+			else
+			{
+				$("#detail_menu_"+id).attr('style','display: none');
+				$("#li_menu_"+id).removeClass();
+			}
+		}
+}
+//-->
+</script>
+<script type="text/javascript">
+	function showht(){
+		var status = '{$invid}';
+		if(status=="no"){
+			jBox.tip("您未投此标");
+		}else if(status=="login"){
+			jBox.tip("请先登陆");
+		}else{
+			window.location.href="__APP__/member/agreement/downfile?id="+status;
+		}
+	}
+</script>
+<style type="text/css">
+.e_hytx dd.e_bb p { width:270px }
+.e_hytx dt { height:210px }
+.e_hytx dt p.e_r a { height:40px; margin-left:0px }
+.pdxd { padding:20px }
+.ellipsis a{cursor: pointer; text-decoration:none; color:#666}
+.ellipsis a:hover {cursor: pointer; text-decoration:none; color:#333}
+
+	 .ellipsis {
+            overflow: hidden;
+            height: 180px; }
+
+        .ellipsis:before {
+            content:"";
+            float: left;
+            width: 5px; height: 180px; }
+
+        .ellipsis > *:first-child {
+            float: right;
+            width: 100%;
+            margin-left: -5px; }        
+
+        .ellipsis:after {
+            content: "\02026";  
+
+            box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+
+            float: right; position: relative;
+            top: -15px; left: 100%; 
+            width: 3em; margin-left: -3em;
+            padding-right: 5px;
+            
+            text-align: right;
+
+            background: -webkit-gradient(linear, left top, right top,
+                from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+            background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);            
+            background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white); }
+</style>
+<div class='wrapper2'>
+<div style="width:980px; margin:0 auto;border: #E9E9E9 1px solid; margin-top:5px;">
+  <div class="project-main">
+    <div class="main-line" style='width:950px;text-align:left;'>
+      <div class="item-img-pos" style='*margin-left:-240px;'> <span class="img-wrap shadow-5">
+        <if condition="$vo.b_img eq ''"><img width="231" height="156" src="__ROOT__/Style/H/images/default.gif" border="0" class="picborder"/>
+          <else/>
+          <img width="231" height="156" src="__ROOT__/{$vo.b_img}" border="0" class="picborder"/></if>
+        </span> 
+      </div>
+      <div class="right-content">
+        <div class="company-info clx">
+          <table class="fl" style='width:420px;'>
+            <tbody>
+              <tr>
+                <th height="39" style="width:160px;font-size:16px;">项目名称：</th>
+                <td colspan="2"><a  title="{$vo.borrow_name}"><span class="info fl" style="float:left; padding-top:3px;"><em class="large"><b>{$vo.borrow_name|cnsubstr=###,11}</b></em></span></a><span style="margin-top:2px; margin-left:10px; display:block; float:left; display:inline">{:getIco($vo)}</span> </td>
+              </tr>
+              <tr>
+                <th height="39" style='font-size:16px;'>项目日期：</th>
+                <td colspan="2"><span class="fl" style="float:left; padding-top:3px;font-size:16px;"><em class="">{$vo.add_time|date="Y-m-d H:i",###}</em></span> </td>
+              </tr>
+              <tr>
+                <th height="39" style='font-size:16px;'>信用等级：</th>
+                <td width="280"> {$minfo.credits|getLeveIco=###,2}</td>
+                <td width="300" align="center" valign="bottom"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="key-table-wrap" style='width:220px;float:right;'>
+          <table>
+            <tbody>
+              <tr>
+                <td height="39" style='font-size:17px;'>年化利率：<em class="finance-rate">{$vo.borrow_interest_rate}%</em></td>
+              </tr>
+              <tr>
+                <td style='font-size:17px;'>项目期限：<strong>{$vo.borrow_duration} </strong>
+                  <if condition="$vo.repayment_type eq 1">天
+                    <else/>
+                    个月</if>
+                  </td>
+              </tr>
+              <tr>
+                <td style='font-size:17px;'><if condition="$vo['reward_rate'] neq 0">网站奖励：<em class="return-type" >{$vo.reward_rate}%</em></if></td>
+              </tr>
+              <tr>
+                <td style='font-size:17px;'>还款方式：<em class="return-type" >{$Bconfig['REPAYMENT_TYPE'][$vo['repayment_type']]}</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-line" style='*width:950px;'>
+      <table>
+        <tbody>
+          <tr>
+            <td class="remind-infos" style="width: 296px;">
+            <div class="linstitution">
+                <label>担保机构： </label>
+                <span class="info" ><a href="__ROOT__/danbao/{$vo.ensure_url}">{$vo.ensure_department}</a></span> </div>
+              <div class="linstitution"> <span class="" >★100%本息保障</span> </div>
+              <div class="linstitution">
+                <label>★起息时间：</label>
+                <span  style="color:#c8050e;">{$vo.currentday|mydate="Y-m-d",###}</span> </div>
+              <div class="linstitution"> ★立即投资可获得<span style="color:#c8050e;">{$vo.restday}</span>天收益 </div>
+              <div class="linstitution"> ★ <if condition="($vo['transfer_out']-$vo['transfer_total'] eq 0) and ($vo['borrow_status'] eq 7)">
+                  企业运营正常,项目已还完
+                  <elseif condition="($vo['transfer_out']-$vo['transfer_total'] eq 0) and ($vo['borrow_status'] eq 2)"/>
+                   企业运营正常,项目正在还款中
+                  <elseif condition="($vo.is_show eq 0) and ($vo.borrow_status neq 7)"/>
+                  当前项目已停售
+                  <else/>
+			 	 每投资10万可获得利息<span style="color:#c8050e;">{$vo.shouyi|round=###,2}</span>元 </if></div></td>
+            <td class="project-process" style="width: 268px;"><ul>
+                <li>
+                  <label>融资金额：</label>
+                  <span class="">{$vo.borrow_money|getMoneyFormt=###}元</span> </li>
+                <li>
+                  <label>融资进度：</label>
+                 <span class="progress"> <span class="precent" style="width:{$vo.progress}%"></span> </span>&nbsp;{$vo.progress}%
+</li>
+                <li>
+                  <label>已投金额：</label>
+                  <span class="">{$vo['transfer_out']*$vo['per_transfer']|getMoneyFormt=###}元</span> </li>
+                <li>
+                  <label>还需金额：</label>
+                  <span class="">{$vo['transfer_total']*$vo['per_transfer']-$vo['transfer_out']*$vo['per_transfer']|getMoneyFormt=###}元</span> </li>
+                <li>
+                  <label>最大购买份数：</label>
+                  <span> <em>
+                  <if condition="$vo.borrow_max eq 0">没有限制
+                    <else/>
+                    {$vo.borrow_max}份</if>
+                  </em> </span> </li>
+              </ul></td>
+            <td class="remind-infos delline"><div class="institution">
+                <label>每份金额：</label>
+                <span class="info" >{$vo.per_transfer|getMoneyFormt=###}</span>&nbsp;元 </div>
+              <div class="institution">
+                <label>可投资份数：</label>
+                <span class="info" >{$vo['transfer_total']-$vo['transfer_out']}</span>&nbsp;份 </div>
+                 <div class="institution remain"> <label>您的可用余额：</label>
+             <if condition="session('u_id') ==''">
+                <strong>
+            ￥0.00元
+            <else/> {$investInfo['account_money']+$investInfo['back_money']|getMoneyFormt=###}元</strong>
+            </if>&#12288;<a href="__APP__/member/agreement/phetong.html" target="_blank" class="bot03" style='color:#0697da;'>项目合同</a>
+            
+            <a class="fRight icon-gree-link f16 mr20" style="padding:3px 15px;" href="__APP__/member/charge#fragment-1" target="_blank">充值</a>
+
+          </div>
+              <div>
+			  <p>
+                    <input class="plus" type="button" onclick="minus({$vo.id})" value="-" />
+                    <input class="tnum" type="text" id="tnum_{$vo.id}" value="1份" />
+                    <input class="minus" type="button"  onclick="plus({$vo.id})" value="+" />
+                  </p>
+                  <p>&nbsp;</p>
+                <if condition="($vo['transfer_out']-$vo['transfer_total'] eq 0) and ($vo['borrow_status'] eq 7)">
+                  <div class="tailttb ptailttb">已完成</div>
+                  <elseif condition="($vo['transfer_out']-$vo['transfer_total'] eq 0) and ($vo['borrow_status'] eq 2)"/>
+                  <div class="tailttb ptailttb">项目运作中</div>
+                  <elseif condition="$vo['borrow_status'] eq 3"/>
+                  <div class="tailttb ptailttb">已流标</div>
+                  <else/>
+                  
+				  <if condition="session('u_id') !='' and ($vo['transfer_out']-$vo['transfer_total'] neq 0)">
+                  <div class="tailttb"  onclick="Transfer({$vo.id})">立即投标</div>
+				  <else/>
+				  <div class="tailttb"><a href="__APP__/member/common/login/" style=" color:#FFFFFF">请先登录</a></div>
+				  </if>
+                </if>
+              </div><!-- <span style='color:red;font-size:12px;display:block;text-align:center;line-height:30px;'>*理财有风险，投资需谨慎</span> -->
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <table width="950" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+    <tr>
+      <td width="465" align="left" valign="top"><table width="464" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="60"  style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px;"><table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="350" align="left" valign="middle" class="table_title">融资方商业概述</td>
+                  <td width="84" align="left" valign="middle" class="xiangxi"><a  onclick="tanchu({$vo.id},'borrow_breif')" style="color:#ff7800; cursor: pointer">详细说明</a></td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td  style="border: 1px solid #D1D1D1; width:461px;"><table width="465" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="8"></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" style="padding-left:15px; padding-right:15px; padding-bottom:5px; " ><div class="ellipsis"><a  onclick="tanchu({$vo.id},'borrow_breif')" >{$vo.borrow_breif}</a></div></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+      <td width="20" align="right" valign="top">&nbsp;</td>
+      <td width="465" align="right" valign="top"><table width="464" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="60" style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px;"><table width="464" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="359" align="left" valign="middle" class="table_title">融资方资产情况</td>
+                  <td width="84" align="left" valign="middle" class="xiangxi"><a  onclick="tanchu({$vo.id},'borrow_capital')" style="color:#ff7800; cursor: pointer">详细说明</a></td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #D1D1D1; width:461px;"><table width="464" border="0" cellspacing="0" cellpadding="0" style="">
+                <tr>
+                  <td height="8"></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" style="padding-left:15px; padding-right:15px; padding-bottom:5px; " ><div class="ellipsis"><a  onclick="tanchu({$vo.id},'borrow_capital')" >{$vo.borrow_capital}</a></div></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+
+  <table width="950" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+    <tr>
+      <td width="465" align="right" valign="top"><table width="464" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="60"  style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px;"><table width="464" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="359" align="left" valign="middle" class="table_title">融资方资金用途</td>
+                  <td width="84" align="left" valign="middle" class="xiangxi"><a  onclick="tanchu({$vo.id},'borrow_use')" style="color:#ff7800; cursor: pointer">详细说明</a></td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #D1D1D1; width:461px;"><table width="464" border="0" cellspacing="0" cellpadding="0" style="">
+                <tr>
+                  <td height="8"></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" style="padding-left:15px; padding-right:15px; padding-bottom:5px;" ><div class="ellipsis"><a  onclick="tanchu({$vo.id},'borrow_use')" >{$vo.borrow_use}</a></div></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+      <td width="20" align="right" valign="top">&nbsp;</td>
+      <td width="465" align="left" valign="top"><table width="464" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td  height="60"  style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px;"><table width="464" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="359" align="left" valign="middle" class="table_title">风险控制措施</td>
+                  <td width="84" align="left" valign="middle" class="xiangxi"><a  onclick="tanchu({$vo.id},'borrow_risk')" style="color:#ff7800; cursor: pointer">详细说明</a></td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #D1D1D1; width:461px;"><table width="464" border="0" cellspacing="0" cellpadding="0" style="">
+                <tr>
+                  <td height="8"></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" style="padding-left:15px; padding-right:15px; padding-bottom:5px; " ><div class="ellipsis"><a  onclick="tanchu({$vo.id},'borrow_risk')" >{$vo.borrow_risk}</a></div></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+
+  <table width="950" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+    <tr>
+      <td align="center" valign="top"><table width="950" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="60"  style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px;"><table width="950" border="0" cellspacing="0" cellpadding="0" >
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="891" align="left" valign="middle" class="table_title">融资方相关资料</td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td><table width="950" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #CCC; border-top:0;">
+                <tr>
+                  <td height="10"></td>
+                </tr>
+                <tr>
+                  <td align="center" valign="top" style=" padding-bottom:5px;"><table style="width:900px;">
+                      <tr>
+                        <td align="center"><div style="float: left; border:0;" id="preview">
+                            <div id="spec-n5">
+                              <div class="spec-button spec-left" id="spec-left" style="cursor: default;"> <img id="imgLeft" src="__ROOT__/Style/H/images/left_g.gif"></div>
+                              <div id="spec-list" class="bot05">
+                                <div class="bot06">
+                                  <ul class="list-h bot07">
+                                    <php>$i=0;foreach(unserialize($vo['borrow_img']) as $v){ $i++;</php>
+                                    <li><a title="<php>echo $v['info'];</php>" rel="img_group" href="__ROOT__/<php>echo $v['img'];</php>"><img src="__ROOT__/<php>echo get_thumb_pic($v['img']);</php>"></a>
+                                      <div>
+                                        <php>echo $i.cnsubstr($v['info'],5);</php>
+                                      </div>
+                                    </li>
+                                    <php>}</php>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="spec-button" id="spec-right" style="cursor: default;"><img id="imgRight" src="__ROOT__/Style/H/images/scroll_right.gif"></div>
+                            </div>
+                          </div>
+                          <script type="text/javascript">
+								var lilenth = $(".list-h li").length+1;
+								$(".list-h").css("width", lilenth * 160);
+								var leftpos = 0;
+								var leftcount = 0;
+				
+								$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+								$("#spec-left").css("cursor", "default");
+				
+								if (lilenth > 1) {
+									$(function() {
+										$("#spec-right").click(function() {
+											if (leftcount >= 0) {
+												$("#imgLeft").attr("src", "__ROOT__/Style/H/images/scroll_left.gif");
+												$("#spec-left").css("cursor", "pointer");
+											}
+											if (lilenth - leftcount < 3) {
+												$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+												$("#spec-right").css("cursor", "default");
+											}
+											else {
+												leftpos = leftpos - 160;
+												leftcount = leftcount + 1;
+												$(".list-h").animate({ left: leftpos }, "slow");
+												if (lilenth - leftcount < 2) {
+													$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+													$("#spec-right").css("cursor", "default");
+												}
+											}
+				
+										});
+									});
+				
+				
+									$(function() {
+										$("#spec-left").click(function() {
+											if (lilenth - leftcount > 2) {
+												$("#imgRight").attr("src", "__ROOT__/Style/H/images/scroll_right.gif");
+												$("#spec-right").css("cursor", "pointer");
+											}
+				
+											if (leftcount < 1) {
+												$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+												$("#spec-left").css("cursor", "default");
+											}
+											else {
+												leftpos = leftpos + 160;
+												leftcount = leftcount - 1;
+												$(".list-h").animate({ left: leftpos }, "slow");
+												if (leftcount < 1) {
+													$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+													$("#spec-left").css("cursor", "default");
+												}
+											}
+				
+										}
+										)
+									})
+								}
+								else {
+									$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+									$("#spec-right").css("cursor", "default");
+								}
+								$(function() {
+									var width = $("#preview").width();
+									$("#spec-list").css("width", 820).css("margin-right", 8);
+				
+								});
+				
+								$(function() {
+									$("#spec-list img").bind("mouseover", function() {
+										$(this).css({
+											"border": "2px solid #FFFFFF",
+											"padding": "1px"
+										});
+									}).bind("mouseout", function() {
+										$(this).css({
+											"border": "1px solid #ccc",
+											"padding": "2px"
+										});
+									});
+								})
+								</script>
+                        </td>
+                      </tr>
+                    </table></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+
+  <table width="950" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+    <tr>
+      <td align="center" valign="top"><table width="950" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="60"  style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px; "><table width="950" border="0" cellspacing="0" cellpadding="0" >
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="891" align="left" valign="middle" class="table_title">本项目最近10条投资记录</td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td  style="border:1px solid #CCC; border-top:0;"><table width="950" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center" valign="top" style=" padding-bottom:5px;"><table  class="tdBordert" border=0 cellSpacing=0 width="100%">
+                      <THEAD>
+                        <tr>
+                          <td height="10"></td>
+                        </tr>
+                        <tr style="background-color:#E4E4E4">
+                          <td height="25" align="left" valign="middle">　认购人
+                            </th>
+                          <td align="left" valign="middle">认购份数
+                            </th>
+                          <td align="left" valign="middle">认购金额
+                            </th>
+                          <td align="left" valign="middle">当前利率
+                            </th>
+                          <td align="left" valign="middle">认购期限
+                            </th>
+                          <td align="left" valign="middle">认购方式
+                            </th>
+                          <td align="left" valign="middle">状态
+                            </th>
+                        </tr>
+                      </THEAD>
+                      <volist name="investinfo" id="vi">
+                        <tr>
+                          <td height="25" align="left" valign="middle">　{$vi.user_name|hidecard=###,5}</td>
+                          <td align="left" valign="middle">{$vi.transfer_num}份</td>
+                          <td align="left" valign="middle">{$vi.investor_capital|Fmoney=###}元</td>
+                          <td align="left" valign="middle">{$vo.borrow_interest_rate}%/年</td>
+                          <td align="left" valign="middle">{$vi.transfer_month}个月</td>
+                          <td align="left" valign="middle"><if condition="$vi.is_auto eq 1">自动
+                              <else/>
+                              手动</if></td>
+                          <td align="left" valign="middle"><img src="__ROOT__/Style/H/images/zhangtai.png" /></td>
+                        </tr>
+                      </volist>
+                    </table></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+  
+  <table width="950" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+    <tr>
+      <td align="center" valign="top"><table width="950" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:15px;">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="60"  style="background:#f2f8fe;border: 1px solid #D1D1D1; width:461px;"><table width="950" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="891" align="left" valign="middle" class="table_title">本项目用户讨论</td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td style="border:1px solid #CCC; border-top:0;"><table width="950" border="0" cellspacing="0" cellpadding="0" >
+                <tr>
+                  <td align="center" valign="top" style=" padding-bottom:5px;" id="scomment"><volist name="commentlist" id="vc">
+                      <table width="880" border="0" cellspacing="0" cellpadding="0" style=" margin-top:15px; margin-bottom:15px;">
+                        <tr>
+                          <td width="113" align="left" valign="top"><div class="dv_l_4_1"><img  src="{$vc.uid|get_avatar=###}" /></div></td>
+                          <td width="767" align="left" valign="top"><table width="740" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td height="28" align="left" valign="top" style="color:#248DCC; font-weight:bolder; font-size:14px;">{$vc.uname}</td>
+                              </tr>
+                              <tr>
+                                <td height="28" align="left" valign="top" style="color:#333">{$vc.comment}</td>
+                              </tr>
+                              <tr>
+                                <td height="28" align="left" valign="top" style="color: #999;">发布日期：{$vc.add_time|date="Y-m-d H:i:s",###}</td>
+                              </tr>
+                            </table>
+                            <if condition="$vc.deal_time gt 0">
+                              <table width="740" border="0" cellspacing="0" cellpadding="0" >
+                                <tr>
+                                  <td height="15" colspan="2" align="center" valign="top">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td width="74" align="center" valign="top"><img src="/Style/H/images/touxiang.jpg" width="60" height="60" /></td>
+                                  <td width="666" align="left" valign="top"><table width="660" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td height="28" align="left" valign="top" style="color:#248DCC; font-weight:bolder; font-size:12px;">{$glo.web_name}客服</td>
+                                      </tr>
+                                      <tr>
+                                        <td height="28" align="left" valign="top">{$vc.deal_info}</td>
+                                      </tr>
+                                      <tr>
+                                        <td height="28" align="left" valign="top" style="color: #999;">发布日期：{$vc.deal_time|date="Y-m-d H:i:s",###}</td>
+                                      </tr>
+                                    </table></td>
+                                </tr>
+                              </table>
+                            </if>
+                          </td>
+                        </tr>
+                      </table>
+                      <div style="width:880px; height:1px; border-bottom:1px solid #CCC;"></div>
+                    </volist>
+                    <div class="page ajaxpagebar" data="scomment" style="margin-left:10px">{$commentpagebar}</div></td>
+                </tr>
+              </table>
+              <table width="950" border="0" cellspacing="0" cellpadding="0" style="">
+                <tr>
+                  <td height="170" align="center" valign="middle"><table width="820" border="0" cellspacing="0" cellpadding="0" height="150">
+                      <tr>
+                        <td height="40" colspan="2" align="left" valign="middle"><strong>发表评论</strong></td>
+                      </tr>
+                      <tr>
+                        <td width="701"><textarea name="comments" id="comments" cols="30" rows="4" style="width:600px; height:110px;"  ></textarea></td>
+                        <td width="199"><a href="javascript:;" onclick="addComment();" class="bot09"><img src="__ROOT__/Style/H/images/comment.gif" /></a></td>
+                      </tr>
+                    </table></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+</div>
+</div>
+<!--页面层容器结束-->
+<script type="text/javascript" language="javascript">
+$(document).ready(function() {
+	$("a[rel=img_group]").fancybox({
+		'transitionIn'		: 'none',
+		'transitionOut'		: 'none',
+		'titlePosition' 	: 'over',
+		'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+			return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+		}
+	});
+});
+
+bindpage();
+function refreshComment(){
+	var geturl = "{$vo.id|getTInvestUrl=###}?type=commentlist&id={$vo.id}&p=1";
+	
+	var id = "scomment";
+	var x={};
+	
+	$.ajax({
+		url: geturl,
+		data: x,
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){ 
+				$("#"+id).html(d.html);
+			}
+		}
+	});
+}
+function bindpage(){
+	$('.ajaxpagebar a').click(function(){
+		try{	
+			var geturl = $(this).attr('href');
+			var id = $(this).parent().attr('data');
+			var x={};
+			$.ajax({
+				url: geturl,
+				data: x,
+				timeout: 5000,
+				cache: false,
+				type: "get",
+				dataType: "json",
+				success: function (d, s, r) {
+					if(d) $("#"+id).html(d.html);//更新客户端竞拍信息 作个判断，避免报错
+				}
+			});
+		}catch(e){};
+		return false;
+	})
+}
+function addComment(){
+	var tid = {$vo.id|default=0};
+	var cm = $("#comments").val();
+	if(cm=="") {
+		$.jBox.tip("留言内容不能为空",'tip');
+		return;
+	}
+	$.jBox.tip("提交中......","loading");
+	$.ajax({
+		url: "__URL__/addcomment",
+		data: {"comment":cm,"tid":tid},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					refreshComment();
+					$.jBox.tip('留言成功');
+					$("#comments").val('');
+				}else{
+					$.jBox.tip(d.message,'fail');
+				}
+			}
+		}
+	});
+}
+</script>
+<script type="text/javascript">
+function jubao(id){
+	var uxid = "{$UID}"||0;
+	if(!(parseInt(uxid)>0)){
+		$.jBox.tip("请先登陆");
+		return;
+	}
+	$.jBox("get:__URL__/jubao/?id="+id, {title: "举报会员"});
+}
+</script>
+<include file="Public:_footer" />

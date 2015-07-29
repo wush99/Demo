@@ -1,0 +1,47 @@
+<script src="__ROOT__/Style/H/js/jquery.min.js"   type="text/javascript"></script>
+<div>
+	<div style='text-align:center;'>
+		<h2>增加保证金</h2>
+		<form method="post">
+			<input type='hidden' name='id' value="{$vo.id}" />
+			<input type='hidden' name='uid' value="{$vo.uid}" />
+			<table width='320' height='250' style='margin:0 auto;'>
+				<tr>
+					<td >保证金：</td><td><input type='text' disabled value="{$vo.own}" id='own' />万</td>
+				</tr>
+				<tr>
+					<td >配资倍数：</td><td><input type='text' disabled value="{$vo.beishu}" id='beishu' />倍<br/></td>
+				</tr>
+				<tr>
+					<td >配资额度：</td><td><input type='text' disabled value="{$vo.money}" id='money'>万<br/></td>
+				</tr>
+				<tr>
+					<td >配资期限：</td><td><input type='text' disabled value="{$vo.times}">个月<br/></td>
+				</tr>
+				<tr>
+					<td >增加保证金：</td><td><input type='text' name='add_own' id='add_own' value="{$vo.add_own}" />万<br/></td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2"><input style='width:100px;' type='submit' value='提交'/></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<script>
+	$(function(){
+		$('#add_own').blur(function(){
+			if(isNaN($(this).attr('value'))){
+				$(this).attr('value',1)
+			}
+			if($(this).attr('value')!=''){
+				var money=parseInt($(this).attr('value'))
+			}else{
+				var money=0
+			}
+			$(this).attr('value',money)
+			var i=(parseInt($('#own').attr('value'))+parseInt($('#add_own').attr('value')))*$('#beishu').attr('value')
+			$('#money').attr('value',i)	
+		})
+	})
+</script>

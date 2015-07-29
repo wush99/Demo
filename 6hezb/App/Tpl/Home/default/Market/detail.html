@@ -1,0 +1,339 @@
+<include file="Public:_header_common" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$vo.name}-积分商城商品</title>
+<script  type="text/javascript" src="__ROOT__/Style/H/js/index.js"></script>
+<link href="__ROOT__/Style/H/css/shop.css" rel="stylesheet" type="text/css">
+<script>
+//滚动插件
+(function($){
+$.fn.extend({
+	Scroll:function(opt,callback){
+		//参数初始化
+		if(!opt) var opt={};
+		var _this=this.eq(0).find("ul:first");
+		var lineH=_this.find("li:first").height(), //获取行高
+		line=opt.line?parseInt(opt.line,10):parseInt(this.height()/lineH,10), //每次滚动的行数，默认为一屏，即父容器高度
+		speed=opt.speed?parseInt(opt.speed,10):800, //卷动速度，数值越大，速度越慢（毫秒）
+		timer=opt.timer?parseInt(opt.timer,10):5000; //滚动的时间间隔（毫秒）
+		if(line==0) line=1;
+		var upHeight=0-line*lineH;
+		//滚动函数
+		scrollUp=function(){
+			_this.animate({
+				marginTop:upHeight
+			},speed,function(){
+				for(i=1;i<=line;i++){
+						_this.find("li:first").appendTo(_this);
+				}
+				_this.css({marginTop:0});
+			});
+		}
+		//鼠标事件绑定
+		_this.hover(function(){
+				clearInterval(timerID);
+		},function(){
+				timerID=setInterval("scrollUp()",timer);
+		}).mouseout();
+	}        
+})
+})(jQuery);
+
+$(document).ready(function(){
+    $(".lky_scroll").Scroll({line:5,speed:500,timer:6000});
+
+    $(".pr_clicks li").click(function(){
+        $(this).parent().find(".hover").removeClass("hover");
+        $(this).addClass("hover");
+    });
+    
+    $("#fsubmit").click(function(){
+        if($(".pr_clicks li").size()>0 && $(".pr_clicks li.hover").html()==null){
+            alert("请选择商品风格");
+            return false;
+        }
+
+        var c = confirm("您确定要兑换‘{$vo.name}’吗？");
+        if(!c) return false;
+
+        $.post("buyGood",{id:$(".gid").val(),style: $(".pr_clicks li.hover").html()},
+            function(d){
+                alert(d.info);
+				if(d.info=="购买成功"){
+                    shouhuo();
+				}
+        },"json");
+
+        return false;
+    });
+});
+
+    
+function setTab(name,cursel,n){
+ for(i=1;i<=n;i++){
+  var menu=document.getElementById(name+i);
+  var con=document.getElementById("con_"+name+"_"+i);
+  menu.className=i==cursel?"hover":"";
+  con.style.display=i==cursel?"block":"none";
+ }
+}
+
+//添加收货地址
+	function shouhuo(){
+		var uxid = "{$UID}"||0;
+		if(!(parseInt(uxid)>0)){
+			$.jBox.tip("请先登陆");
+			return;
+		}
+		$.jBox("get:__URL__/addressinfo/", {
+			title: "添加收货地址",
+			width: "auto",
+			top:'15%',
+			buttons: {'关闭': true }
+		});
+	}
+</script>
+<include file="Public:_header_main" />
+<div class="jf_shop">
+  <div id="JS_huanDengs">
+    <volist name=":get_ad(7)" id="va">
+      <div> <a href="{$va.url}"><img src="__ROOT__/{$va.img}" /></a></div>
+    </volist>
+    <!--textarr[{$key+1}] = "{$va.info}";-->
+    <ul id="JS_HDmenus">
+    </ul>
+  </div>
+  <div class="jf_commodities">
+    <div class="jf_prouct">
+      <!--产品详情页模块开始-->
+      <div class="Product_Details">
+        <!--PROUDUCT DETAILS PAGE -->
+        <div class="details">
+          <div class="zoom">
+            <div class="imgzoom">
+              <div id="idList" class="list"><img src="/Style/ajax-image-uploader/images/{$imgArr}"  style=" max-height:350px; max-width:350px;"/></div>
+            </div>
+            <!--左侧放大镜模块结束-->
+            <div class="product_inf_item">
+              <form id="form1" name="form1" method="post" action="">
+                <input type="hidden" class="gid" name="id" value="{$vo.id}">
+                <div class="pr_tit">
+                  <div class="lft_tit">{$vo.name}</div>
+                </div>
+                <div class="pr_msy"> <span style="color:#B8B8BA; font-size:14px; padding-left:6px;">{$vo.description|cnsubstr=###,40}</span> </div>
+                <div class="price">市场参考价值：<del style="color:#999999">&nbsp; {$vo.price}元&nbsp; </del></div>
+                <div class="price"><span style="color:#F60; margin-left:0px; font-size:24px; ">兑换所需积分：{$vo.cost}分</span> </div>
+                <div class="price"><span style="color:#F60; margin-left:0px; font-size:24px; ">剩余数量：{$vo.surplus}份</span> </div>
+                <div class="pr_color">
+                  <if condition="$isstyle neq 0">
+                    <div class="lr_color"> <span style="font-size:16px; ">选择风格：</span> </div>
+                    <div class="pr_clicks">
+                      <ul>
+                        <volist id="vs" name="styleArr">
+                          <li>{$vs}</li>
+                        </volist>
+                      </ul>
+                    </div>
+                  </if>
+                </div>
+                <div class="pr_buy_bottom">
+                  <if condition="session('u_id') !=''">
+                    <if condition="$vo.surplus gt 0">
+                      <input id="fsubmit" type="button" value="立即兑换" class="button usable">
+                      <else/>
+                      <input type="button" value="兑换结束" class="button disabled">
+                    </if>
+                    <span class="back_y"><a href="/market/index/" title="返回首页">[返回首页]</a></span>
+                    <else/>
+                    <input type="button" value="立即兑换" class="button disabled">
+                    <span class="back_y"><a href="/member/common/login/" title="请先登录">[请先登录]</a></span> </if>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="luck_start">
+            <div class="left_luck_start">
+              <div class="luck_lf">
+                <div class="lk_tit">成功兑换会员列表</div>
+                <div class="lky_scroll">
+                  <ul>
+                    <volist id="vl" name="list">
+                      <li>
+                        <div class="lky_icon"><img src="{$vl.uid|get_avatar=###}" width="60" height="60" border="0"></div>
+                        <div class="lky_rinf"> <span class="lky_name">{$vl.user_name|cnsubstr=###,6}</span> <span class="lky_date">{$vl.add_time|date="Y-m-d",###}</span> <span class="lky_name1">{$vl.name}</span> </div>
+                      </li>
+                    </volist>
+                  </ul>
+                </div>
+                <div class="btbg"><img src="/Style/H/images/icon-012.gif"></div>
+              </div>
+            </div>
+            <div class="right_parameter">
+              <!--产品参数/产品简介Tab切换模块开始-->
+              <div class="cpjs">
+                <div class="top_tit">
+                  <ul>
+                    <li id="one1" onClick="setTab('one',1,5)" class="hover">商品简介</li>
+                    <li style="border-right:1px solid #E6E4E3;width:1px;height:20px; line-height:25px; margin-top:10px;"></li>
+                    <li id="one2" class="lk_bot1" onClick="setTab('one',2,5)">商品详情</li>
+                  </ul>
+                </div>
+                <div class="content">
+                  <div id="con_one_1">{$vo.jianjie}</div>
+                  <div id="con_one_2" style="display:none">{$vo.canshu}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table width="980" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;border:1px solid #CCC; ">
+    <tr>
+      <td align="center" valign="top"><table width="912" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:15px;">
+          <tr>
+            <td height="10"></td>
+          </tr>
+          <tr>
+            <td height="28"><table width="912" border="0" cellspacing="0" cellpadding="0" >
+                <tr>
+                  <td width="21" height="28">&nbsp;</td>
+                  <td width="891" align="left" valign="middle" ><strong>用户讨论</strong></td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td><table width="912" border="0" cellspacing="0" cellpadding="0" style="border-top:1px solid #CCC; ">
+                <tr>
+                  <td align="center" valign="top" style=" padding-bottom:5px;" id="scomment"><volist name="commentlist" id="vc">
+                      <table width="880" border="0" cellspacing="0" cellpadding="0" style=" margin-top:15px; margin-bottom:15px;">
+                        <tr>
+                          <td width="113" align="left" valign="top"><div class="dv_l_4_1"><img  src="{$vc.uid|get_avatar=###}" /></div></td>
+                          <td width="767" align="left" valign="top"><table width="740" border="0" cellspacing="0" cellpadding="0" style="border-bottom:1px solid #CCC;">
+                              <tr>
+                                <td height="28" align="left" valign="top" style="color:#248DCC; font-weight:bolder; font-size:14px;">{$vc.uname}</td>
+                              </tr>
+                              <tr>
+                                <td height="28" align="left" valign="top" style="color:#333">{$vc.comment}</td>
+                              </tr>
+                              <tr>
+                                <td height="28" align="left" valign="top" style="color: #999;">发布日期：{$vc.add_time|date="Y-m-d H:i:s",###}</td>
+                              </tr>
+                            </table>
+                            <if condition="$vc.deal_time gt 0">
+                              <table width="740" border="0" cellspacing="0" cellpadding="0" >
+                                <tr>
+                                  <td height="15" colspan="2" align="center" valign="top">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td width="74" align="center" valign="top"><img src="/Style/H/images/touxiang.jpg" width="60" height="60" /></td>
+                                  <td width="666" align="left" valign="top"><table width="660" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td height="28" align="left" valign="top" style="color:#248DCC; font-weight:bolder; font-size:12px;">{$glo.web_name}客服</td>
+                                      </tr>
+                                      <tr>
+                                        <td height="28" align="left" valign="top">{$vc.deal_info}</td>
+                                      </tr>
+                                      <tr>
+                                        <td height="28" align="left" valign="top" style="color: #999;">发布日期：{$vc.deal_time|date="Y-m-d H:i:s",###}</td>
+                                      </tr>
+                                    </table></td>
+                                </tr>
+                              </table>
+                            </if>
+                          </td>
+                        </tr>
+                      </table>
+                      <div style="width:880px; height:1px; border-bottom:1px solid #CCC;"></div>
+                    </volist>
+                    <div class="page ajaxpagebar" data="scomment" style="margin-left:10px">{$commentpagebar}</div></td>
+                </tr>
+              </table>
+              <table width="912" border="0" cellspacing="0" cellpadding="0" >
+                <tr>
+                  <td height="170" align="center" valign="middle"><table width="820" border="0" cellspacing="0" cellpadding="0" height="150">
+                      <tr>
+                        <td height="40" colspan="2" align="left" valign="middle"><strong>发表评论</strong></td>
+                      </tr>
+                      <tr>
+                        <td width="701"><textarea name="comments" id="comments" cols="30" rows="4" style="width:600px; height:110px;"  ></textarea></td>
+                        <td width="199"><a href="javascript:;" onclick="addComment();" class="bot09"><img src="__ROOT__/Style/H/images/comment.gif" /></a></td>
+                      </tr>
+                    </table></td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+</div>
+<script type="text/javascript">
+bindpage();
+function refreshComment(){
+	var geturl = "{$vo.id|getMarketUrl=###}?type=commentlist&id={$vo.id}&p=1";
+	var id = "scomment";
+	var x={};
+	$.ajax({
+		url: geturl,
+		data: x,
+		timeout: 5000,
+		cache: false,
+		type: "get",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d) $("#"+id).html(d.html);//更新客户端 作个判断，避免报错
+		}
+	});
+}
+function bindpage(){
+	$('.ajaxpagebar a').click(function(){
+		try{	
+			var geturl = $(this).attr('href');
+			var id = $(this).parent().attr('data');
+			var x={};
+			$.ajax({
+				url: geturl,
+				data: x,
+				timeout: 5000,
+				cache: false,
+				type: "get",
+				dataType: "json",
+				success: function (d, s, r) {
+					if(d) $("#"+id).html(d.html);//更新客户端 作个判断，避免报错
+				}
+			});
+		}catch(e){};
+		return false;
+	})
+}
+function addComment(){
+	var tid = {$vo.id|default=0};
+	var cm = $("#comments").val();
+	if(cm=="") {
+		$.jBox.tip("留言内容不能为空",'tip');
+		return;
+	}
+	$.jBox.tip("提交中......","loading");
+	$.ajax({
+		url: "__URL__/addcomment",
+		data: {"comment":cm,"tid":tid},
+		timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					refreshComment();
+					$.jBox.tip('留言成功');
+					$("#comments").val('');
+				}else{
+					$.jBox.tip(d.message,'fail');
+				}
+			}
+		}
+	});
+}
+
+</script>
+<include file="Public:_footer" /> 

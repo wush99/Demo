@@ -1,0 +1,99 @@
+﻿<include file="Pub:header" />  
+<div class="main">
+<!--  列表开始-->
+
+  <!--- 企业直投开始---> 
+  <volist name="listTBorrow.list" id="tvo">
+  <div class="main_box">
+  <div class="title">     
+    <div class="title_img">{:getIco($tvo)}</div>
+    <a href="{:U('/M/tinvest/tdetail', array('id'=>$tvo['id']))}" >{$tvo.borrow_name|cnsubstr=###,17}</a>
+  </div>  
+  <div class="box_ner">
+   <table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td align="left">
+     <div class="box_ner_nn">
+      <ul>
+     <li>金额：<span class="col">{$tvo.borrow_money|MFormt=###}元</span></li>
+     <li>期限：{$tvo.borrow_duration} <php> echo $tvo['repayment_type']==1?'天':'个月'</php></li>
+     <li>利率：{$tvo.borrow_interest_rate}%/<php> echo $tvo['repayment_type']==1?'天':'年'</php></li>
+     <li><span class="jd">进度：</span>
+     <span class="progress">
+     <span class="precent" style="width:{$tvo.progress}%;"></span></span></li>
+    </ul> 
+    </div>     
+     </td>
+     <td align="center">
+     <if condition="$tvo['is_show'] eq 0 and ($tvo['borrow_status'] eq 7 or $tvo['borrow_status'] eq 3)">
+      <a class="tz_btt">已完成</a>
+     <elseif condition="$tvo['is_show'] eq 1 and $tvo['transfer_out'] neq $tvo['transfer_total']" />
+     <a href="{:U('/M/tinvest/tdetail', array('id'=>$tvo['id']))}"  class="tz_bt">马上购买</a>
+     <else/>
+     <a class="tz_btt">基金运作中</a>
+     </if>
+     </td></tr>
+   </table>
+    
+   </div>
+  </div>
+  </volist>
+  <!--- 企业直投结束--->
+  
+  <volist name="list.list" id='vo'>
+  <div class="main_box">
+  <div class="title">     
+    <div class="title_img">{:getIco($vo)}</div>
+    <a href="{:U('M/invest/detail', array('id'=>$vo['id']))}" >{$vo.borrow_name|cnsubstr=###,17}</a>
+  </div>  
+  <div class="box_ner">
+   <table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td align="left">
+     <div class="box_ner_nn">
+      <ul>
+     <li>金额：<span class="col">{$vo.borrow_money|MFormt=###}元</span></li>
+     <li>期限：{$vo.borrow_duration} <php> echo $vo['repayment_type']==1?'天':'个月'</php></li>
+     <li>利率：{$vo.borrow_interest_rate}%/<php> echo $vo['repayment_type']==1?'天':'年'</php></li>
+     <li><span class="jd">进度：</span>
+     <span class="progress">
+     <span class="precent" style="width:{$vo.progress}%;"></span></span></li>
+    </ul> 
+    </div>     
+     </td>
+     <td align="center">{$vo.borrow_status|borrow_status=$vo['id'],###}</td></tr>
+   </table>
+    
+   </div>
+  </div>
+  </volist>
+
+<!-- 列表结束-->
+</div>
+
+<div class="fixed_div" style="padding-top:10px"><a href="javascript:void(0)" onclick="getInfo()" class="tz_bt">更多投资项目</a></div>
+<script type="text/javascript">
+    var nowPage = {$list.page.nowPage};
+    var total = {$list.page.total};
+  
+    function getInfo() {
+        nextPage = nowPage+1;
+        $.ajax({
+            url: location.href,
+            data: { p: nextPage },
+            type: 'get',
+            async: true,
+            success: function (res) {
+                jQuery(".main").append(res);
+                if (total == nextPage) {
+                    jQuery(".gengduo").hide();
+                }
+                nowPage++;
+            },
+            error: function () {
+                //document.getElementById('result').innerHTML = "";
+            }
+        });
+    }
+</script>
+﻿<include file="Pub:footer" />  

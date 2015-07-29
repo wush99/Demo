@@ -1,0 +1,246 @@
+﻿<script type="text/javascript">
+function videoverify(){
+	$.jBox.confirm("申请视频认证后会直接从帐户扣除认证费用{$glo.fee_video|default=0}元，然后客服会联系您进行认证。<br/><font style='color:red'>确定要申请认证吗?</font>", "视频认证", dovideo, { buttons: { '确认申请': true, '暂不申请': false} });
+}
+function dovideo(v, h, f) {
+	if (v == true){
+        $.ajax({
+            url: "__APP__/common/video",
+            data: {},
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d){
+					if(d.status==1) $.jBox.tip(d.message, 'success');
+					else $.jBox.tip(d.message, 'fail');
+				}
+            }
+        });
+	}
+	return true;
+};
+// 自定义按钮
+function faceverify(){
+	$.jBox.confirm("<font style='color:red'>确定要申请现场认证吗?</font>", "现场认证", doface, { buttons: { '确认申请': true, '暂不申请': false} });
+}
+function doface(v, h, f) {
+	if (v == true){
+        $.ajax({
+            url: "__APP__/common/face",
+            data: {},
+            timeout: 5000,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            success: function (d, s, r) {
+              	if(d){
+					if(d.status==1) $.jBox.tip(d.message, 'success');
+					else $.jBox.tip(d.message, 'fail');
+				}
+            }
+        });
+	}
+	return true;
+};
+  $(function  () {
+   	 var xiaowei_p= $("#xiaowei li");
+   	 if(true)
+   	 {
+   	   xiaowei_p.parent().parent().css('background','url(__ROOT__/Style/H/images/hover_bg.gif) no-repeat center right');
+
+
+   	 }
+   })
+
+  
+</script>
+<script type=text/javascript><!--//--><![CDATA[//><!--
+function menuFix() {
+var ele_ = document.getElementById("nav");
+	if(!ele_) return;
+var sfEls = ele_.getElementsByTagName("li");
+for (var i=0; i<sfEls.length; i++) {
+sfEls[i].onmouseover=function() {
+this.className+=(this.className.length>0? " ": "") + "sfhover";
+}
+sfEls[i].onMouseDown=function() {
+this.className+=(this.className.length>0? " ": "") + "sfhover";
+}
+sfEls[i].onMouseUp=function() {
+this.className+=(this.className.length>0? " ": "") + "sfhover";
+}
+sfEls[i].onmouseout=function() {
+this.className=this.className.replace(new RegExp("( ?|^)sfhover\\b"),
+"");
+}
+}
+}
+window.onload=menuFix;
+//--><!]]></script>
+<link rel="stylesheet" type="text/css" href="__ROOT__/Style/H/css/home.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__/Style/H/css/kefu.css" />
+</head><body>
+<!--头部开始-->
+<if condition="$UID gt '0'"> <include file="default:Common:afterlogin" group="Member"/>
+  <else/>
+  <include file="default:Common:beforelogin" group="Member"/> </if>
+<script type="text/javascript">
+  function  erji(a, b, c, d) {
+        $(a).children(b).each(function() {
+            var a1 = $(this).children(c),
+             b2 = $(this).children(d),
+             index=$(this).index();
+            if (a1.html()) $(this).hover(function() {
+                a1.show();
+                
+            index==0 && $(this).css({'background-position':'0px -62px'});
+            index==1 && $(this).css({'background-position':'0px -124px'});
+                b2.css({
+
+                    'color':'#cfcfcf'
+                });
+            }, function() {
+                a1.hide();
+                 index==0 && $(this).css({'background-position':'0px -31px'});
+            index==1 && $(this).css({'background-position':'0px -93px'});
+                b2.css({
+
+                    'color':'#b1b1b1'
+                });
+            });
+        });
+    }
+
+
+
+erji('#erji','li','div','h1');
+</script>
+<div class="Nav">
+  <div class="contain">
+    <div class="N_logo"><a href="/">{:get_ad(1)}</a></div>
+    <div class="Nav_nav">
+     <div class="menu">
+        <ul class="navigation-list" id="dw_ul"  style="width:592px;" >
+        <!-- <php>$typelist = getTypeList(array('type_id'=>0,'limit'=>9)); foreach($typelist as $vtype=> $va){ </php>
+          <li class="navigation-item "> <a href="{$va.turl}" class="navigation-item-name">{$va.type_name}
+           
+            </a>
+            <div class="navigation-list-two-con" id="dw_ul2">
+              <div class="navigation-list-two">
+             
+                <ul class="navigation-two-list" id="erji_nav">
+             
+                </ul>
+              </div>
+            </div>
+          </li>
+          <php>}</php>    -->
+          <if condition="$UID gt '0'">
+            <else/>
+            <li class="navigation-right hd-regist-btm  "> <a class="" href="__APP__/member/common/register/">注册</a> </li>
+            <li class="navigation-right hd-login-btn"> <a class="first" href="__APP__/member/common/login/">登录</a> </li>
+          </if>
+        </ul>
+      </div>  
+    </div>
+    <if condition="$UID gt '0'">
+      <!--快捷通道-->
+      <div class="grid_3 ui-header-grid">
+        <ul class="ui-nav fn-right  ">
+          <li id="ui-nav-item-link"  class="ui-nav-item ui-nav-item-x" > <a  class="ui-nav-item-link rrd-dimgray ui-nav-username fn-text-overflow" href="__APP__/member/" >
+            <?php
+                             $dws= session('u_user_name');
+                            ?>
+            <span id="jieduan">您好，{$dws|cnsubstr=###,10} <span class="arrow-down"></span> </a>
+            <ul class="ui-nav-dropdown" id="ui-nav-dropdown" style="display: none;">
+              <li class="ui-nav-dropdown-angle"><span></span></li>
+              <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/charge#fragment-1">充值</a></li>
+              <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/withdraw#fragment-1">提现</a></li>
+              <li class="ui-nav-dropdown-separator"></li>
+              <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/capital#fragment-2">资金明细</a></li>
+              <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/charge#fragment-1">在线充值</a></li>
+              <li class="ui-nav-dropdown-separator"></li>
+              <li class="ui-nav-dropdown-item"><a class="rrd-dimgray" href="__APP__/member/common/actlogout">退出</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--快捷通道end-->
+    </if>
+    <script language="javascript">
+                   $(document).ready(function(){
+			
+						
+					$("#ui-nav-item-link").mouseover(function(){
+						$("#ui-nav-dropdown").show()
+						}).mouseout(function(){
+							$("#ui-nav-dropdown").hide()
+							});
+						$(".ui-nav-dropdown-item").mouseover(function(){
+							$(this).css({"background":"#027BC0"}).mouseout(function(){
+								$(this).css({"background":"#fff"})
+															});
+
+							})
+						
+					  })
+//			var str=$("#jieduan").html();
+//								  if(len(str)>6){
+//									  str=
+//									  }
+                     </script>
+  </div>
+
+</div>
+<div class="hd-nav">
+    	<div class="hd-inner clearfix">
+            <ul class="hd-main-nav  clearfix">
+				  <php>$typelist = getTypeList(array('type_id'=>0,'limit'=>9)); foreach($typelist as $vtype=> $va){ </php>
+                <li class="h-m-n-item" >
+                    <a href="/invest_list/index.html" ><a href="{$va.turl}" >{$va.type_name}</a>
+                   <!-- <span class="hd-triangle fadeIn-1s">◆</span>  -->
+                    <ul class="hd-sub-nav clearfix dspn fadeIn-1s">
+					   <php>$sontypelist = getTypeList(array('type_id'=>$va['id'],'limit'=>8,'notself'=>true)); foreach($sontypelist as $sonvtype){</php>
+                        <li class="h-s-n-item"><a href="{$sonvtype.turl}"  >{$sonvtype.type_name}</a></li>
+						<php>}</php>
+                    </ul>
+                    
+                </li>
+				<php>}</php>
+            </ul>
+                       
+       </div>
+    </div>
+<DIV id=floatTools class=float0831 style="display:none;">
+ 
+  <DIV class=floatL><A style="DISPLAY: none" id=aFloatTools_Show class=btnOpen 
+title=查看在线客服 onclick="javascript:$('#divFloatToolsView').animate({width: 'show', opacity: 'show'}, 'normal',function(){ $('#divFloatToolsView').show();kf_setCookie('RightFloatShown', 0, '', '/', 'www.hxcfp2p.com'); });$('#aFloatTools_Show').attr('style','display:none');$('#aFloatTools_Hide').attr('style','display:block');$('#divFloatToolsView').attr('style','display:block');" 
+href="javascript:void(0);">展开</A> <A id=aFloatTools_Hide class=btnCtn title=关闭在线客服 onclick="javascript:$('#divFloatToolsView').animate({width: 'hide', opacity: 'hide'}, 'normal',function(){ $('#divFloatToolsView').hide();kf_setCookie('RightFloatShown', 1, '', '/', 'www.hxcfp2p.com'); });$('#aFloatTools_Show').attr('style','display:block');$('#aFloatTools_Hide').attr('style','display:none');$('#divFloatToolsView').attr('style','display:none');" 
+href="javascript:void(0);">收缩</A> </DIV>
+  
+  <DIV id=divFloatToolsView class=floatR>
+    <DIV class=tp></DIV>
+    <DIV class=cn>
+      <UL>
+        <LI class=top1>
+          <H3 class=titZx>QQ咨询</H3>
+        </LI>
+        <LI><SPAN class=icoZx>在线咨询</SPAN> </LI>
+        <LI><A class=icoTc href="http://wpa.qq.com/msgrd?v=3&uin=82364240&site=qq&menu=yes">在线客服</A> </LI>
+        <!--<LI><A class=icoTc href="http://wpa.qq.com/msgrd?v=3&uin=1569307876&site=qq&menu=yes">斗进贷</A> </LI>-->
+		<LI><A class=icoTc href="http://shang.qq.com/wpa/qunwpa?idkey=4e56575a1f149f0acb1df41c71877033585a10c4f4d830f7b47ddff5b4aae110">官方QQ群</A> </LI>
+       
+      </UL>
+      
+      <UL>
+        <LI>
+          <H3 class=titDh>电话咨询</H3>
+        </LI>
+        <LI><SPAN class=icoTl><?php $dw_kefu=get_qq(2);echo($dw_kefu[1]["qq_num"]); ?></SPAN> </LI>
+       
+      </UL>
+    </DIV>
+  </DIV>
+</DIV>

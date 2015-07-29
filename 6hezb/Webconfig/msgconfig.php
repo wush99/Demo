@@ -1,0 +1,2 @@
+<?php
+return array ( 'stmp' => array ( 'user' => 'admin@doujind.com', 'pass' => 'daohaodeshi250', 'server' => 'smtp.qq.com', ), 'sms' => array ( 'type' => '0', 'user1' => 'xingzhongbao', 'pass1' => 'xingzhongbao2014', 'user2' => '', 'pwd' => '', 'user3' => '', 'pass3' => '', ), 'baidu' => array ( 'apiKey' => 'k5mt8cZINNQI4Cl8gIqMAnnO', 'secretKey' => 'PychX6ID9fYt6DtFMmvMavxnP7xDS9kR', 'apkVersion' => '1.0', 'apkPath' => 'http://wap.lvmaque.cn/style/lmq.apk', ), ); ?>

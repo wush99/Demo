@@ -1,0 +1,16 @@
+<include file="Public:_header_common" />
+<title>{$vo.type_name}-{$glo.web_name}</title>
+<meta http-equiv="keywords" content="{$vo.type_keyword}" />
+<meta http-equiv="description" content="{$vo.type_info}" />
+
+<div class="wrapper2">
+  <div class="guide" style='text-align:left;'><a href="../index.htm" >首页</a> - 关于我们</div>
+  <div class="wrapper" style='text-align:left;'>
+    <include file='left'/>
+      <div class="about_right" style='*width:855px;'>
+        {$vo.type_content}
+      </div>
+  </div>
+</div>
+
+<include file="Public:_footer" />

@@ -1,0 +1,94 @@
+<include file="Public:_header_common" />
+<title>我的账户-- {$glo.web_name}</title>
+<include file="default:Public:_header_main" group="Home"/>
+<!--中部开始-->
+<div class="wrap2">
+	<div id="hy_left">
+		<include file="Public:_left" />
+	</div>
+	<div id="hy_right">
+            <div class="box">
+				<div class="Menubox1" id="rotate">
+					<ul class="menu ajaxdata">
+						<li><a href="#fragment-1" ajax_href="__URL__/friendlist/">添加留言</a></li>
+
+					</ul>
+				</div> 
+				<div class="contentright">
+                     <div>
+					     <form action="__URL__/addliuyan" method="post">
+						    　　留言会员:{$touser}
+							 <br/>
+							 <br/>
+						　　留言标题:<input type="text" name="title" id="title"/>
+							 <br/>
+							 <br/>
+						　　留言内容:<textarea rows="3" cols="20" name="msg" id="msg">请输入留言内容...
+						</textarea>
+						<br/>
+						<br/>
+						　　　　　　　<input type="hidden" name="fasong" value="fafafafafa"/>
+						　　　　　　　<input type="submit" onclick="return goliuyan()" value="点击发送"/>
+						 </form>
+					 </div>
+				</div>
+			</div>
+    </div>
+</div>
+<script type="text/javascript">
+function checkAll(o,id){
+	if( o.checked == true ){
+		$("#"+id).find('input[name="checkbox"]').attr('checked','true');
+	}else{
+		$("#"+id).find('input[name="checkbox"]').removeAttr('checked');
+	}
+}
+function goliuyan(){
+   if(document.getElementById("title").value==""){
+	   alert("留言标题不能为空!");
+	   return false;
+   }
+   if(document.getElementById("msg").value==""){
+	   alert("留言内容不能为空!");
+	   return false;
+   }
+}
+function getChecked(id) {
+	var gids = new Array();
+	$.each($("#"+id).find('input:checked'), function(i, n){
+		if($(n).val()!=0) gids.push( $(n).val() );
+	});
+	return gids;
+}
+function del(id,type) {
+	if(!confirm("删除后不可恢复，确定要删除吗?")) return;
+	aid = getChecked(id);
+	aid = aid.toString();
+	if(aid == '') return false;
+
+	//提交修改
+	var datas = {'idarr':aid,'type':type};
+	$.post("__URL__/delmsg", datas, delResponse,'json');
+}
+function delResponse(d){
+	if(d.status==1){
+		$.jBox.tip("删除成功",'success');
+		aid = d.data.split(',');
+		$.each(aid, function(i,n){
+			$('#msg_'+n).remove();
+		});
+	}else{
+		$.jBox.tip(d.message,'fail');
+	}
+}
+
+function InnerMsg(uid){
+	var uid = uid;
+	$.jBox("get:__URL__/innermsg?uid="+uid, {
+		title: "发送站内信",
+		width: "auto",
+		buttons: {'关闭': true }
+	});
+}
+</script>
+<include file="default:Public:_footer" group="Home" />

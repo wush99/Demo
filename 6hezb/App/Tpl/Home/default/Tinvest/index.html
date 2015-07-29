@@ -1,0 +1,241 @@
+﻿<include file='Public:_header_common'/>
+<title>{$glo.index_title}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<link href="__ROOT__/Style/H/css/moneyandloan.css" rel='stylesheet' type='text/css'/>
+<style>
+.list_banner{width:1010px;height:241px;margin: 0 auto; margin-top:5px;}
+.list_banner_left{background:#F9F9F9; border:#e9e9e9 1px solid;}
+.list_banner_left p{text-align:left;font-size: 16px;line-height: 31px; font-family:"微软雅黑";}
+.list_banner_left_l{height:216px;position:relative;left:0; top:0;}
+.list_banner_left_l h2,.list_banner_left_r h2{text-align:left;font-size:20px;font-family: "Microsoft YaHei", Helvetica, sans-serif,simsun ;margin:16px 0px 10px 20px;}
+.list_banner_left_l ul {height:38px;margin-top:4px; margin-left:20px; margin-right:20px; border-bottom:1px dotted #E2E2E2;}
+.list_banner_left_l ul li{float:left;width:76px;height:35px;line-height:35px;}
+.list_banner_left ul li.saixuanlx{ width: 82px;}
+.list_banner_left ul li.buxz{background:url("__ROOT__/Style/H/images/zhaobiao.gif") no-repeat 1px 6px;width:74px;height:28px;text-align:center; margin-right:20px;}
+.list_banner_left ul li.buxz a{color:#fff;}
+.list_banner_left ul.dierge{line-height:30px;}
+.list_banner_left ul.dierge li{}
+.list_banner_left ul.dierge li.daxiezimu{width:30px;}
+.list_banner_left_l ul li.qixian{}
+.list_banner_left_l ul li.sousuo{margin:0px 6px 0px 0px;width:90px;}
+.list_banner_left_l ul li.jiekuanyonghu{width:80px;}
+.list_banner_left_l ul li.chaxun{background:url(../images/chaxun.gif)  9px 6px no-repeat ;color:#fff;position:absolute;text-align:center;right:489px;}
+.list_banner_left_l ul li.chaxun a{color:#fff;margin-left:4px;}
+.list_banner_left_r{width:300px;height:216px;float:left;margin:31px 0px 0px  4px;border:solid 1px #ccc;}
+.list_banner_left_r em h2{float:left;font-size:20px;}
+.list_banner_left_r em a{float:right;font-size:14px;margin:16px 9px 0px 0px;color:#888;}
+.list_main{width:976px; overflow:hidden;margin: 0 auto;border:#E9E9E9 1px solid;}
+.list_main_top{width:980px;}
+.list_main_top h2{font-size:19px;float:left;width:80px;height:30px;margin:24px 24px 28px 20px;}
+.list_main_top img{display:block;float:left;line-height:72px;margin-top:26px;}
+.header{margin-top:-21px;}
+.fund_list_c_1{*width:95px;}
+.fund_list_b_1{*width:85px;}
+.footer .wrapper{font-size:14px;}
+</style>
+
+<script type="text/javascript" src="__ROOT__/Style/H/js/common.js" language="javascript"></script>
+<script type="text/javascript">
+var Transfer_invest_url = "__APP__/tinvest";
+</script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/area.js"></script>
+<tagLib name="htmlA" />
+<script type="text/javascript">
+var url = window.location.href;
+if(url)var allargs = url.split("?")[1];
+if(allargs)var tab1= allargs.split("=")[1];
+if(tab1)var tab= tab1.split("&")[0];
+
+$(function(){ 
+    if(tab==9){
+        $('#a1').addClass("show_style");
+    }
+    if(tab==4){
+        $('#a2').addClass("show_style");
+        $('#a1').removeClass("show_style");
+    }
+    if(tab==6){
+        $('#a3').addClass("show_style");
+        $('#a1').removeClass("show_style");
+    };
+    if(tab==7){
+        $('#a4').addClass("show_style");
+        $('#a1').removeClass("show_style");
+    };
+    if(tab==10){
+        $('#a5').addClass("show_style");
+        $('#a1').removeClass("show_style");
+        $('#black').attr('style','display:block');
+        $('#con').attr('style','display:none');
+    };
+});
+
+</script>
+<script type="text/javascript">
+function buy_debt(invest_id)
+{
+    $.jBox("get:__URL__/buydebt?invest_id="+invest_id, {
+        title: "购买债权",
+        width: "auto",
+        buttons: {}
+    });
+}
+</script>
+<div class='wrapper2'>
+<div class="list_banner" style='text-align:left;'>
+  <div class="list_banner_left">
+    <div class="list_banner_left_l">
+      <h2>筛选投资项目</h2>
+      <ul>
+        <li class="saixuanlx">标的利率</li>
+        <php>foreach($searchMap['interest_rate'] as $key=>$v){</php>
+        <php>if($key==$searchUrl['interest_rate']['cur']){</php>
+        <li class="buxz"><a>{$v}</a></li>
+        <php>}else{</php>
+        <li><a class="a_lb_2" href="__URL__/index.html?type=search&{$searchUrl.interest_rate.url}&interest_rate={$key}">{$v}</a></li>
+        <php>}</php>
+        <php>}</php>
+      </ul>
+      <ul class="dierge">
+        <li  class="saixuanlx">信用等级</li>
+        <php>foreach($searchMap['leve'] as $key=>$v){</php>
+        <php>if($key==$searchUrl['leve']['cur']){</php>
+        <li class="buxz"><a>{$v}</a></li>
+        <php>}else{</php>
+        <li><a class="a_lb_2" href="__URL__/index.html?type=search&{$searchUrl.leve.url}&leve={$key}">{$v}</a></li>
+        <php>}</php>
+        <php>}</php>
+      </ul>
+      <ul>
+        <li class="saixuanlx">运作期限</li>
+        <php>foreach($searchMap['borrow_duration'] as $key=>$v){</php>
+        <php>if($key==$searchUrl['borrow_duration']['cur']){</php>
+        <li class="buxz"><a href="__ROOT__/invest/index.html">{$v}</a></li>
+        <php>}else{</php>
+        <li><a class="a_lb_2" href="__URL__/index.html?type=search&{$searchUrl.borrow_duration.url}&borrow_duration={$key}">{$v}</a></li>
+        <php>}</php>
+        <php>}</php>
+      </ul>
+      <ul style="border-bottom:none;">
+        <form name="searchform" action="__URL__/index" method="get">
+          <li  class="saixuanlx">关键词搜索:</li>
+          <li style="width:292px;">
+            <htmlA:radio id="is_keyword" value="key|searchMap.is_keyword" default="0|不限制,1|项目用户,2|项目商品名"/>
+          </li>
+          <li>
+            <input class="searchkeywords" name="searchkeywords" type="text"  value="{$searchMap.searchkeywords}" style="margin-top:6px;border:1px solid #ccc"/>
+          </li>
+          <li>
+            <input type="submit" name="btnSubmit" id="btnSubmit" value="" style="height:29px;width:70px; margin-left:77px; margin-top:3px; cursor: pointer;background: url('__ROOT__/Style/H/images/index_55.gif') no-repeat scroll center center rgba(0, 0, 0, 0);border: medium none;" class="btn">
+          </li>
+        </form>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class='main01'>
+<div class="web both" style='*width:1009px;text-align:left;'>
+    <div class="web_tit"><span class="left">投资列表</span> <span class="left"><a href="/tools/tool.html"  class="blue02">理财计算器</a></span>
+        <div style="float:right; width:473px;  ">
+   <table width="473px" border="0" style="background-image:url(/images/tjbg.jpg); background-position:30px 0;height:76px;">
+  <tr>
+    <td style="font-size:14px" align="center">累计成交总金额<br><span style="font-size:20px; color:#999"><script type="text/javascript" src="../tj.php" ></script>
+</span>&nbsp;万元</td>
+    <td style="font-size:14px" align="center">累计成交总笔数<br><span style="font-size:20px; color:#999"><script type="text/javascript" src="../tj.php-type=bi" ></script></span>&nbsp;笔</td>
+    <td style="font-size:14px" align="center">为用户累计赚取<br><span style="font-size:20px; color:#999"><script type="text/javascript" src="../tj.php-type=zq" ></script></span>&nbsp;万元</td>
+  </tr>
+</table>
+    </div>
+    </div>
+    <div style="height:20px; width:100%;"></div>
+    <div class="fund_a both" style="margin-bottom:20px;text-align:left;">
+      <div class="web_tit2">
+          <div class="fund_list_aaa">&nbsp;&nbsp;<strong>借款标题</strong></div>
+          <div class="fund_list_c_1"><strong>年利率</strong></div>
+          <div class="fund_list_c_1"><strong>保证金</strong></div>  
+          <div class="fund_list_c_1"><strong>配资金额</strong></div>
+          <div class="fund_list_b_1"><strong>期限</strong></div>
+          <div class="fund_list_c_1"><strong>进度</strong></div>
+          <div class="fund_list_b_1" style="text-align:right"><strong>操作</strong></div>
+      </div>
+      <div class="fund_c">
+      </div>
+    </div>
+  <if condition="$list.list eq null">
+    <div class="paging both">
+   没有信息 
+    </div>
+  <else/>
+<volist name="list.list" id="vb">
+    
+    <div class="fund_list" style='font-size:14px;'>
+      <div class="fund_list_aaa" >
+        <span class='left'>{:getIco($vb)}</span>
+        <span class="orange left" style="padding-left:0px;"> <a href="{$vb.id|getTInvestUrl=###}" title="{$vb.borrow_name}">{$vb.borrow_name|cnsubstr=###,20}</a></span>
+      </div>
+      <div class="fund_list_c_1"><span class="size18">{$vb.borrow_interest_rate}</span>%</div>
+      <div class="fund_list_c_1"><span class="size18"><?php echo intval($vb['vouch_money']/10000);?>万元</div>
+      <div class="fund_list_c_1"><span class="size18"><?php echo intval($vb['borrow_money'])/10000;?>万元</span></div>
+      <div class="fund_list_b_1"><span class="size18">{$vb.borrow_duration}</span>个月</div>
+      <div class="fund_list_c_1" style="padding-top:12px">
+      <span style='display:block;width:100%;background:#aaa;'>
+      <table width="{$vb.progress|intval}%" height="12px" border="0" bgcolor="#ff8106" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="11px"></td>
+        </tr>
+      </table>
+      </span>  
+      <span style="display:block;margin-top:-13px;color:#FFF; font-size:11px; line-height:12px; padding-top:1px;text-align:center;">{$vb.progress|intval}%</span>
+      </div>
+      <div class="fund_list_b_1" style="margin-left:15px;">
+          <if condition="$vb.borrow_status eq 3"> <a href="javascript:;"><img class="anNiuYLB" src="__ROOT__/Style/H/images/status/touM.gif" /></a>
+          <elseif condition="$vb.borrow_status eq 4"/>
+          <a href="javascript:;"><img class="anNiuDDFS" src="__ROOT__/Style/H/images/status/touM.gif" /></a>
+          <elseif condition="$vb.borrow_status eq 6"/>
+          <a href="javascript:;"><img  class="anNiuHKZ" src="__ROOT__/Style/H/images/status/touM.gif"  /></a>
+          <elseif condition="$vb.borrow_status gt 6"/>
+          <a href="{$vb.id|getTInvestUrl=###}"><img class="anNiuYWC" src="__ROOT__/Style/H/images/status/touM.gif"  /></a>
+          <else/>
+          <a href="{$vb.id|getTInvestUrl=###}"><img class="anNiuTB" src="__ROOT__/Style/H/images/status/touM.gif" /></a> 
+        </if>
+      </div>
+    </div>
+</volist>
+  </if>
+</div>
+</div>
+
+<div class="list_bottom">
+  <div class="list_bottom_right">
+    <ul>
+      {$list.page}
+    </ul>
+  </div>
+</div>
+</div>
+  <script language="javascript">
+  $(function() {
+    $(".borrowlistp").bind("mouseover", function(){
+      $(this).css("background", "#fce8e1");
+    })
+
+    $(".borrowlistp").bind("mouseout", function(){
+      $(this).css("background", "#fff");
+    })
+
+
+    $(".borrowlistl").bind("mouseover", function(){
+      $(this).css("background", "#f8f8f8");
+    })
+
+    $(".borrowlistl").bind("mouseout", function(){
+      $(this).css("background", "#fff");
+    })
+  });
+
+</script>
+                
+<!--中部结束-->
+<include file="Public:_footer" />

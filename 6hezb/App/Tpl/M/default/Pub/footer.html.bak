@@ -1,0 +1,42 @@
+<div class="footer">
+ <p><a href="" target="_blank"><img src="/style/mobile/images/dn.png" width="16" height="16" /></a>
+ <span><a href="" target="_blank">电脑版</a></span></p>
+ <p>联系电话：<a href="wtai://wp/mc;01056023799">010-56023799</a></p> 
+ <p style="color:#666">地址：北京市昌平区回龙观珠江摩尔国际3-1-1709</p>
+</div>
+<script type="text/javascript">  
+
+var browser = navigator.userAgent
+  
+ // browser.indexOf('AppleWebKit') > -1 //苹果、谷歌内核
+  //browser.indexOf('Presto') > -1  //opera内核
+ // browser.indexOf('Trident') > -1 //IE内核
+ // browser.indexOf('Gecko') > -1 && browser.indexOf('KHTML') == -1 //火狐内核
+ // !!browser.match(/AppleWebKit.*Mobile.*/) //是否为移动终端 
+  //!!browser.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
+  // browser.indexOf('Android') > -1 || browser.indexOf('Linux') > -1  
+   //android终端或uc浏览器
+ //  browser.indexOf('iPhone') > -1  //是否为iPhone或者QQHD浏览器
+ //  browser.indexOf('iPad') > -1  //是否iPad
+
+                               
+// 判断屏幕是否旋转
+function orientationChange() {
+    if(browser.indexOf('Android') > -1 || browser.indexOf('Linux') > -1){
+        manWidth(screen.width);
+    }
+    
+}
+
+function manWidth(width){
+     width = width/2-12;
+     $(".main").css('width',width+'px');
+}
+// 添加事件监听
+addEventListener('load', function(){ 
+    orientationChange();
+    window.onorientationchange = orientationChange;
+}); 
+</script> 
+</body>
+</html>

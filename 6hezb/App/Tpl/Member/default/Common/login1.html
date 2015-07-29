@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>六合资本-全国首家专业股票配资网络平台</title>
+<meta name="keywords" content="六合资本,股票配资,期货配资,配资公司,配资平台,配资炒股,配资网,P2P理财" />
+<meta name="description" content="网配出资是指针对在六合资本网上的配资标的进行出资的投资理财方式，六合资本网上的配资是保证金交易模式；小微投资是指针对在六合资本网上的“车贷”、“房贷”、“企业贷”的标的进行出资的投资理财方式，六合资本网上的贷款仅针对实物抵押担保贷款。安全可控，收益可观。" />
+<link href="__ROOT__/Style/H/css/index.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/base.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/vip.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/moneyandloan.css"  rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="__ROOT__/Style/JBox/Skins/Currently/jbox.css"/>
+<link href="__ROOT__/Style/H/css/about.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/hzctimages/newstyle.css"  rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__ROOT__/Style/H/hzctimages/header.js" ></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/jquery.js" ></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/user.js" ></script>
+
+<script src="__ROOT__/Style/H/js/jquery.min.js"  type="text/javascript"></script>
+<script  src="__ROOT__/Style/JBox/jquery.jBoxConfig.js" type="text/javascript"></script>
+<script  src="__ROOT__/Style/JBox/jquery.jBox.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+var timeout         = 500;
+var closetimer		= 0;
+var ddmenuitem      = 0;
+
+function jsddm_open()
+{	jsddm_canceltimer();
+	jsddm_close();
+	ddmenuitem = $(this).find('ul').eq(0).css('visibility', 'visible');}
+
+function jsddm_close()
+{	if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{	closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{	if(closetimer)
+	{	window.clearTimeout(closetimer);
+		closetimer = null;}}
+
+$(document).ready(function()
+{	$('#jsddm > li').bind('mouseover', jsddm_open);
+	$('#jsddm > li').bind('mouseout',  jsddm_timer);});
+
+document.onclick = jsddm_close;
+  </script>
+</head>
+<body>
+<div class="header">
+<div class="wrapper">
+<div class="top">
+<div class="top_txt left">
+您好，欢迎来到六合资本网！ <A href="/member/common/login.html"  style="color:#FFF" >请登录</A>-<A href="/member/common/register.html"  style="color:#FFF">免费注册</A></div>
+<div class="top_nav right"><a href="index.html-user&q=action-login.htm"  style="color:#FFF">我的六合资本</a> <a href="/aboutus/xins.html"  style="color:#FFF">帮助</a> <a href="/"  style="color:#FFF">首页</a> </div>
+</div>
+<div class="nav">
+<div class="logo"><!-- <a href="index.htm"  ><img src="__ROOT__/Style/H/images/index_03.jpg"   width="197" height="114" alt="logo" /></a> --><div class="N_logo"><a href="/">{:get_ad(1)}</a></div></div>
+<div class="login_a">还没有加入六合资本？<a href="/member/common/register.html"  class="Blue">免费注册</a></div>
+</div>
+</div>
+</div>
+<!--主要内容-->
+
+<div class="form">
+  <h2>用户登录
+    <div class="login_register"> 　　　<a href="__APP__/member/common/register/">免费注册</a>&nbsp;｜&nbsp;<a href="javascript:getPassWord();">忘记密码?</a> </div>
+  </h2>
+  <div style="height:40px; width:240px;">
+    <div  id="dvUser"></div>
+  </div>
+  <p> <span>用户名&nbsp;:</span>
+    <input type="text" id="txtUser" class="login_text"/>
+  </p>
+  <p> <span>密&nbsp;&nbsp;&nbsp;码&nbsp;:</span>
+    <input type="password" class="login_pass" id="txtPwd"/>
+  </p>
+  <p> <span>验证码&nbsp;:</span>
+    <input type="text" class="login_check" id="txtCode"/>
+    <img onclick="this.src=this.src+'?t='+Math.random()" id="imVcode" alt="点击换一个校验码" style=" width: auto; height:auto;border: 1px solid #ccc;" src="__URL__/verify"> <a href="javascript:document.getElementById('imVcode').onclick();">刷新</a> </p>
+  <input type="image" src="__ROOT__/Style/H/images/login_submit.jpg" class="login_submit"  onclick="LoginSubmit(this);" id="btnReg"/>
+  <!--<p style=" text-align:center; height:40px;">
+    <if condition="$loginconfig['qq']['enable'] eq '1'"><img src="__ROOT__/Style/H/images/qq_n.png">&nbsp;<a href="__APP__/member/oauth/qq/">QQ账号登录</a></if>
+    &nbsp;&nbsp;
+    <if condition="$loginconfig['sina']['enable'] eq '1'"><img src="__ROOT__/Style/H/images/sina_n.png">&nbsp;<a href="__APP__/member/oauth/sina/">新浪微博账号登录</a></if>
+  </p>-->
+</div>
+
+
+<!--主要内容-->
+<script type="text/javascript">
+var imgpath="__ROOT__/Style/M/";
+var curpath="__URL__";
+</script>
+<script type="text/javascript" src="__ROOT__/Style/M/js/login.js"></script>
+<!-- <form name="login" method="post" action=""  >
+<div class="wrapper2">
+<div class="lan2" style="margin-top:30px;">
+    <div class="lan_tit">会员登录</div>
+    <div class="lan3"><div id="dvUser" style='height:30px;margin-top:-30px;'></div>
+      <div class="lan4" style="padding-bottom:20px;">
+        <div class="lan5">用户名：</div>
+        <div class="lan6"><span class="landed4">
+           <input type="text" class="lan_box login_text" id="txtUser" name="keywords" >
+        </span></div>
+        <div class="lan7"></div>
+      </div>
+      <div class="lan4 both">
+        <div class="lan5">密码：</div>
+        <div class="lan6"><span class="landed4">
+          <input  class="lan_box2 login_pass" type="password"  name="password"  id="txtPwd">
+  <p><select name="cookietime" style="display:none;"><option value="15">保存15分钟</option>
+<option value="30">保存30分钟</option>
+<option value="60" selected="selected">保存1小时</option>
+<option value="180">保存3小时</option>
+<option value="360">保存6小时</option>
+<option value="1440">保存1天</option>
+<option value="4320">保存3天</option>
+<option value="7200">保存5天</option>
+</select></p>
+        </span></div>
+        <div class="lan7" style="font-size:12px;"><a href="javascript:getPassWord();" class="blue">忘记密码？</a></div>
+      </div>
+      <div class="lan4 both" style="padding-bottom:20px;">
+        <div class="lan5"></div>
+        <div class="lan6"><span class="left"> <input name="savepwd" type="checkbox" value="1" class="checkbox_txt" />&nbsp;</span><span class="left">下次自动登录</span></div>
+        <div class="lan7"></div>
+      </div>
+      <div class="lan4 both">
+        <div class="lan5"></div>
+        <div class="lan6">
+       <input id="btnSubmit"  tabindex="1" type="image" src="__ROOT__/Style/H/images/dwyjk_33.gif" class="login_submit"  onclick="LoginSubmit(this);" id="btnReg"   style="width:158px; height:48px;" name="Submit1"  value="立即登录"  class="cologin_btn" onclick="return loginSubmit()" />
+        </div>
+        <div class="lan7"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</form> -->
+
+
+<script type="text/jscript">
+ $("#m1").attr("class", "dv_header_4");
+ $("#a1").attr("class", "a_h_o");
+ $("#m7").attr("class", "dv_header_2");
+ $("#a7").attr("class", "a_h_m");
+ $("#b1").css("display", "none");      
+function jfun_dogetpass(){
+	var ux = $("#emailname").val();
+	if(ux==""){
+		$.jBox.tip('请输入用户名或者邮箱','tip');
+		return;
+	}
+	$.jBox.tip("邮件发送中......","loading");
+	$.ajax({
+		url: "__APP__/member/common/dogetpass/",
+		data: {"u":ux},
+		//timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					$.jBox.tip("发送成功，请去邮箱查收",'success');
+					$.jBox.close(true);
+				}else{
+					$.jBox.tip("发送失败，请重试",'fail');
+				}
+			}
+		}
+	});
+
+}
+function getPassWord() {
+	$.jBox("get:__APP__/member/common/getpassword/", {title: "找回密码"});   
+}
+$('#login_main').on('keyup',function keyLogin(e){
+    var e = e||window.event;
+     	if(e.keyCode == 13)
+     	{
+     		document.getElementById("btnReg").click();  //调用登录按钮的登录事件
+     	}
+});
+</script>
+
+
+<div class="footer">
+<div class="wrapper">
+    <div class="foote_link"><a href="#"><strong>友情链接</strong></a>
+<a href="javascript:if(confirm('https://www.96caifu.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='https://www.96caifu.com/'"  target="_blank">玖珑财富</a>
+<a href="javascript:if(confirm('http://www.p2peye.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.p2peye.com/'"  target="_blank">网贷天眼</a>
+<a href="javascript:if(confirm('http://www.wangdaizhijia.com/  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://www.wangdaizhijia.com/'"  target="_blank">网贷之家</a>
+     </div>
+    <div class="foote_nav">
+    <div class="foote_nav_a">
+    <div class="foote_nav_b">
+<a href="gsjs/index.html" >公司介绍</a>
+<a href="zcfg/index.html" >政策法规</a>
+<a href="ljpz/index.html" >了解配资</a>
+<a href="cjwt/index.html" >常见问题</a>
+<a href="lxwm/index.html" >联系我们</a>
+<a href="rec/index.html" >文章推荐</a>
+<a href="chedai/index.html" >车贷</a>
+<a href="fangdai/index.html" >房贷</a>
+<a href="qiyedai/index.html" >企业贷</a>
+    </div>
+    <div class="foote_nav_c">
+    <span  style="line-height:30px;padding-right:20px;float:left;">客户服务</span>
+    <span class="left">
+    <a href="javascript:if(confirm('http://weibo.com/u/5079551744/home?topnav=1&wvr=5&from=company  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://weibo.com/u/5079551744/home?topnav=1&wvr=5&from=company'"  target="_blank" class="foote_nav_cv"></a>
+    <a href="lxwm/index.html"  class="foote_nav_cv2"></a>
+    <a href="javascript:if(confirm('http://t.qq.com/liuheziben?pgv_ref=im.perinfo.perinfo.icon  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://t.qq.com/liuheziben?pgv_ref=im.perinfo.perinfo.icon'"  target="_blank" class="foote_nav_cv3"></a>
+    <a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank" class="foote_nav_cv4"></a>
+    <a href="javascript:if(confirm('http://qun.qq.com/fenlei.html?k=384452395  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://qun.qq.com/fenlei.html?k=384452395'"  target="_blank" class="foote_nav_cv5"></a>
+    </span>
+    </div>
+    </div>
+    <div class="foote_tel"><span class="foote_tel20">{:get_ad(9)}</span></div>
+    </div>
+    <div class="copyright"><span class="left">公司地址：武汉武昌汉街万达总部国际A座32层<br />{$glo.bottom}<span style="display:none">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000405030'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/z_stat.php%3Fid%3D1000405030' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9784dbf7cbf8662c253fe8ba86e962a5' type='text/javascript'%3E%3C/script%3E"));
+</script> 
+</span></span><span class="right"> <img src="__ROOT__/Style/H/images/bottom_bg2.gif"  width="217" height="36" alt="六合资本" /> <a href="javascript:if(confirm('http://webscan.360.cn/index/checkwebsite/url/www.6hezb.com  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://webscan.360.cn/index/checkwebsite/url/www.6hezb.com'" ><img border="0" height="24" src="http://img.webscan.360.cn/status/pai/hash/0311303dddbd33667c25399e83904071" /></a> </span></div>
+</div>
+</div>
+<!-- 代码 开始 -->
+<link href="__ROOT__/Style/H/css/zzsc.css"  rel="stylesheet" type="text/css" />
+<div id="service">
+	<a href="lxwm/index.html"  class="srvLog" target="_blank">联系我们</a>
+	<!--<a class="goTop" id="goTop" title="返回顶部" style="display:none">返回顶部</a>-->
+</div>
+<div class="srvCns">
+    <a class="qq" href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">在线客服</a>
+    <ul>
+    	<li><a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">LHZB-小迪</a></li>
+    	<li><a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">LHZB-小凡</a></li>
+        <li><a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">LHZB-小陶</a></li>
+        <li><a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">LHZB-小雯</a></li>
+        <li><a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">LHZB-小铭</a></li>
+        <li><a href="javascript:if(confirm('http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6  \n\n该文件无法用 Teleport Ultra 下载, 因为 它是一个域或路径外部被设置为它的启始地址的地址。  \n\n你想在服务器上打开它?'))window.location='http://crm2.qq.com/page/portalpage/wpa.php?uin=4008738666&f=1&ty=1&aty=0&a=&from=6'"  target="_blank">LHZB-小燕</a></li>
+    </ul>
+</div>
+<!--<script type="text/javascript" src="/js/service.js"></script>-->
+<!-- 代码 结束 -->
+</body>
+</html>
+
+
+

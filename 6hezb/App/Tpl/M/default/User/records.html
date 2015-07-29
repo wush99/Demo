@@ -1,0 +1,20 @@
+﻿<include file="Pub:header" /> 
+<div class="main">
+    <div class="box7"> 
+        <div class="box7_title"><a href="javascript:history.back()"><img src="/style/mobile/images/table_but.png"/></a>资金记录</div> 
+        <volist name="list" id="vo">
+        <div class="r_list">
+           <span><php>echo date("y年m月d日", $vo['add_time'])</php></span>
+           <ul>
+            <li>{$vo.type}<font class="r_right">{$vo.affect_money|MFormt=###}</font></li>
+          
+           <li>管理员手动审核充值</li>
+           <li>可用：<font>{:MFormt($vo['account_money']+$vo['back_money'])}</font>，冻结：<font>{$vo.freeze_money|MFormt=###}</font>，待收：<font>{$vo.collect_money|MFormt=###}</font></li>
+           </ul>
+        </div>
+        </volist>
+    </div>
+    <div class="page">{$pagebar}</div>
+</div>
+
+﻿<include file="Pub:footer" /> 

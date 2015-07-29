@@ -1,0 +1,425 @@
+<include file="Public:_header_common" />
+<title>积分抽奖-{$glo.web_name}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<link rel="stylesheet" type="text/css" href="/Style/H/css/header_main.css">
+<script type="text/javascript">
+    //滚动插件
+    (function($){
+    $.fn.extend({
+		Scroll:function(opt,callback){
+			//参数初始化
+			if(!opt) var opt={};
+			var _this=this.eq(0).find("ul:first");
+			var lineH=_this.find("li:first").height(), //获取行高
+				line=opt.line?parseInt(opt.line,10):parseInt(this.height()/lineH,10), //每次滚动的行数，默认为一屏，即父容器高度
+				speed=opt.speed?parseInt(opt.speed,10):800, //卷动速度，数值越大，速度越慢（毫秒）
+				timer=opt.timer?parseInt(opt.timer,10):5000; //滚动的时间间隔（毫秒）
+			if(line==0) line=1;
+			var upHeight=0-line*lineH;
+			//滚动函数
+			scrollUp=function(){
+				_this.animate({
+						marginTop:upHeight
+				},speed,function(){
+					for(i=1;i<=line;i++){
+						_this.find("li:first").appendTo(_this);
+					}
+					_this.css({marginTop:0});
+				});
+			}
+			//鼠标事件绑定
+			_this.hover(function(){
+					clearInterval(timerID);
+			},function(){
+					timerID=setInterval("scrollUp()",timer);
+			}).mouseout();
+		}
+    })
+    })(jQuery);
+
+    $(document).ready(function(){
+       $(".scrollDiv").Scroll({line:1,speed:500,timer:3000});
+       
+        $(".sina_btn").click(function(){
+            var href = $(this).attr("href");
+            href += "?url={:C('WEB_URL')}/market/lottery&title="+encodeURIComponent($(".gz_share").val());
+            $(this).attr("href",href);
+        });
+    });
+
+    var index=0,           //当前亮区位置
+    prevIndex=13,          //前一位置
+    Speed=300,           //初始速度
+    Time,            //定义对象
+    arr_length = 13;      //初始化数组
+    EndIndex=0,           //决定在哪一格变慢
+    cycle=0,           //转动圈数   
+    EndCycle=3,           //计算圈数
+    flag=false,           //结束转动标志
+    random_num=0,      //中奖数
+    quick=0;           //加速
+	var cost =0;
+    var name = "";      //奖品名称
+       
+    function StartGame(){
+		var uxid = "{$UID}"||0;
+		if(!(parseInt(uxid)>0)){
+			$.jBox.tip("请先登陆");
+			return;
+		}
+        var c = confirm("您确定要进行积分抽奖");
+        if(!c) return false;
+
+		var cost = {$cost};
+        if($(".active").html()<cost){
+		  $.jBox.tip("您的积分不够继续抽奖");
+          return false;
+        }
+
+        $.ajax({
+          type: "post",
+          url:"/market/lottery", 
+          data:{lucky:true},
+          dataType:"json",
+          success:function(d){
+            if(d.status==0){
+              alert(d.message);
+              return false;
+            }
+
+            cycle=0;           //转动圈数   
+            EndCycle=3;           //计算圈数
+    
+            name = d.title;
+			shibai = d.fail;
+            random_num = parseInt(d.iid);
+            
+            $(".lottery_box td").removeClass("random_current"); //取消选中
+            if(random_num>4) {
+                EndIndex = random_num - 5; //前5格开始变慢
+            } else {
+                EndIndex = random_num + 13 - 5; //前5格开始变慢
+            }
+            Time = setInterval(Star,Speed);
+          }
+        });
+    }
+
+    function Star(num){
+        // 跑马灯变速
+        if(flag==false){ 
+          //走五格开始加速
+          if(quick==5){
+             clearInterval(Time);
+             Speed=50;
+             Time=setInterval(Star,Speed);
+          }
+          //跑N圈减速
+          if(cycle==EndCycle+1 && index-1==EndIndex){
+             clearInterval(Time);
+             Speed=300;
+             flag=true;         //触发结束
+             Time=setInterval(Star,Speed);
+          }
+        }
+       
+        if(index>arr_length){
+            index=0;
+            cycle++;
+        }
+       
+        if(flag==true && index==parseInt(random_num)){ //结束转动并选中号码
+            quick=0;
+            flag=false;
+            clearInterval(Time);
+        }
+
+        if(index>0){
+			prevIndex=index-1;
+        }else{
+	        prevIndex=arr_length;
+        }
+        $("#prize"+index).addClass('random_current'); //设置当前选中样式
+        $("#prize"+prevIndex).removeClass('random_current'); //取消上次选择样式 
+        if(quick==0 && index==parseInt(random_num)){
+          $(".active").html($(".active").html()-{$cost});
+		  if(shibai==0){
+		      $.jBox.tip("恭喜您抽中‘"+name+"’一份");
+		  }else{
+			  $.jBox.tip("您未中奖，谢谢参与！");
+		  }
+		  
+        }
+
+        index++;
+        quick++;
+    }
+</script>
+<link href="__ROOT__/Style/H/css/shop.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="__ROOT__/Style/H/js/index.js"></script>
+<include file="Public:_header_main" />
+<div class="jf_shop">
+<div id="JS_huanDengs">
+  <volist name=":get_ad(7)" id="va">
+    <div> <a href="{$va.url}"><img src="__ROOT__/{$va.img}" /></a></div>
+  </volist>
+  <ul id="JS_HDmenus">
+  </ul>
+</div>
+<div class="jf_box">
+  <div class="luck_cj">
+    <div class="cjmain_content">
+      <div class="lottery_left">
+        <div id="draw" class="draw">
+          <table class="lottery_box" id="lottery_box" cellpadding="0" cellspacing="0" >
+            <tbody>
+              <tr>
+                <td align="center" valign="middle" id="prize0"><div class="item">
+                    <if condition="$jplist[0]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[0]['title']}"><p class="name">{$jplist[0]['title']}</p>
+                      <elseif condition="$jplist[0]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[0]['title']}"><p class="name">{$jplist[0]['title']}</p>
+                      <elseif condition="$jplist[0]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[0]['b_img']}" alt="{$jplist[0]['title']}"><p class="name">{$jplist[0]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize1"><div class="item">
+                    <if condition="$jplist[1]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[1]['title']}"><p class="name">{$jplist[1]['title']}</p>
+                      <elseif condition="$jplist[1]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[1]['title']}"><p class="name">{$jplist[1]['title']}</p>
+                      <elseif condition="$jplist[1]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[1]['b_img']}" alt="{$jplist[1]['title']}"><p class="name">{$jplist[1]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize2"><div class="item">
+                    <if condition="$jplist[2]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[2]['title']}"><p class="name">{$jplist[2]['title']}</p>
+                      <elseif condition="$jplist[2]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[2]['title']}"><p class="name">{$jplist[2]['title']}</p>
+                       <elseif condition="$jplist[2]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[2]['b_img']}" alt="{$jplist[2]['title']}"><p class="name">{$jplist[2]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>              
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize3"><div class="item">
+                    <if condition="$jplist[3]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[3]['title']}"><p class="name">{$jplist[3]['title']}</p>
+                      <elseif condition="$jplist[3]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[3]['title']}"><p class="name">{$jplist[3]['title']}</p>
+                      <elseif condition="$jplist[3]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[3]['b_img']}" alt="{$jplist[3]['title']}"><p class="name">{$jplist[3]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize4"><div class="item">
+                    <if condition="$jplist[4]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[4]['title']}"><p class="name">{$jplist[4]['title']}</p>
+                      <elseif condition="$jplist[4]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[4]['title']}"><p class="name">{$jplist[4]['title']}</p>
+                      <elseif condition="$jplist[4]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[4]['b_img']}" alt="{$jplist[4]['title']}"><p class="name">{$jplist[4]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle" id="prize13"><div class="item">
+                    <if condition="$jplist[13]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[13]['title']}"><p class="name">{$jplist[13]['title']}</p>
+                      <elseif condition="$jplist[13]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[13]['title']}"><p class="name">{$jplist[13]['title']}</p>
+                      <elseif condition="$jplist[13]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[13]['b_img']}" alt="{$jplist[13]['title']}"><p class="name">{$jplist[13]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td colspan="3" rowspan="2" align="center" valign="middle"><table width="365" height="145" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td bgcolor="#FF7105">&nbsp;</td>
+  </tr>
+</table>
+</td>
+                <td align="center" valign="middle" id="prize5"><div class="item">
+                    <if condition="$jplist[5]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[5]['title']}"><p class="name">{$jplist[5]['title']}</p>
+                      <elseif condition="$jplist[5]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[5]['title']}"><p class="name">{$jplist[5]['title']}</p>
+                      <elseif condition="$jplist[5]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[5]['b_img']}" alt="{$jplist[5]['title']}"><p class="name">{$jplist[5]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle" id="prize12"><div class="item">
+                    <if condition="$jplist[12]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[12]['title']}"><p class="name">{$jplist[12]['title']}</p>
+                      <elseif condition="$jplist[12]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[12]['title']}"><p class="name">{$jplist[12]['title']}</p>
+                      <elseif condition="$jplist[12]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[12]['b_img']}" alt="{$jplist[12]['title']}"><p class="name">{$jplist[12]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize6"><div class="item">
+                    <if condition="$jplist[6]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[6]['title']}"><p class="name">{$jplist[6]['title']}</p>
+                      <elseif condition="$jplist[6]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[6]['title']}"><p class="name">{$jplist[6]['title']}</p>
+                      <elseif condition="$jplist[6]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[6]['b_img']}" alt="{$jplist[6]['title']}"><p class="name">{$jplist[6]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+              </tr>
+              <tr>
+                <td align="center" valign="middle" id="prize11"><div class="item">
+                    <if condition="$jplist[11]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[11]['title']}"><p class="name">{$jplist[11]['title']}</p>
+                      <elseif condition="$jplist[11]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[11]['title']}"><p class="name">{$jplist[11]['title']}</p>
+                      <elseif condition="$jplist[11]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[11]['b_img']}" alt="{$jplist[11]['title']}"><p class="name">{$jplist[11]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize10"><div class="item">
+                    <if condition="$jplist[10]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[10]['title']}"><p class="name">{$jplist[10]['title']}</p>
+                      <elseif condition="$jplist[10]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[10]['title']}"><p class="name">{$jplist[10]['title']}</p>
+                      <elseif condition="$jplist[10]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[10]['b_img']}" alt="{$jplist[10]['title']}"><p class="name">{$jplist[10]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize9"><div class="item">
+                    <if condition="$jplist[9]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[9]['title']}"><p class="name">{$jplist[9]['title']}</p>
+                      <elseif condition="$jplist[9]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[9]['title']}"><p class="name">{$jplist[9]['title']}</p>
+                      <elseif condition="$jplist[9]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[9]['b_img']}" alt="{$jplist[9]['title']}"><p class="name">{$jplist[9]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize8"><div class="item">
+                    <if condition="$jplist[8]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[8]['title']}"><p class="name">{$jplist[8]['title']}</p>
+                      <elseif condition="$jplist[8]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[8]['title']}"><p class="name">{$jplist[8]['title']}</p>
+                      <elseif condition="$jplist[8]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[8]['b_img']}" alt="{$jplist[8]['title']}"><p class="name">{$jplist[8]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+                <td align="center" valign="middle" id="prize7"><div class="item">
+                    <if condition="$jplist[7]['category'] eq 1"><img src="__ROOT__/Style/H/images/shop/lijin.gif" alt="{$jplist[7]['title']}"><p class="name">{$jplist[7]['title']}</p>
+                      <elseif condition="$jplist[7]['category'] eq 2"/>
+                      <img src="__ROOT__/Style/H/images/shop/jifen.gif" alt="{$jplist[7]['title']}"><p class="name">{$jplist[7]['title']}</p>
+                      <elseif condition="$jplist[7]['category'] eq 3"/>
+                      <img src="__ROOT__/{$jplist[7]['b_img']}" alt="{$jplist[7]['title']}"><p class="name">{$jplist[7]['title']}</p>
+                      <else/>
+                      <img src="__ROOT__/Style/H/images/shop/no.jpg" >
+                      </if>
+                    
+                  </div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="draw_panel no_login">
+            <input type="button" id="btn_lottery" class="btn_lottery" hidefocus="true" onClick="StartGame()">
+          </div>
+        </div>
+      </div>
+      <div class="sidebar_right">
+        <div class="g_mod rewards">
+          <div class="cj_tit"><a  onclick=javascript:qiehuan(0) class="logback" id=nav0>近期幸运星</a> <a  onclick=javascript:qiehuan(1) id=nav1 class="logback2">我的中奖记录</a>
+          </div>
+          <div class="scrollDiv" id=qh_conn0>
+            <ul>
+              <volist id="vo" name="list">
+                <li><span class="cj_time">{$vo.add_time|date="m-d H:i",###}</span>恭喜{$vo.user_name|hidecard=###,5}抽中‘{$vo.name}’</li>
+              </volist>
+            </ul>
+          </div>
+          <div class="scrollDiv2" id=qh_conn1 style="display:none">
+          <marquee align="left" behavior="scroll"  direction="up" height="100" width="100%" hspace="50" vspace="0" loop="-1" scrollamount="20" scrolldelay="1000" onmouseover="this.stop();"   onmouseout="this.start();">
+            <ul>
+              <volist id="vo" name="mlist">
+                <li><span class="cj_time">{$vo.add_time|date="m-d H:i",###}</span>恭喜您抽中‘{$vo.name}’</li>
+              </volist>
+            </ul>
+           </marquee>
+          </div>
+          <div class="cj_tit">
+            <div style="float:right; margin-right:20px;">您当前剩余：<span class="active">{$user.active_integral|default=0}</span>分</div>
+        </div>
+        </div>
+        
+        <SCRIPT language=javascript>
+	function qiehuan(num){
+		for(var id = 0;id<2;id++)
+		{
+			if(id==num)
+			{
+				document.getElementById("qh_conn"+id).style.display="block";
+				
+			    document.getElementById("nav"+id).className = "logback";
+
+			}
+			else
+			{
+				document.getElementById("qh_conn"+id).style.display="none";
+				
+			    document.getElementById("nav"+id).className = "logback2";
+			
+				
+			}
+		}
+	}
+</SCRIPT>
+        <div class="g_mod share">
+          <form action="" method="post">
+            <div class="share_tit"> <a href="http://weibo.com/" target="_blank">新浪微博 </a> <span><a href="http://weibo.com/" target="_blank" title="关注新浪微博"> <img src="/Style/H/images/shop/btn_follow.png" width="62" height="22" border="0"></a></span> </div>
+            <div class="share_bd">
+              <textarea class="gz_share" name="" cols="30" rows="100" maxlength="115">我发现了一个不错的投资理财平台，投资返积分，还能抽大奖，奖品好诱人哦，你也一起来抽奖吧！
+              </textarea>
+            </div>
+            <div class="ft"> <a href="http://v.t.sina.com.cn/share/share.php" class="sina_btn" target="_blank"><img src="/Style/H/images/shop/ico_bot.png"  width="85" height="26" border="0" title="一键转发至新浪微博" /></a> </div>
+          </form>
+        </div>
+      </div>
+      <div class="intro_bt">
+        <!--活动规则模块-->
+        <div class="hdgz"> <span class="hdgz_tit">活动规则:</span>
+          <div class="hd_item">
+            <ul>
+              <li>1、用户通过投资积分进行抽奖，消耗{$cost}活跃积分可抽奖一次，每天不限量；</li>
+              <li>2、抽中的投资礼金及积分将实时发放到您的账户；</li>
+              <li>3、本活动最终解释权归本平台所有！</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<include file="Public:_footer" />

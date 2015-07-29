@@ -1,0 +1,77 @@
+﻿<include file="Pub:header" /> 
+<div class="main">
+<div class="box5">
+  <div class="box5_title"><span>项目名称：{$vo.borrow_name|cnsubstr=###,22}</span>{:getIco($vo)}</div>
+  <div class="box5_ner1">
+   <table cellpadding="0" cellspacing="0" border="0">
+    <tr height="28">
+        <td align="left">融资金额： {$vo.borrow_money|getMoneyFormt=###}元</td>
+        <td rowspan="2">
+			<div class="fixed_div" >
+			<if condition="$vo['is_show'] eq 0 and ($vo['borrow_status'] eq 7 or $vo['borrow_status'] eq 3)">
+				<a href="javascript:void(0)" class="tz_btt" style=" float:right;line-height:20px; padding:5px 10px;">已完成</a>
+			<elseif condition="$vo['is_show'] eq 1 and $vo['transfer_out'] neq $vo['transfer_total']" />
+				<a href="{:U('m/tinvest/invest', array('bid'=>$vo['id']))}" class="tz_bt" style=" float:right;line-height:20px; padding:5px 10px;">我要购买</a>
+			<else />
+				<a href="javascript:void(0)" class="tz_btt" style=" float:right;line-height:20px; padding:5px 10px;">项目运作中</a>
+			</if>
+			</div>
+		</td>
+    </tr>
+     <tr height="28">
+         <td>
+            年利率：18.00% 
+        </td>
+        
+    </tr>    
+   </table>     
+   </div>
+  <div class="box5_ner2">
+   <table cellpadding="0" cellspacing="0" border="0">
+    <tr height="28">
+     <td align="left">总流转份数： {$vo.transfer_total|default=0}份</td>
+     <td align="right">回购期限： {$vo.borrow_duration}个月</td></tr>
+     <tr height="28">
+     <td align="left">已流转份数： {$vo.transfer_out|default=0}份</td>
+     <td align="right">已回购份数： 300份</td></tr>   
+     <tr height="28">
+     <td align="left"> <span class="jd">融资进度：</span>
+     <span class="progress">
+     <span class="precent" style="width:{$vo.progress}%;"></span></span> </td>
+     <td align="right">可流转份数： {$vo['transfer_total']-$vo['transfer_out']}份</if></td></tr>   
+     <tr height="28">
+     <td align="left">最小流转单位： {$vo.per_transfer|Fmoney=###}元</td>
+     <td align="right">最大购买份数： <if condition="$vo.borrow_max eq 0">没有限制
+                  <else/>
+                  {$vo.borrow_max}份</if></td></tr>        
+   </table>     
+   </div>
+   
+  
+</div>
+
+ <div class="box6">
+  <div class="box6_title">融资方商业概述</div>
+  <div class="line"></div>
+  <p>{$vo.borrow_breif}</p>
+ </div>
+ <div class="box6">
+  <div class="box6_title">融资方资产情况</div>
+  <div class="line"></div>
+  <p>{$vo.borrow_capital}</p>
+ </div>
+ <div class="box6">
+  <div class="box6_title">融资方资金用途</div>
+  <div class="line"></div>
+  <p>{$vo.borrow_use}</p>
+ </div>
+ <div class="box6">
+  <div class="box6_title">风险控制措施</div>
+  <div class="line"></div>
+  <p>{$vo.borrow_risk}</p>
+ </div>
+
+ 
+</div>
+
+﻿<include file="Pub:footer" /> 

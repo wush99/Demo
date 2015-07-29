@@ -1,0 +1,2 @@
+<?php
+return array ( 'type' => 'php', 'func' => '', 'code' => '', 'dir' => array ( 0 => 'D:\\wangzhan\\chaoji1/App', 1 => 'D:\\wangzhan\\chaoji1/CORE', 2 => 'D:\\wangzhan\\chaoji1/Public', 3 => 'D:\\wangzhan\\chaoji1/Rewrite', 4 => 'D:\\wangzhan\\chaoji1/Style', 5 => 'D:\\wangzhan\\chaoji1/UF', 6 => 'D:\\wangzhan\\chaoji1/Webconfig', ), ); ?>

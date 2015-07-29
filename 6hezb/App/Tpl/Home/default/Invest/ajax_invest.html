@@ -1,0 +1,31 @@
+<form class="ajax-invest" method="post" name="investForm" id="investForm" action="__URL__/investmoney">
+	<input type="hidden" name="borrow_id" id="borrow_id" value="{$vo.id}" />
+	<input type="hidden" name="money" id="money" value="{$investMoney}" />
+    <ul class="item">
+			<if condition="$has_pin eq 'yes'">
+				<li>
+					<h6 style='font-size:16px;'>支付密码</h6>
+					<input type="password" id="pin" name="pin" />
+				</li>
+				<if condition="!empty($vo['password'])">
+				<li>
+					<h6>定向标密码</h6>
+					<input type="password" id="borrow_pass" name="borrow_pass" />
+				</li>
+				</if>
+				<li>
+					<div>
+					<a href="javascript:void(0);" class="center" onclick="PostData()">立即投资</a>
+					</div>
+				</li>
+			<else/>
+				<li>
+					<a href='__APP__/member/user#fragment-3' target="_blank" onclick="$.jBox.close();" class="center">请设置支付密码</a>
+				</li>
+			</if>
+	</ul>
+</form>
+<script type="text/javascript">
+borrow_min = {$vo.borrow_min|default=0};
+borrow_max = {$vo.borrow_max|default=0};
+</script>

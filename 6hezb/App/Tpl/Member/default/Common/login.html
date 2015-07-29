@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登陆-{$glo.index_title}</title>
+<meta name="keywords" content="{$glo.web_keywords}" />
+<meta name="description" content="{$glo.web_descript}" />
+<link href="__ROOT__/Style/H/css/index.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/base.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/vip.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/css/moneyandloan.css"  rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="__ROOT__/Style/jBox/Skins/Green/jbox.css"/>
+<link href="__ROOT__/Style/H/css/about.css"  rel="stylesheet" type="text/css" />
+<link href="__ROOT__/Style/H/hzctimages/newstyle.css"  rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="__ROOT__/Style/H/hzctimages/header.js" ></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/jquery.js" ></script>
+<script type="text/javascript" src="__ROOT__/Style/H/js/user.js" ></script>
+<script type='text/javascript' src='__ROOT__/Style/jBox1/jquery.jBox.min.js'></script>
+<script type='text/javascript' src='__ROOT__/Style/jBox1/jquery.jBoxConfig.js'></script>
+
+<style>
+img{border:none;}
+</style>
+<script type="text/javascript">
+var timeout         = 500;
+var closetimer		= 0;
+var ddmenuitem      = 0;
+
+function jsddm_open()
+{	jsddm_canceltimer();
+	jsddm_close();
+	ddmenuitem = $(this).find('ul').eq(0).css('visibility', 'visible');}
+
+function jsddm_close()
+{	if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');}
+
+function jsddm_timer()
+{	closetimer = window.setTimeout(jsddm_close, timeout);}
+
+function jsddm_canceltimer()
+{	if(closetimer)
+	{	window.clearTimeout(closetimer);
+		closetimer = null;}}
+
+$(document).ready(function()
+{	$('#jsddm > li').bind('mouseover', jsddm_open);
+	$('#jsddm > li').bind('mouseout',  jsddm_timer);});
+
+document.onclick = jsddm_close;
+  </script>
+</head>
+<body>
+<div class="header">
+<div class="wrapper">
+<div class="top">
+<div class="top_txt left">
+  <span style="color:#FFF">您好，欢迎来到{$glo.web_name}！</span><A href="/member/common/login.html" style="color:#FFF">请登录</A>-<A href="/member/common/register.html"  style="color:#FFF">免费注册</A></div>
+<div class="top_nav right"><a href="/member/"  style="color:#FFF">我的{$glo.index_title}</a> <a href="/aboutus/xins.html"  style="color:#FFF">帮助</a> <a href="/"  style="color:#FFF">首页</a> </div>
+</div>
+<div class="nav">
+<div class="logo"><!-- <a href="index.htm"  ><img src="__ROOT__/Style/H/images/index_03.jpg"   width="197" height="114" alt="logo" /></a> --><div class="N_logo"><a href="/">{:get_ad(1)}</a></div></div>
+<div class="login_a">还没有加入{$glo.index_title}？<a href="/member/common/register.html"  class="Blue">免费注册</a></div>
+</div>
+</div>
+</div>
+<!--主要内容-->
+
+<!--主要内容-->
+<script type="text/javascript">
+var imgpath="__ROOT__/Style/M/";
+var curpath="__URL__";
+</script>
+<script type="text/javascript" src="__ROOT__/Style/M/js/login.js"></script>
+<form name="login" method="post" action="{:U('actlogin1')}"  >
+<div class="wrapper2">
+<div class="lan2" style="margin-top:57px;">
+    <div class="lan_tit">会员登录</div>
+    <div class="lan3"><div id="dvUser" style='height:30px;margin-top:-30px;'></div>
+      <div class="lan4" style="padding-bottom:20px;">
+        <div class="lan5">用户名：</div>
+        <div class="lan6"><span class="landed4">
+           <input type="text" class="lan_box login_text" id="txtUser" name="sUserName" >
+        </span></div>
+        <div class="lan7"></div>
+      </div>
+      <div class="lan4 both">
+        <div class="lan5">密码：</div>
+        <div class="lan6"><span class="landed4">
+          <input  class="lan_box2 login_pass" type="password"  name="sPassword"  id="txtPwd">
+  <p><select name="cookietime" style="display:none;"><option value="15">保存15分钟</option>
+<option value="30">保存30分钟</option>
+<option value="60" selected="selected">保存1小时</option>
+<option value="180">保存3小时</option>
+<option value="360">保存6小时</option>
+<option value="1440">保存1天</option>
+<option value="4320">保存3天</option>
+<option value="7200">保存5天</option>
+</select></p>
+        </span></div>
+        <div class="lan7" style="font-size:12px;"><a href="javascript:getPassWord();" class="blue">忘记密码？</a></div>
+      </div>
+      <div class="lan4 both" style="padding-bottom:20px;">
+        <div class="lan5"></div>
+        <div class="lan6"><span class="left"> <input name="savepwd" type="checkbox" value="1" class="checkbox_txt" />&nbsp;</span><span class="left">下次自动登录</span></div>
+        <div class="lan7"></div>
+      </div>
+      <div class="lan4 both">
+        <div class="lan5"></div>
+        <div class="lan6">
+       <input id="btnSubmit"  tabindex="1" type="image" src="__ROOT__/Style/H/images/dwyjk_33.gif" class="login_submit"  onclick="LoginSubmit(this);" id="btnReg"   style="width:158px; height:48px;" name="Submit1"  value="立即登录"  class="cologin_btn" onclick="return loginSubmit()" />
+        </div>
+        <div class="lan7"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+<script type="text/jscript">
+ $("#m1").attr("class", "dv_header_4");
+ $("#a1").attr("class", "a_h_o");
+ $("#m7").attr("class", "dv_header_2");
+ $("#a7").attr("class", "a_h_m");
+ $("#b1").css("display", "none");      
+function jfun_dogetpass(){
+	var ux = $("#emailname").val();
+	if(ux==""){
+		$.jBox.tip('请输入用户名或者邮箱','tip');
+		return;
+	}
+	$.jBox.tip("邮件发送中......","loading");
+	$.ajax({
+		url: "__APP__/member/common/dogetpass/",
+		data: {"u":ux},
+		//timeout: 5000,
+		cache: false,
+		type: "post",
+		dataType: "json",
+		success: function (d, s, r) {
+			if(d){
+				if(d.status==1){
+					$.jBox.tip("发送成功，请去邮箱查收",'success');
+					$.jBox.close(true);
+				}else{
+					$.jBox.tip("发送失败，请重试",'fail');
+				}
+			}
+		}
+	});
+
+}
+function getPassWord() {
+	$.jBox("get:__APP__/member/common/getpassword/", {title: "找回密码"});   
+}
+$('#login_main').on('keyup',function keyLogin(e){
+    var e = e||window.event;
+     	if(e.keyCode == 13)
+     	{
+     		document.getElementById("btnReg").click();  //调用登录按钮的登录事件
+     	}
+});
+</script>
+
+<include file="default:Public:_footer" group='Home'/>
+

@@ -1,0 +1,520 @@
+<include file="Public:_header_common" />
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>{$vo.borrow_name}-我要投资-{$glo.web_name}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<link rel="stylesheet" href="__ROOT__/Style/H/css/reset.css" />
+<link rel="stylesheet" href="__ROOT__/Style/H/css/detail.css" />
+<link rel="stylesheet" type="text/css" href="__ROOT__/Style/fancybox/jquery.fancybox-1.3.2.css" media="screen" />
+<include file="Public:_header_main" />
+<div class="state_main">
+  <div class="xw_main_state">
+    <div class="state_project">
+      <div class="project_left">
+        <h3> <span class="tailuser">基金用户&nbsp;:&nbsp;{$minfo.user_name}&nbsp;{$minfo.credits|getLeveIco=###,2}</span><span style="display:block; float:left;">{:getIco($vo)}</span> {$vo.borrow_name|cnsubstr=###,16}&nbsp; </h3>
+        <div class="clear"></div>
+        <p> <span class="width1">基金金额</span> <span class="width2">年利率</span> <span class="width3">运作期限</span> </p>
+        <ul>
+          <li><span class="width1"><strong>￥{$vo.borrow_money|getMoneyFormt=###}</strong>元</span><span class="width2"><strong>{$vo.borrow_interest_rate}</strong>&nbsp;%/年&nbsp;</span> <span class="width3">&nbsp;<strong>{$vo.borrow_duration} </strong>
+            <if condition="$vo.repayment_type eq 1">天
+              <else/>
+              个月</if>
+            </span></li>
+          <li> <span class="width1">还款方式：{$Bconfig['REPAYMENT_TYPE'][$vo['repayment_type']]}</span>投资进度： <span class="ui-list-field"> <span class="ui-progressbar-mid ui-progressbar-mid-{$vo.progress|intval}"><em>{$vo.progress|intval}%</em></span> </span> </li>
+          <li> <span class="width1">基金用途：{$gloconf['BORROW_USE'][$vo['borrow_use']]}</span><span>投标奖励：{$vo.reward_num}%</span>
+            <if condition="$vo.money_collect gt 0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="width3" style="color:red;"> 待收限制：
+              {$vo.money_collect|Fmoney=###}元 </span>
+              <else/>
+            </if>
+          </li>
+          <li> 
+        <if condition="$vo.danbao eq 0">
+        <span class="width1">发布时间 : {$vo.add_time|date="Y-m-d H:i",###}</span><else/>
+        <span class="width1">担保公司 :<a class="newdanbao"  href="/news/{$vo.danbao}.html"> {$vo.title}</a></span>
+        </if><span>剩余时间：<span id="endtime"><span class="red"><span  id="loan_time">-- 天 -- 小时 -- 分 -- 秒</span></span></span></span>
+
+ </li>
+        </ul>
+      </div>
+      <div class="project_right">
+        <h3><a href="/tools/tool.html">理财计算器</a>我要投资</h3>
+        <form method="get" action="">
+          <p class="remain"> <span>您的可用余额：</span> <strong>
+            <if condition="session('u_id') ==''">
+            ￥0.00元
+            <else/> {$investInfo['account_money']+$investInfo['back_money']|getMoneyFormt=###}元
+           <!-- {:Fmoney(getFloatValue($investInfo['account_money']+$investInfo['back_money'],2))}元--></strong>
+            </if>
+            <a class="fRight icon-gree-link f16 mr20" style="padding:3px 15px;" href="__APP__/member/charge#fragment-1" target="_blank">充值</a>
+          </p>
+          <p class="jx_end"> 
+            <if condition="$vo.borrow_status gt 5">
+				已满额&#12288;&#12288;<a href="__APP__/member/tendout#fragment-3" class="bot03">基金合同</a>
+            <else/>
+				 满额还差:{$vo.need|getMoneyFormt=###}元
+			</if>
+          </p>
+          <p class="jx_notice" id="jx_notice"></p>
+          	<p class="jx_input">
+			<if condition="session('u_id') ==''">
+             	<input type="text" class="jx_input_disabled" disabled="disabled" value="请先登录"/>
+			<elseif condition="$vo.borrow_status eq 3"/>
+            	<input type="text" class="jx_input_disabled" disabled="disabled" value="已流标"/>
+            <elseif condition="$vo.borrow_status eq 4"/>
+            	<input type="text" class="jx_input_disabled" disabled="disabled" value="复审中"/>
+            <elseif condition="$vo.borrow_status eq 6"/>
+            	<input type="text" class="jx_input_disabled" disabled="disabled" value="基金运作中"/>
+            <elseif condition="$vo.borrow_status gt 6"/>
+            	<input type="text" class="jx_input_disabled" disabled="disabled" value="已完成"/>
+           	<else/>
+           		<input id="enter_value" type="text" />
+			</if>
+			</p>
+			<p class="jx_desc">
+				<if condition="$vo.borrow_max neq 0"><span>最多投资金额:{$vo.borrow_max|default="无限制"}</span></if>起投金额:{$vo.borrow_min|Fmoney=###}
+			</p>
+			<if condition="$vo.borrow_status eq 3">
+            	<div class="jx_payment jx_payment_disabled">已流标</div>
+            <elseif condition="$vo.borrow_status eq 4"/>
+            	<div class="jx_payment jx_payment_disabled">复审中</div>
+            <elseif condition="$vo.borrow_status eq 6"/>
+            	<div class="jx_payment jx_payment_disabled">基金运作中</div>
+            <elseif condition="$vo.borrow_status gt 6"/>
+            	<div class="jx_payment jx_payment_disabled">已完成</div>
+            <else/>
+            	<div id="jx_payment" class="jx_payment" onclick="invest({$vo.id});">立即投标</div>
+          	</if>
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="state_info">
+      <ul class="state_info_nav" id="state_info_nav">
+        <li class="active"><a class="invest-tab current" href="javascript:void(0)" onclick="showTail('userintro',this);">基金经理</a></li>
+        <li class=""><a class="invest-tab" href="javascript:void(0)" onclick="showTail('picintro',this);">信息披露</a></li>
+        <li class=""><a class="invest-tab" href="javascript:void(0)" onclick="showTail('record',this);">投资记录</a></li>
+      </ul>
+      <div class="clear"></div>
+      <div class="state_info_con"  id="userintro" style="display:block;">
+        <h3> 个人信息 </h3>
+        <ul class="state_person">
+          <if condition="$UID gt '0'">
+            <li><span class="width1">性别：{$minfo.sex|default="未填写"}</span><span class="width2">年龄：{$minfo.age||default="0"}岁（{$minfo.age|getAgeName=###}）</span><span class="width3">学历：{$minfo.education|default="未填写"}</span><span class="width4">婚姻状况：{$minfo.marry|default="未填写"}</span><span class="width5">月收入(元)：{$minfo.fin_monthin|getMoneyFormt=###}</span></li>
+            <li><span class="width1">邮箱：{$minfo.user_email|default="未填写"}</span><span class="width2">所属客服：{$minfo.customer_name|default="未指定"}</span><span class="width3">是否购车：{$minfo.fin_car|default="未填写"}</span><span class="width4">投资积分：{$minfo.integral|default="0"}分</span><span class="width5">职位：{$minfo.zy|default="未填写"}</span></li>
+            <li><span class="width1">户籍所在地：{$minfo.location|default="未填写"}</span><span class="width2"></span><span class="width3"></span><span class="width4"></span><span class="width5"></span></li>
+            <else/>
+            <p style="font-size:18px; text-align:center; line-height:3em;">个人信息登陆后才可以查看！</p>
+          </if>
+        </ul>
+        <h3> 运作统计 </h3>
+        <ul class="state_person">
+          <if condition="$UID gt '0'">
+            <li><span class="width1">资产总额：{$minfo.zcze|getMoneyFormt=###}</span><span class="width2">待还总额：{$capitalinfo.tj.dhze|getMoneyFormt=###}</span><span class="width3">已还总额：{$capitalinfo.tj.yhze|getMoneyFormt=###}</span><span class="width4">借出本金：{$capitalinfo.tj.jcze|getMoneyFormt=###}</span><span class="width5">待收总额：{$capitalinfo.tj.dsze|getMoneyFormt=###}</span></li>
+            <li><span class="width1">回款总额：{$capitalinfo.tj.ysze|getMoneyFormt=###}</span><span class="width2">负债情况：
+              <if condition="$capitalinfo['tj']['fz'] lt 0">({$capitalinfo.tj.fz|getMoneyFormt=###})
+                <else/>
+                ({$capitalinfo.tj.fz|getMoneyFormt=###})</if>
+              </span><span class="width3">信用额度：{$mainfo.credit_limit|getMoneyFormt=###}</span><span class="width4"></span><span class="width5"></span></li>
+            <else/>
+            <p style="font-size:18px; text-align:center; line-height:3em;">账户详情登陆后才可以查看！</p>
+          </if>
+        </ul>
+        <h3> 基金信用 </h3>
+        <ul class="state_person">
+          <if condition="$UID gt '0'">
+            <li><span class="width1">成功基金次数：{$capitalinfo.tj.jkcgcs|default=0}次</span><span class="width2">正常还款次数：{$capitalinfo.repayment.1.num|default=0}次</span><span class="width3">迟还次数：{$capitalinfo.repayment.3.num|default=0}次</span><span class="width4">待还款笔数：{$xin_list.6.num|default="0"}次</span><span class="width5">提前还款次数：{$capitalinfo.repayment.2.num|default=0}次</span></li>
+            <li><span class="width1">网站代还次数：{$capitalinfo.repayment.4.num|default=0}次</span><span class="width2">逾期还款笔数：{$capitalinfo.repayment.5.num|default=0}次</span><span class="width3"></span><span class="width4"></span><span class="width5"></span></li>
+            <else/>
+            <p style="font-size:18px; text-align:center; line-height:3em;">还款信用登陆后才可以查看！</p>
+          </if>
+        </ul>
+      </div>
+      <div class="state_info_con"  id="picintro" style="display:none;">
+        <if condition="$UID gt '0'">
+        
+                <h3>基金说明</h3>
+                <ul class="state_person">
+                    <p style="font-size:14px; text-align:left; line-height:2em;">&nbsp;&nbsp;&nbsp;&nbsp;{$vo.borrow_info|default="投资人没有添加基金说明"}！</p>
+                </ul>
+         <if condition="$vo['updata'] eq 'N;'"> 
+         <else/>
+          <table style="width:99%">
+            <tr>
+              <td><div  style="float:left;" id="preview">
+                  <div id="spec-n5">
+                    <div class="spec-button spec-left" id="spec-left" style="cursor: default;"> <img id="imgLeft" src="__ROOT__/Style/H/images/left_g.gif"></div>
+                    <div id="spec-list" class="bot05">
+                      <div class="bot06">
+                        <ul class="list-h bot07">
+                          <php>$i=0;foreach(unserialize($vo['updata']) as $v){ $i++;</php>
+                          <li id="display2"> <a href="__ROOT__/<php>echo $v['img'];</php>" title="<php>echo $v['info'];</php>" rel="img_group"> <img  title="<php>echo $v['info'];</php>" src="__ROOT__/<php>echo get_thumb_pic($v['img']);</php>"> </a> <span>
+                            <php>echo $v['info'];</php>
+                            </span> </li>
+                          <php>}</php>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="spec-button" id="spec-right" style="cursor: default;"> <img id="imgRight" src="__ROOT__/Style/H/images/scroll_right.gif"></div>
+                  </div>
+                </div>
+                <script type="text/javascript">
+								var lilenth = $(".list-h li").length+1;
+								$(".list-h").css("width", lilenth * 160);
+								var leftpos = 0;
+								var leftcount = 0;
+				
+								$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+								$("#spec-left").css("cursor", "default");
+				
+								if (lilenth > 1) {
+									$(function() {
+										$("#spec-right").click(function() {
+											if (leftcount >= 0) {
+												$("#imgLeft").attr("src", "__ROOT__/Style/H/images/scroll_left.gif");
+												$("#spec-left").css("cursor", "pointer");
+											}
+											if (lilenth - leftcount < 3) {
+												$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+												$("#spec-right").css("cursor", "default");
+											}
+											else {
+												leftpos = leftpos - 160;
+												leftcount = leftcount + 1;
+												$(".list-h").animate({ left: leftpos }, "slow");
+												if (lilenth - leftcount < 2) {
+													$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+													$("#spec-right").css("cursor", "default");
+												}
+											}
+				
+										});
+									});
+				
+				
+									$(function() {
+										$("#spec-left").click(function() {
+											if (lilenth - leftcount > 2) {
+												$("#imgRight").attr("src", "__ROOT__/Style/H/images/scroll_right.gif");
+												$("#spec-right").css("cursor", "pointer");
+											}
+				
+											if (leftcount < 1) {
+												$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+												$("#spec-left").css("cursor", "default");
+											}
+											else {
+												leftpos = leftpos + 160;
+												leftcount = leftcount - 1;
+												$(".list-h").animate({ left: leftpos }, "slow");
+												if (leftcount < 1) {
+													$("#imgLeft").attr("src", "__ROOT__/Style/H/images/left_g.gif");
+													$("#spec-left").css("cursor", "default");
+												}
+											}
+				
+										}
+										)
+									})
+								}
+								else {
+									$("#imgRight").attr("src", "__ROOT__/Style/H/images/right_g.gif");
+									$("#spec-right").css("cursor", "default");
+								}
+								$(function() {
+									var width = $("#preview").width();
+									$("#spec-list").css("width", 820).css("margin-right", 8);
+				
+								});
+				
+								$(function() {
+									$("#spec-list img").bind("mouseover", function() {
+										$(this).css({
+											"border": "2px solid #FFFFFF",
+											"padding": "1px"
+										});
+									}).bind("mouseout", function() {
+										$(this).css({
+											"border": "1px solid #ccc",
+											"padding": "2px"
+										});
+									});
+								})
+								</script>
+              </td>
+            </tr>
+          </table>
+           </if>
+          <else/>
+          <p style="font-size:18px; text-align:center; line-height:3em;">基金人披露信息登陆后才可以查看！</p>
+        </if>
+        </ul>
+      </div>
+      <div class="state_info_con"  id="record" style="display:none;">
+        <div class="bidbox">
+          <table class="bid" cellspacing="0" width="100%">
+            <thead>
+              <tr class="">
+                <th class="" width="148">投标人</th>
+                <th class="" width="148">投标类型</th>
+                <th class="" width="158">投标金额</th>
+                <th class="" width="198">投标时间</th>
+              </tr>
+            </thead>
+            <tbody id="investrecord" class="tender-list">
+            </tbody>
+          </table>
+        </div>
+        <div class="totalAmount posa fn-clear" id="totalAmount" style="left: 701px; ">
+          <p class="f16">已投标金额</p>
+          <p><em class="f24" id="total-money">{$vo.has_borrow|getMoneyFormt=###}</em>元</p>
+          <p class="f16 mt20">加入人次</p>
+          <p><em class="f24" id="total-time">{$vo.borrow_times|default="0"}</em>人</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__ROOT__/Style/fancybox/jquery.fancybox-1.3.2.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("a[rel=img_group]").fancybox({
+			'transitionIn'		: 'none',
+			'transitionOut'		: 'none',
+			'titlePosition' 	: 'over',
+			'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+				return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+			}
+		});
+		ajax_show(1);
+		/////////////////
+		
+		/*var num = parseInt($("#input_money").val());
+   			num = isNaN(num)?0:num;
+		if(num==0){
+			$("#toubiao").attr("style","display:none");
+			$("#toubiao2").attr("style","display:block");
+		}*/
+		/////////////////
+	});
+	function ajax_show(p)
+	{
+	   $.get("__URL__/investRecord?borrow_id={$borrow_id}&p="+p, function(data){
+		  $("#investrecord").html(data);
+	   });
+
+	   $(".pages a").removeClass('current');
+	   $(".pages a").eq(p).addClass("current");
+	}
+
+	$(function() {
+		$(".borrowlist5").bind("mouseover", function(){
+			$(this).css("background", "#c9edff");
+		})
+
+		$(".borrowlist5").bind("mouseout", function(){
+			$(this).css("background", "#ecf9ff");
+		})
+
+
+		$(".borrowlist3").bind("mouseover", function(){
+			$(this).css("background", "#c9edff");
+		})
+
+		$(".borrowlist3").bind("mouseout", function(){
+			$(this).css("background", "#fff");
+		})
+	});
+
+</script>
+<input id="hid" type="hidden" value="{$vo.lefttime}" />
+<script type="text/javascript">
+	function showht(){
+		var status = '{$invid}';
+		if(status=="no"){
+			$.jBox.tip("您未投此标");
+		}else if(status=="login"){
+			$.jBox.tip("请先登陆");
+		}else{
+			window.location.href="__APP__/member/agreement/downfile?id="+status;
+		}
+	}
+
+	var seconds;
+	var pers = {$vo.progress|default=0}/100;
+	var timer=null;
+	function setLeftTime() {
+		seconds = parseInt($("#hid").val(), 10);
+		timer = setInterval(showSeconds,1000);
+	}
+	
+	function showSeconds() {
+		var day1 = Math.floor(seconds / (60 * 60 * 24));
+		var hour = Math.floor((seconds - day1 * 24 * 60 * 60) / 3600);
+		var minute = Math.floor((seconds - day1 * 24 * 60 * 60 - hour * 3600) / 60);
+		var second = Math.floor(seconds - day1 * 24 * 60 * 60 - hour * 3600 - minute * 60);
+		if (day1 < 0) {
+			clearInterval(timer);
+			$("#loan_time").html("投标已经结束！");
+		} else if (pers >= 1) {
+			clearInterval(timer);
+			$("#loan_time").html("投标已经结束！");
+		} else {
+			$("#loan_time").html(day1 + " 天 " + hour + " 小时 " + minute + " 分 " + second + " 秒");
+		}
+		seconds--;
+	}                
+	if (pers >= 1) {
+		$("#loan_time").html("投标已经结束！");
+	}else{
+		setLeftTime();
+	}
+	$(document).ready(function(){
+		if($("#display2").length>0){ 
+			$('#display1').show();
+		}
+						
+	});
+</script>
+<include file="Public:_footer" />
+<script language="javascript" src="__ROOT__/Style/H/js/index.js"></script>
+<script language="javascript" src="__ROOT__/Style/H/js/borrow.js"></script>
+<script>
+function invest(id){
+	var flag = validate_enter(),
+		num = $('#enter_value').val();
+		if(!_validate_enter_flag || !flag){
+			return;
+		}
+		
+		$.jBox("get:__URL__/ajax_invest?id="+id+'&num='+num, {title: "立即投标"});
+}
+var investmoney = 0;
+var borrowidMS = 0;
+var borrow_min = 0;
+var borrow_max = 0;
+function PostData() {
+	var pin = $("#pin").val(),					// 支付密码
+		money = $("#enter_value").val(),		// 输入投资金额
+		borrow_id = $('#borrow_id').val(),		// 投标编号
+		borrow_pass = $("#borrow_pass");		// 定向标密码
+		if(!pin){
+			$.jBox.tip("请输入支付密码");  
+			return false;
+		}
+		
+		if(borrow_pass.length && !borrow_pass.val()){
+			$.jBox.tip("请输入定向标密码");  
+			return false;
+		}
+		
+		var flag = validate_enter();
+			if(!flag){
+				return;
+			}
+  $.ajax({
+	  url: "__URL__/investcheck",
+	  type: "post",
+	  dataType: "json",
+	  data: {"money":money,'pin':pin,'borrow_id':borrow_id,"borrow_pass":borrow_pass.val()},
+	  success: function(d) {
+			  if (d.status == 1) {
+			  		investmoney = money;
+			  var content = '<div class="jbox-custom"><p>'+ d.message +'</p><div class="jbox-custom-button"><span onclick="$.jBox.close()">取消</span><span onclick="isinvest(true)">确定投标</span></div></div>';
+			  	$.jBox(content, {title:'会员投标提示'});
+			  }
+			  else if(d.status == 2)// 无担保贷款多次提醒
+			  {
+				  var content = '<div class="jbox-custom"><p>'+ d.message +'</p><div class="jbox-custom-button"><span onclick="$.jBox.close()">取消</span><span onclick="ischarge(true)">去充值</span></div></div>';
+				  	$.jBox(content, {title:'会员投标提示'});
+			  }
+			  else if(d.status == 3)// 无担保贷款多次提醒
+			  {
+				  $.jBox.tip(d.message);
+			  }else{
+				  $.jBox.tip(d.message);  
+			  }
+	  }
+  });
+}
+
+
+// 提交支付当前要投标表单
+function isinvest(d){
+	if(d===true) document.forms.investForm.submit();
+}
+// 充值
+function ischarge(d){
+	if(d===true) location.href='/member/charge#fragment-1';
+}
+
+// 是否验证成功 默认不允许投钱
+$('#enter_value').on('focus', function (){
+	var notice = document.getElementById('jx_notice');
+	notice.innerHTML = '';
+	notice.className = 'jx_notice';
+});
+
+var _validate_enter_flag = false;
+
+function validate_enter()
+{
+	var getId = function (ele){ return document.getElementById(ele);},
+		need_max = {$vo.need},
+		allow_max = ({$vo.borrow_max} == 0 ? need_max : {$vo.borrow_max}),
+		allow_min = {$vo.borrow_min},
+		notice = getId('jx_notice'),
+		owner = getId('enter_value'),
+		payment = getId('jx_payment');
+	
+		if(!owner)
+		{
+			return null; // 在金额输入框为禁用状态
+		}
+		else
+		{
+			value = owner.value;
+		}
+		
+		if(isNaN(value))
+		{ // 不是数字
+			notice.innerHTML = '投资金额不正确，默认最小投资金额！'
+			notice.className = 'jx_notice jx_error';
+			payment.className = 'jx_payment';
+			owner.value = allow_min;
+			_validate_enter_flag = false;
+		}
+		else
+		{
+			var max = Math.min(need_max, allow_max),
+				int = parseInt(value);
+				if(int%allow_min != 0)
+				{
+					notice.innerHTML = '投资金额为起投金额的整数倍！'
+					notice.className = 'jx_notice jx_error';
+					owner.value = allow_min;
+					_validate_enter_flag = false;
+				}
+				else
+				{
+					if(int > max){
+						notice.innerHTML = '投资金额不正确，大于最多投标金额！'
+						notice.className = 'jx_notice jx_error';
+						owner.value = max;
+						_validate_enter_flag = false;
+					}else if(int < allow_min){
+						notice.innerHTML = '投资金额不正确，默认最小投资金额！'
+						notice.className = 'jx_notice jx_error';
+						owner.value = allow_min;
+						_validate_enter_flag = false;
+					}else{
+						_validate_enter_flag = true;
+						notice.className = 'jx_notice jx_success';
+						notice.innerHTML = '输入正确！';
+						payment.className = 'jx_payment';
+					}
+				}
+		}
+		
+		return _validate_enter_flag;
+}
+</script>

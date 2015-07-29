@@ -1,0 +1,68 @@
+<include file="Public:_header_common" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>积分商城-{$glo.web_name}</title>
+<meta http-equiv="keywords" content="{$glo.web_keywords}" />
+<meta http-equiv="description" content="{$glo.web_descript}" />
+<link href="__ROOT__/Style/H/css/shop.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="__ROOT__/Style/H/js/index.js"></script>
+<include file="Public:_header_main" />
+<script type="text/javascript">	$(function(){
+		$(".JQ-slide-nav").switchable(".JQ-slide-content > a", {
+
+				effect: "fade",
+				steps: 1,
+				visible: 1,
+				circular: true
+		}).autoplay({ api:true,interval:5});
+
+	});
+
+</script>
+<div class="jf_shop">
+<div id="JS_huanDengs">
+  <volist name=":get_ad(7)" id="va">
+				   <div> <a href="{$va.url}"><img src="__ROOT__/{$va.img}" /></a></div>
+	</volist>
+<!--textarr[{$key+1}] = "{$va.info}";-->
+<ul id="JS_HDmenus"></ul>
+  </div>
+<div class="jf_commodities">
+  <div class="jf_prouct">
+    <div id="puBody">
+      <div class="sLeft">
+        <dl>
+          <dt>网站公告</dt>
+          <volist name="noticeList.list" id="vn">
+            <dd><a href="{$vn.arturl}" title="{$vn.title}">{$vn.title|cnsubstr=###,12}</a></dd>
+          </volist>
+        </dl>
+        <dl>
+          <dt>商城动态</dt>
+          <volist id="vl" name="list_log">
+            <dd><span title="{$vl.user_name}　兑换了{$vl.name}">{$vl.user_name}　兑换了{$vl.name|cnsubstr=###,5}</span></dd>
+          </volist>
+        </dl>
+      </div>
+      <div class="sRight">
+        <div class="Title"> <span>当前位置：<a href="/">首页</a> &gt; <font>积分商城</font></span>
+          <p>积分商城</p>
+        </div>
+        <div class="List">
+          <ul>
+            <volist id="vo" name="list">
+              <li><a href="{$vo.id|getMarketUrl=###}" target="_blank"><img src="__ROOT__/Style/ajax-image-uploader/images/{$vo.img}" alt="{$vo.name}" title="{$vo.name}" border="0px" width="160" height="160"></a>
+                <p><a href="{$vo.id|getMarketUrl=###}" target="_blank">{$vo.name}</a></p>
+                <p><span>所需积分:<strong>{$vo.cost}</strong></span></p>
+                <p style="height:35px;"><a href="/market/detail?id={$vo.id}" target="_blank" class="btn_duih">点击兑换</a></p>
+              </li>
+            </volist>
+          </ul>
+          <div style=" clear:both"></div>
+          <p></p>
+          <div class="pubPage">{$pagebar}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<include file="Public:_footer" />

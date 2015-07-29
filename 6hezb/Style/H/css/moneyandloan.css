@@ -1,0 +1,160 @@
+@charset "utf-8";
+/* CSS 借款 */
+.main{width:1009px;height:428px;margin:0 auto;}
+
+
+.maina{width:1009px;height:628px;margin:0 auto;}
+
+.loan{width:321px;height:428px;float:left;background:#fff;}
+
+
+.loana{width:321px;height:628px;float:left;background:#fff;}
+
+
+.loan_tit,.loan_tit2,.loan_tit3,.money_tit,.money_tit2,.money_tit3{height:60px;line-height:60px;padding-left:30px;color:#fff; font-size:22px;background:#99ad4e; font-family:"微软雅黑";}
+.loan_tit2{background:#f28f27;}
+.loan_tit3{background:#a18667;}
+.loan_a{height:271px;padding:20px 30px 0 30px;}
+
+.loan_aa{height:471px;padding:20px 30px 0 30px;}
+
+
+.loan_button{width:261px;height:37px;margin:0 auto;padding-top:20px;border-top:1px solid #eeeeee; text-align:center}
+.loan_a1{height:30px;font-size:20px;color:#333;font-family:"微软雅黑";}
+.loan_a2{height:20px; font-size:12px;color:#999;}
+.loan_a3{height:160px;padding-top:15px;line-height:30px;}
+.loan_b{height:46px;line-height:46px;}
+a.loan_btxt:link,a.loan_btxt:visited{color:#00a8e8}
+a.button:link,a.button:visited,a.button:hover,a.button:active{width:147px;height:36px;line-height:36px; text-align:center;color:#FFF;background:#00a8e8;margin:0 auto;display:block;}
+/* CSS 理财 */
+.money_tit{background:#86684c;}
+.money_tit2{background:#7a956a;}
+.money_tit3{background:#4c8a97;}
+.money_a{height:70px;line-height:20px;color:#999;font-size:12px; overflow:hidden;}
+.money_b{height:201px;line-height:30px;}
+/* CSS 借款详细 */
+.main2{width:1007px;height:auto;display:table;background:#FFF;border:1px solid #ebebeb;border-top:none;margin:0 auto;}
+.loan_tit4{height:70px;line-height:70px;background:url("../images/bg2.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg2.gif*/ repeat-x;}
+.loan_tit4_a{width:221px;height:70px;line-height:70px;color:#333; font-size:22px; font-family:"微软雅黑"; text-align:center;background:url("../images/bg3.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg3.gif*/ repeat-x;border-right:1px solid #ebebeb;}
+.loan_main{width:879px;padding:45px 64px;}
+.data_tit{height:38px; font-size:18px;font-family:"微软雅黑"; }
+.data_txt{height:41px;line-height:41px;}
+.data_txt1{height:41px;width:250px;float:left;padding-right:29px;}
+.data_txt01{height:41px;width:200px;float:left;padding-right:10px;}
+.data_box,.data_box2,.data_box3,.data_box4,.data_box5{padding:10px 0;width:240px;border:1px solid #e7e7e7;background:url("../images/bg4.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg4.gif*/ right no-repeat;padding-left:8px;color:#999;}
+.data_box2{background:#FFF;}
+.data_box3{width:190px;background:#FFF;margin-right:5px;}
+.data_box5{width:100px;background:#FFF;}
+.data_box4{width:190px;}
+.data_border{height:26px;border-bottom:1px solid #d8d8d8;margin-bottom:39px;}
+/* CSS 借款详细 */
+.jie,.jie01{width:878px;height:auto;display:table;border-bottom:1px solid #eee;padding:40px 0;font-size:12px;}
+.jie01{border:none;}
+.jie_left{width:400px;padding-right:38px;float:left;line-height:24px;font-size:12px;}
+.jie2{height:35px;color:#666666;font-size:14px;}
+.jie_box,.jie_box2,.lan_box4{width:193px;height:37px;line-height:37px;float:left;border:1px solid #e4e4e4;color:#999;padding-left:5px;}
+.jie3{height:40px;}
+.jie4{height:458px;}
+.jie5{width:80px; height:37px;line-height:37px;text-align:right;float:left}
+.jie6{width:626px;float:left}
+.jie_box2{width:616px;}
+.lan_box4{width:157px;background:#fff;}
+/* CSS 网配配资 */
+.main01{width:1009px;height:auto;display:table;margin:0 auto; font-family:"微软雅黑"}
+.web{width:949px;height:auto;display:table;background:#fff;padding:25px 30px;margin-bottom:20px;border:1px solid #e0e0e0;border-bottom: none;background:url("../images/011bg.gif")/*tpa=http://www.6hezb.com/themes/default/images/011bg.gif*/ repeat-x bottom #FFF;}
+.web_fr{height:auto;display:table;background:#fff;padding:25px 30px;border:1px solid #e0e0e0;border-bottom: none;background:url("../images/011bg.gif")/*tpa=http://www.6hezb.com/themes/default/images/011bg.gif*/ repeat-x bottom #FFF;}
+.web01{width:949px;height:auto;display:table;background:#fff;margin-bottom:20px;border:1px solid #e0e0e0;border-bottom: none;background:url("../images/011bg.gif")/*tpa=http://www.6hezb.com/themes/default/images/011bg.gif*/ repeat-x bottom #FFF;}
+.web02{width:949px;height:auto;display:table;background:#fff;padding:25px 30px;margin-bottom:20px;}
+.web_tit{height:24px;line-height:24px;color:#333;font-size:24px; font-family:"微软雅黑";padding-bottom:20px;}
+.web_main{line-height:24px;color:#666;}
+.fund_a{height:auto;display:table;}
+.fund_b{height:33px;line-height:33px;border-top:1px solid #ebebeb;}
+.fund_c{height:auto;display:table;}
+.fund_d{height:55px; line-height:55px;text-align:center}
+.fund_list{height:33px;line-height:33px;border-bottom:1px solid #ebebeb;padding:20px 0px;}
+.fund_list_a{width:220px;float:left;}
+.fund_list_aaa{width:333px;float:left;}
+.fund_list_b{width:82px;float:left;padding-left:29px; text-align:center;}
+.fund_list_c{width:98px;float:left;padding-left:29px; text-align:center;}
+.fund_list_b_1{width:72px;float:left;padding-left:29px; text-align:center;}
+.fund_list_c_1{width:75px;float:left;padding-left:19px; text-align:center;}
+.news{width:100%;height:378px;background:#fff; }
+.news_a{height:269px;}
+.web_tit2{height:43px;line-height:43px;border-bottom:2px solid #dfc6a6;color:#a0a0a0;}
+/* CSS 网配配资详细 */
+.m_tit{width:946px;height:354px;color:#955f17;padding:24px 20px 0 20px;}
+.m_tit_left{width:680px;height:378px;float:left;color:#999;font-family:Arial}
+.m_tit_right{width:226px;height:378px;float:right;border-left:1px solid #e4e4e4;padding-left:19px;font-size:12px;}
+.web_left{width:680px;height:168px;float:left;color:#999;font-family:Arial}
+.web_right{width:226px;height:168px;float:right;border-left:1px solid #e4e4e4;padding-left:19px;font-size:12px;}
+.m_tit2,.m_tit3{height:53px;}
+.m_tit3{line-height:53px;border-bottom:1px solid #eeeeee;}
+.m_tit4{height:89px;line-height:26px;padding-top:20px;}
+.m_tit5{width:225px;float:left}
+.m_tit6{height:103px;border-bottom:1px solid #eee;}
+.m_tit7{height:87px;padding-top:20px;border-bottom:1px solid #eee;}
+.m_tit8{height:58px;line-height:20px;padding-top:20px;}
+.m_tit08{height:88px;padding-top:20px;}
+.m_tit9{width:86px;height:87px;float:left;}
+.m_tit10{width:132px;height:87px;float:left;padding-left:8px;}
+.m_tit11{width:986px;background:#f0f0f0;border-top:1px solid #e6e6e6;border-right:1px solid #e6e6e6;}
+.m_lr{width:988px;height:auto;display:table;margin:0 auto;}
+.m_lr2{width:876px;height:auto;display:table;padding:37px 54px;}
+.m_lr3{height:48px;line-height:48px;border-bottom:1px solid #eeeeee;}
+.m_lr4{width:290px;float:left; color:#666; font-family:Arial;}
+.m_lr5{width:450px;float:left;}
+.m_lr555{width:350px;float:left;}
+.m_lr6{width:290px;float:left; text-align:center}
+.m_lr8,.m_lr9{width:90px;float:left; text-align:center}
+.m_lr7{width:278px;float:left; text-align:center}
+.m_lr7 img{padding-top:15px;}
+.m_lr8{float:right;}
+.m_lr9{width:200px;float:right;}
+.m_lr12{width:162px;float:left;}
+.m_lr3 strong{color:#0697da;}
+.m_lr10{width:162px;float:left; text-align:center}
+.m_lr11{width:65px;float:left; text-align:center}
+.m_lr11 img{padding-top:15px;}
+.web_box{width:206px;height:35px;border:1px solid #ccc; text-align:right;padding:0 10px;}
+.loan_tit04{height:50px;line-height:50px;background:url("../images/bg02.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg02.gif*/ bottom repeat-x;}
+.loan_tit04_a,.loan_tit04_b{width:120px;height:50px;line-height:50px;color:#333; font-size:18px; font-family:"微软雅黑"; text-align:center;border-right:1px solid #ebebeb;float:left;}
+.loan_tit04_a{background:url("../images/bg03.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg03.gif*/ repeat-x;}
+.loan_tit04_b{font-size:16px;border-right:1px solid #ebebeb;color:#666;float:left;}
+.web_news li{font-size:14px;line-height:30px;}
+.web_tit3{border-bottom:1px solid #dddddd;}
+.peizi{height:auto;display:table;padding:55px 0 0 45px;}
+.peizi01{padding:80px; text-align:center}
+.peizi1{height:40px;line-height:40px;padding:10px 0;}
+.peizi_a{width:100px;float:left; text-align:right;padding-right:10px;}
+.peizi_b{width:220px;padding-right:10px;float:left;}
+.peizi_c{width:400px;float:left;font-size:12px;color:#999;}
+.peizi2{height:140px;line-height:40px;padding:10px 0;}
+.peizi2_a{width:630px;float:left;}
+.peizi2_b{width:70px;height:20px;line-height:20px;border:1px solid #eee;padding:10px;float:left;margin-right:10px;margin-bottom:10px;}
+.peizi2_c{height:40px;}
+.peizi2_d{height:20px;line-height:20px;border:1px solid #eee;padding:10px 15px;float:left;margin-right:10px;margin-bottom:10px;}
+.peizi2_e{height:59px;line-height:59px;border:1px solid #eee;padding:10px 15px;float:left;margin-right:10px;}
+.peizi_lr{width:480px;padding:20px 0;margin:0 auto;font-size:14px;}
+.peizi_lr b{font-size:22px;color:#0697da;padding-right:10px;}
+.peizi_lr_a,.peizi_lr_b{width:240px;height:50px;line-height:50px;float:left}
+.peizi_lr_b{text-align:right}
+.peizi_fk{height:73px;line-height:73px;}
+.peizi_fk_a{height:73px;line-height:73px;width:100px;float:left; text-align:right;padding-right:10px;}
+.peizi_fk_b{height:73px;width:630px;float:left;}
+.peizi_fk_d{height:48px;width:20px;float:left;padding-top:25px;}
+.peizi_fk_e img{display:block;border:1px solid #eee;padding:5px;float:left;margin-right:30px;}
+.news_peizi{width:663px;height:120px;background:#f9f9f9;border:1px solid #efefef;margin-left:45px;}
+.news_peizi li{width:165px;float:left;height:110px;font-size:14px;text-align:center}
+.news_peizi li span{display:block;}
+.news_peizi_tit{display:block;width:165px;line-height:30px;background:#0697da;color:#fff;}
+.news_peizi_txt{display:block;padding-top:27px;}
+.news_peizi li span b{color:#0697da;padding-right:5px;font-size:24px;}
+.peizi_leftborder{border-right:1px dashed #ccc;}
+.news_peizi2{width:432px;height:30px;font-size:14px;padding-top:15px;margin-left:45px;padding-left:230px;}
+.paizia{padding:0 30px;}
+.paizia_a{color:#222;font-size:22px; font-family:"微软雅黑";padding:10px 0;border-bottom:1px solid #ccc;}
+.paizia_b{padding:10px 0;line-height:26px;color:#666;}
+.tab_menu{height:50px;line-height:50px;background:url("../images/bg02.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg02.gif*/ bottom repeat-x;}
+.tab_menu li.current{background:url("../images/bg03.gif")/*tpa=http://www.6hezb.com/themes/default/images/bg03.gif*/ repeat-x;}
+.tab_menu li{font-size:16px;border-right:1px solid #ebebeb;color:#666;float:left;width:120px;height:50px;line-height:50px;color:#333; font-size:18px; font-family:"微软雅黑"; text-align:center;border-right:1px solid #ebebeb;float:left;}
+.tab_box .hide{display:none;}

@@ -1,0 +1,137 @@
+<include file="default:Public:_header_common" group="Home"/>
+<script type="text/javascript">
+var imgpath="__ROOT__/Style/M/";
+var curpath="__URL__";
+</script>
+<style>
+  img{border:none;}
+</style>
+<script type='text/javascript' src='__ROOT__/Style/M/js/reg.js'></script>
+<!-- 主体开始 -->
+<div class="wrapper2">
+ <form action="">
+  <div class="login4" style="margin-top:30px;">
+    <div class="lan_tit">会员注册</div>
+    <div class="login_b">
+    
+      <div class="login2" style="padding-bottom:40px;">
+        <div class="login01">手机号码：</div>
+        <div class="lan6">
+          <input id="txtPhone" type='text' class='lan_box3'/>
+        </div>
+        <div class='dv_r_4_3' id='dvPhone'></div>
+        <!-- <span class="landed4">
+          <input type="text" class="lan_box3"  name=phone id=phone  onBlur="checkphone(this.value);"   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+        </span></div>
+        <div class="login02"> <span class="left"  id=phone_notice> &nbsp;请填写您的手机号码</span></div> -->
+      </div>
+
+      <div class="login2" style="padding-bottom:40px;">
+        <div class="login01">电子邮箱：</div>
+        <div class="lan6">
+          <input id="txtEmail" type="text" class="lan_box3"/></div>
+        <div class="dv_r_4_3" id="dvEmail"></div>
+      </div>
+      
+      <div class="login2" style="padding-bottom:40px;">
+        <div class="login01">用户名：</div>
+        <div class="lan6">
+          <input id="txtUser" type="text" class="lan_box3"/>
+        </div>
+        <div id="dvUser" class="dv_r_4_3"></div>
+      </div>
+      
+      <div class="login2" style="padding-bottom:40px;">
+        <div class="login01">请设置登录密码：</div>
+        <div class="lan6">
+          <input id="txtPwd" type="password" class="lan_box3" onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value) />
+        </div>
+        <div id="dvPwd" class="dv_r_4_3">
+        </div>
+      </div>
+      
+      
+      <div class="login2" style="padding-bottom:40px;">
+        <div class="login01">请确认登录密码：</div>
+        <div class="lan6"><input id="txtRepwd" type="password" class="lan_box3"/></div>
+        <div id="dvRepwd" class="dv_r_4_3"></div>
+      </div>
+      
+      <!--
+      <div class="login2" style="padding-bottom:10px;">
+        <div class="login01">验证码：</div>
+        <div class="lan6"><span class="landed4">
+         <span class="left"> <input type="text" class="lan_box4">
+        </span> <span class="right"> <img src="images/login3.gif" width="98" height="37"  alt=""/></span></div>
+        <div class="login02">看不清？<a href="#">换张图片</a></div>
+      </div>
+      -->
+      
+      <div class="login2 both" style="padding-bottom:30px;">
+        <div class="login01"></div>
+        <div class="lan6"><span class="left">
+        <p></p><span class="f14">我同意<a href="/aboutus/fuwu.html" target="_blank"> 服务条款</a> 和<a href="/aboutus/yinsi.html" target="_blank"> 隐私条款  </a><!-- <input type="checkbox" name="reg_agreement" id="reg_agreement" value="yes"  /> --><input type="checkbox" class="register_checkbox" checked="checked"/>
+        </span>
+        </div>
+        <div class="login02"></div>
+      </div>
+
+      <div class="login2 both">
+        <div class="login01"></div>
+        <div class="lan6"><input maxLength=15 type="hidden" value="" name=invite_userid id=invite_userid >  <input name="type_id" id="type_id" type="hidden" value="2" />
+        <input type="button"  name="Submit" id="submit" value="" style="background-image:url(__ROOT__/Style/H/images/dwyjk_34.gif); width:158px; height:48px; cursor:pointer;border:none;" title="全部填写正确方可提交。"  onclick="RegSubmit1(this)">
+        </div>
+        <div class="login02"></div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<!-- 主体结束 -->
+<script type="text/javascript">
+function closeAction(){
+  window.location.href="__APP__/member/";
+}
+function jfun_dogetpass(){
+  var ux = $("#emailname").val();
+  if(ux==""){
+    $.jBox.tip('请输入用户名或者邮箱','tip');
+    return;
+  }
+  $.jBox.tip("邮件发送中......","loading");
+  $.ajax({
+    url: "__APP__/member/common/dogetpass/",
+    data: {"u":ux},
+    //timeout: 5000,
+    cache: false,
+    type: "post",
+    dataType: "json",
+    success: function (d, s, r) {
+      if(d){
+        if(d.status==1){
+          $.jBox.tip("发送成功，请去邮箱查收",'success');
+          $.jBox.close(true);
+        }else{
+          $.jBox.tip("发送失败，请重试",'fail');
+        }
+      }
+    }
+  });
+
+}
+
+function getPassWord() {
+  $.jBox("get:__APP__/member/common/getpassword/", {
+    title: "找回密码",
+    width: "auto",
+    buttons: {'发送邮件':'jfun_dogetpass()','关闭': true }
+  });   
+}
+$(document).ready(function(){
+    $('#txtEmail').autoMail({
+        emails:['qq.com','163.com','126.com','sina.com','sohu.com','yahoo.cn','gmail.com','hotmail.com','live.cn']
+    });
+});
+</script>
+
+<include file="default:Public:_footer" group='Home'/>

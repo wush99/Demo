@@ -1,0 +1,66 @@
+﻿<include file="Pub:header" /> 
+<div class="main">
+<form  action="" method="post" name="loginForm" id="loginForm">
+<div class="login">
+ <div class="name"><label>电子邮箱：</label><input type="text" name='email' id="email" value="" class="wbk" /><font color=red>*</font></div> 
+ <div class="name"><label>用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label><input type="text" name='username' id="username" value="" class="wbk" /><font color=red>*</font></div>
+ <div class="name"><label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input type="password" name="password" value="" id="password" class="wbk" /><font color=red>*</font></div>
+ <div class="name"><label>确认密码：</label><input type="password" name="password2" value="" id="password2" class="wbk" /><font color=red>*</font></div>
+ <div class="name"><label>验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label><input type="text" name="verify" id="verify" class="wbk" value="" style="width:60px" />
+ <img src='/Pub/verify'  class="verify" onclick="this.src=this.src+'?t='+Math.random()"/>
+ </div>     
+ <div class="button"><input type="button" class="butt" value="注&nbsp;&nbsp; 册" /></div>
+ <div style="text-align: center; height: 50; line-height: 50px;">已有融天下账号，请<a href="{:U('M/pub/login')}"><font color="#f08012">登录</font></a></div>
+</div> 
+</form>
+</div>
+<script language="javascript">
+$(function(){
+    $(".butt").click(function(){
+        var email =  $.trim($("#email").val());
+        var username =  $.trim($("#username").val());
+        var password =  $.trim($("#password").val());
+        var password2 =  $.trim($("#password2").val());
+        var verify =  $.trim($("#verify").val());
+        var re= /\w@\w*\.\w/;
+        
+        if(!re.test(email)){
+            return Apprise('<font color=red>请正确输入电子邮件地址！</font>');
+        }
+        if(username==''){
+            return Apprise('<font color=red>请输入用户名</font>'); 
+        }
+        if(password == ''){
+            return Apprise('<font color=red>请输入密码！</font>'); 
+        }
+        if(password2 == ''){
+            return Apprise('<font color=red>请输入确认密码！</font>'); 
+        }
+        if(password != password2){
+            return Apprise('<font color=red>确认密码不正确，请修改</font>'); 
+        }
+        if(verify.length<4){
+            return Apprise('<font color=red>请输入4位验证码！</font>'); 
+        }
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: "email="+email+"&username="+username+"&password="+password+"&verify="+verify,
+            success: function(e) {
+                if(e==1){
+                    Apprise("恭喜您注册成功!");
+                    $("#apprise-btn-confirm").click(function() {
+                        window.location.href = "{:U('M/user/index')}" ;
+                    })
+                }else{
+                    Apprise("<font color=red>" + e + "</font>");  
+                } 
+            },
+            error: function(e) {
+                Apprise("<font color=red>提交发生错误！请重试</font>")
+            }
+        })
+    })
+})
+</script>
+﻿<include file="Pub:footer" />
